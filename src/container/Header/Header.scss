@@ -77,7 +77,15 @@
     p {
       width: 100%;
       text-transform: uppercase;
-      text-align: right;
+      text-align: left;
+    }
+
+    span {
+      font-size: 1rem;
+      width: 50%;
+      text-transform: uppercase;
+      text-align: left;
+      color: var(--black-color);
     }
   }
 

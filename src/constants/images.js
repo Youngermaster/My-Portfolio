@@ -37,12 +37,14 @@ import spotify from '../assets/spotify.png';
 
 // About
 import problemSolving from '../assets/problem_solving.svg';
+import hacking from '../assets/hacking.png';
 
 // Skills
 import kali from '../assets/kali.png';
 
 export default {
   problemSolving,
+  hacking,
   kali,
   email,
   mobile,
