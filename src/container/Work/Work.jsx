@@ -6,6 +6,7 @@ import { AppWrap, MotionWrap } from '../../wrapper';
 import './Work.scss';
 
 import works from '../../constants/works';
+import workTags from './workTags';
 
 const Work = () => {
   const [filterWork, setFilterWork] = useState(works);
@@ -32,7 +33,7 @@ const Work = () => {
       <h2 className="head-text">Some of my most <span>Relevant Projects</span></h2>
 
       <div className="app__work-filter">
-        {['Security', 'Web App', 'Mobile App', 'Automation', 'All'].map((item, index) => (
+        {workTags.map((item, index) => (
           <div
             key={index}
             onClick={() => handleWorkFilter(item)}
