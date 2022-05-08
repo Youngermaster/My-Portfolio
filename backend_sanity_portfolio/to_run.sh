@@ -1,1 +1,0 @@
-npm install -g @sanity/cli && sanity init --template get-started --project u1kzifvc --dataset production --provider google
