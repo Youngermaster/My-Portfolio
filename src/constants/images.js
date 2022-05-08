@@ -35,7 +35,15 @@ import nb from '../assets/nb.png';
 import skype from '../assets/skype.png';
 import spotify from '../assets/spotify.png';
 
+// About
+import problemSolving from '../assets/problem_solving.svg';
+
+// Skills
+import kali from '../assets/kali.png';
+
 export default {
+  problemSolving,
+  kali,
   email,
   mobile,
   api,

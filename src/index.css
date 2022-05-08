@@ -3,8 +3,11 @@
 :root {
   --font-base: "DM Sans", sans-serif;
 
+  /* --primary-color: #020203; */
   --primary-color: #edf2f8;
-  --secondary-color: #313bac;
+  --secondary-color: #d91438;
+  /* --secondary-color: #313bac; */
+  /* --black-color: #DFE0E4; */
   --black-color: #030303;
   --lightGray-color: #e4e4e4;
   --gray-color: #6b7688;
