@@ -2,7 +2,7 @@ import About from './About/About';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
 import Skills from './Skills/Skills';
-import Testimonial from './Testimonial/Testimonial';
+import Achievements from './Achievements/Achievements';
 import Work from './Work/Work';
 
 export {
@@ -10,6 +10,6 @@ export {
   Footer,
   Header,
   Skills,
-  Testimonial,
+  Achievements,
   Work,
 };

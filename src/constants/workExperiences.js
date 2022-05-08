@@ -5,7 +5,7 @@ const workExperiences = [
   { name: 'Software Quality Assurance Tester', company: 'GETA Club', desc: 'I examined software applications (Unity 3D, Angular and .NET Core) to assess whether or not they worked as expected. I also ran automated tests with Selenium.' },
   { name: 'Cyber Security Analyst', company: 'GETA Club', desc: 'I Helped to protect the company by developing a variety of technologies and processes to prevent, detect, and manage cyber threats. As a cyber security analyst, I have also worked with ISO 27001, SAST and DAST Technologies.' },
   { name: 'IOT Developer', company: 'Della Smart Glasses', desc: 'I tried to Co-Create a company focused on the manufacturing of Smart AR Glasses.' },
-  { name: 'Cyber Security Analyst', company: 'GETA Club', desc: 'd' },
+  { name: 'Cyber Security Analyst', company: 'GETA Club', desc: 'I worked solving software vulnerabilities and reversing engineering Unity 3D apps.' },
 ];
 
 export default workExperiences;
