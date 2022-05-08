@@ -1,6 +1,6 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
+  "name": "my-portfolio",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@sanity/client": "^2.23.2",
