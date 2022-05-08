@@ -1,10 +1,3 @@
-import figma from '../assets/figma.png';
-import flutter from '../assets/flutter.png';
-import git from '../assets/git.png';
-import python from '../assets/python.png';
-import react from '../assets/react.png';
-import typescript from '../assets/typescript.png';
-
 import profile from '../assets/profile.png';
 import circle from '../assets/circle.svg';
 
@@ -13,7 +6,6 @@ import problemSolving from '../assets/problem_solving.svg';
 import pentesting from '../assets/pentesting.svg';
 import mobileDevelopment from '../assets/mobile_development.svg';
 import iotDevelopment from '../assets/iot_development.svg';
-import hacking from '../assets/hacking.png';
 
 // Projects
 import accelerometer from '../assets/accelerometer.png';
@@ -29,7 +21,17 @@ import numericalAnalysis from '../assets/numerical_analysis.png';
 import unityFPS from '../assets/unity_fps.gif';
 
 // Skills
-import kali from '../assets/kali.png';
+import python from '../assets/python.png';
+import parrot from '../assets/parrot.png';
+import rust from '../assets/rust.png';
+import flutter from '../assets/flutter.png';
+import react from '../assets/react.png';
+import figma from '../assets/figma.png';
+import arch from '../assets/arch.svg';
+import postgresql from '../assets/postgresql.svg';
+import golang from '../assets/golang.png';
+import raspberry from '../assets/raspberry.png';
+import unity from '../assets/unity.png';
 
 export default {
   problemSolving,
@@ -47,14 +49,17 @@ export default {
   yasic,
   numericalAnalysis,
   unityFPS,
-  hacking,
-  kali,
+  python,
+  parrot,
+  rust,
+  react,
   figma,
   flutter,
-  git,
-  python,
-  react,
-  typescript,
+  arch,
+  golang,
+  postgresql,
+  raspberry,
+  unity,
   profile,
   circle,
 };
