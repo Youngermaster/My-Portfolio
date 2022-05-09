@@ -12,8 +12,8 @@ const Footer = () => (
     <div className="app__footer-cards">
       {socials.map((social) => (
         <div className="app__footer-card">
-          <img src={social.image} target="_blank" alt={social.text} />
-          <a href={social.url} className="p-text">{social.text}</a>
+          <img src={social.image} alt={social.text} />
+          <a href={social.url} target="_blank" rel="noopener noreferrer" className="p-text">{social.text}</a>
         </div>
       ))}
     </div>
