@@ -1,11 +1,11 @@
 import profile from '../assets/profile.png';
-import circle from '../assets/circle.svg';
+import circle from '../assets/circle.png';
 
 // About
-import problemSolving from '../assets/problem_solving.svg';
-import pentesting from '../assets/pentesting.svg';
-import mobileDevelopment from '../assets/mobile_development.svg';
-import iotDevelopment from '../assets/iot_development.svg';
+import problemSolving from '../assets/problem_solving.png';
+import pentesting from '../assets/pentesting.png';
+import mobileDevelopment from '../assets/mobile_development.png';
+import iotDevelopment from '../assets/iot_development.png';
 
 // Projects
 import accelerometer from '../assets/accelerometer.png';
@@ -27,8 +27,8 @@ import rust from '../assets/rust.png';
 import flutter from '../assets/flutter.png';
 import react from '../assets/react.png';
 import figma from '../assets/figma.png';
-import arch from '../assets/arch.svg';
-import postgresql from '../assets/postgresql.svg';
+import arch from '../assets/arch.png';
+import postgresql from '../assets/postgresql.png';
 import golang from '../assets/golang.png';
 import raspberry from '../assets/raspberry.png';
 import unity from '../assets/unity.png';
@@ -39,7 +39,7 @@ import hackTheBox from '../assets/hack_the_box.png';
 import eafit from '../assets/eafit.png';
 import republicOfColombia from '../assets/republic_of_colombia.png';
 import github from '../assets/github.png';
-import gitlab from '../assets/gitlab.svg';
+import gitlab from '../assets/gitlab.png';
 
 // Socials
 import wechall from '../assets/wechall.gif';
