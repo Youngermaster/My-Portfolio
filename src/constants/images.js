@@ -33,6 +33,27 @@ import golang from '../assets/golang.png';
 import raspberry from '../assets/raspberry.png';
 import unity from '../assets/unity.png';
 
+// Achievements
+import civica from '../assets/civica.png';
+import hackTheBox from '../assets/hack_the_box.png';
+import eafit from '../assets/eafit.png';
+import republicOfColombia from '../assets/republic_of_colombia.png';
+import github from '../assets/github.png';
+import gitlab from '../assets/gitlab.svg';
+
+// Socials
+import wechall from '../assets/wechall.gif';
+import youtube from '../assets/youtube.png';
+import platzi from '../assets/platzi.jpg';
+import stackOverflow from '../assets/stack_overflow.png';
+import instagram from '../assets/instagram.png';
+import twitter from '../assets/twitter.png';
+import discord from '../assets/discord.png';
+import steam from '../assets/steam.png';
+import spotify from '../assets/spotify.png';
+import reddit from '../assets/reddit.png';
+import linkedIn from '../assets/linkedin.png';
+
 export default {
   problemSolving,
   pentesting,
@@ -60,6 +81,23 @@ export default {
   postgresql,
   raspberry,
   unity,
+  civica,
+  hackTheBox,
+  eafit,
+  republicOfColombia,
+  github,
+  gitlab,
   profile,
+  wechall,
+  youtube,
+  platzi,
+  stackOverflow,
+  instagram,
+  twitter,
+  discord,
+  steam,
+  spotify,
+  reddit,
+  linkedIn,
   circle,
 };
