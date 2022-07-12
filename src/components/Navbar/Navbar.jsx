@@ -46,6 +46,10 @@ const Navbar = () => {
                   </a>
                 </li>
               ))}
+              <li className="app__flex p-text" key="link-blog">
+                <div />
+                <a href="https://blog.jmyounghoyos.com/">blog</a>
+              </li>
             </ul>
           </motion.div>
         )}
