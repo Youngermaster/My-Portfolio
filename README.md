@@ -1,6 +1,6 @@
 # My Portfolio
 
-This is my personal portfolio made with Next.js.
+This is my personal portfolio made with React.
 
 ## Base
 I used this [video](https://youtu.be/3HNyXCPDQ7Q) is used as a base.
