@@ -7,7 +7,7 @@ This is my personal portfolio made with React.
 Use the following commands to build and run the portfolio with Docker:
 ```shell
 docker build -t jmyounghoyos-portfolio:release .
-docker run -d -it –rm -p 3002:80 –name jmyounghoyos-portfolio-instance jmyounghoyos-portfolio:release
+docker run -d -p 3003:80 jmyounghoyos-portfolio:release --name jmyounghoyos-portfolio-0
 ```
 ## TODO
 
