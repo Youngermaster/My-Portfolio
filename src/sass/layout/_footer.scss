@@ -1,0 +1,65 @@
+/*--------------------------------------------------------------
+4. tp-footer
+--------------------------------------------------------------*/
+.tp-site-footer {
+    position: relative;
+    font-size: 15px;
+    overflow: hidden;
+    padding: 80px 0;
+    background: $card-bg-color;
+
+    @media(max-width:991px){
+      padding: 50px 0;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    p {
+        color: $light;
+        margin-bottom: 0;
+    }
+
+    li {
+        color: $light;
+    }
+
+    .container {
+        position: relative;
+    }
+
+    .link-widget {
+        overflow: hidden;
+
+        ul {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            li {
+                position: relative;
+
+                a {
+                    display: block;
+                    width: 40px;
+                    height: 40px;
+                    text-align: center;
+                    line-height: 42px;
+                    border: 1px solid #c7c4c4;
+                    color: $light;
+                    font-size: 15px;
+                    border-radius: 50%;
+
+                    &:hover {
+                        background: $theme-primary-color;
+                        color: $white;
+                    }
+                }
+            }
+
+            li+li {
+                margin-left: 15px;
+            }
+        }
+    }
+}

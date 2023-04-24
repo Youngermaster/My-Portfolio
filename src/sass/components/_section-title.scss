@@ -1,0 +1,89 @@
+.tp-section-title {
+	margin-bottom: 50px;
+	text-align: center;
+
+	@include media-query(767px) {
+		margin-bottom: 20px;
+	}
+
+
+	h2 {
+		font-style: normal;
+		font-weight: 500;
+		font-size: 64px;
+		line-height: 100.8%;
+		letter-spacing: 0.01em;
+		text-transform: capitalize;
+		margin-bottom: 20px;
+
+		@include media-query(1399px) {
+			font-size: 60px;
+			line-height: 70px;
+		}
+
+		@include media-query(1199px) {
+			font-size: 50px;
+			line-height: 60px;
+		}
+
+		@include media-query(767px) {
+			font-size: 40px;
+			line-height: 50px;
+		}
+
+		@include media-query(375px) {
+			font-size: 30px;
+			line-height: 40px;
+			margin-bottom: 0px;
+		}
+
+	}
+
+	span {
+		font-weight: 400;
+		font-size: 18px;
+		line-height: 26px;
+		letter-spacing: 0.01em;
+		text-transform: capitalize;
+		padding-left: 15px;
+		position: relative;
+		display: inline-block;
+		margin-bottom: 25px;
+		background: $white;
+		z-index: 1;
+		color: $theme-primary-color;
+
+		@include media-query(575px) {
+			margin-bottom: 15px;
+		}
+
+		&:before {
+			position: absolute;
+			left: 0;
+			top: -8px;
+			height: 39px;
+			width: 39px;
+			content: "";
+			border: 2px solid $theme-primary-color;
+			z-index: -11;
+
+			@include media-query(575px) {
+				left: 0;
+				top: -2px;
+				height: 30px;
+			}
+		}
+
+		&:after {
+			position: absolute;
+			left: 34px;
+			top: 2px;
+			height: 20px;
+			width: 20px;
+			content: "";
+			background: $white;
+			z-index: -1;
+		}
+	}
+
+}

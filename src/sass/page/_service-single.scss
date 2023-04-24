@@ -1,0 +1,194 @@
+/*=====================================================
+6. tp-service-single
+======================================================*/
+.tp-service-single-area {
+    background: $card-bg-color;
+    padding-top: 20px;
+    padding-bottom: 40px;
+
+    .tp-service-single-wrap {
+        .tp-service-single-title {
+            h3 {
+                font-weight: 500;
+                font-size: 35px;
+                line-height: 130.5%;
+                margin-bottom: 20px;
+
+                @media(max-width:767px) {
+                    font-size: 25px;
+                }
+            }
+        }
+
+        .tp-service-single-item {
+            margin-bottom: 40px;
+
+            .tp-service-single-main-img {
+                margin-bottom: 30px;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+        }
+
+        .list-widget {
+            max-width: 590px;
+
+            ul {
+                list-style: none;
+
+                li {
+                    padding: 10px 0;
+                    padding-left: 35px;
+                    position: relative;
+                    color: $body-color;
+
+                    &:before {
+                        position: absolute;
+                        left: 0;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        width: 25px;
+                        height: 25px;
+                        line-height: 25px;
+                        border-radius: 50%;
+                        background: transparentize($theme-primary-color, .9);
+                        content: "\e64c";
+                        font-family: "themify";
+                        text-align: center;
+                        color: $theme-primary-color;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+        .tp-p-details-img {
+            margin-bottom: 10px;
+        }
+
+        .tp-service-area {
+            padding-bottom: 0;
+
+            .tp-service-item {
+                padding: 20px;
+                border: 1px solid $border-color;
+
+                .fi {
+                    color: $body-color;
+
+                    &:before {
+                        font-size: 40px;
+                    }
+                }
+
+                @media(max-width:1200px) {
+                    padding: 20px 10px;
+                }
+
+                h2 {
+                    font-weight: 600;
+                    font-size: 22px;
+                    margin-bottom: 12px;
+                    margin-top: 10px;
+
+                    @media(max-width:1400px) {
+                        font-size: 19px;
+                        margin-bottom: 10px;
+                    }
+
+                    @media(max-width:1200px) {
+                        font-size: 17px;
+                        margin-bottom: 10px;
+                    }
+
+                    @media(max-width:991px) {
+                        font-size: 22px;
+                    }
+                }
+
+                p {
+                    margin-bottom: 5px;
+                }
+            }
+        }
+
+        .tp-service-contact-area {
+            padding: 30px;
+            box-shadow: 0 8px 17px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 29%);
+            border-radius: 20px;
+            background: $white;
+
+            @media(max-width:767px) {
+                padding: 15px;
+            }
+
+            .tp-contact-title {
+                margin-bottom: 30px;
+            }
+
+            .tp-contact-form-area {
+                border: 0;
+                .col {
+                    margin-bottom: 30px;
+                }
+
+                .form-control {
+                    height: 50px;
+                    border: 0;
+                    border-bottom: 0;
+                    border-radius: 0;
+                    background: #f7f5f5;
+                    color: $light;
+
+                    &:focus {
+                        outline: none;
+                        box-shadow: none;
+                    }
+
+                    &::-webkit-input-placeholder {
+                        /* Edge */
+                        color: $light;
+                    }
+
+                    &:-ms-input-placeholder {
+                        /* Internet Explorer 10-11 */
+                        color: $light;
+                    }
+
+                    &::placeholder {
+                        color: $light;
+                    }
+                }
+
+                textarea.form-control {
+                    height: 120px;
+                }
+
+                select.form-control {
+                    background: #f7f5f5 url(../../images/select-icon2.png) no-repeat calc(100% - 15px) center;
+                }
+
+                .submit-area {
+                    button {
+                        border-radius: 6px;
+                    }
+                }
+
+                .errorMessage {
+                    color: red;
+                    margin-top: 10px;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+.modal-body {
+    @media(max-width:575px){
+        padding: 0 !important;
+    }
+}

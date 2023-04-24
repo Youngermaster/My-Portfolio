@@ -1,0 +1,102 @@
+@font-face {
+    font-family: "flaticon";
+    src: url("../fonts/flaticon.ttf?75713cd0fe92267c82649658f1a3b271") format("truetype"),
+url("../fonts/flaticon.woff?75713cd0fe92267c82649658f1a3b271") format("woff"),
+url("../fonts/flaticon.woff2?75713cd0fe92267c82649658f1a3b271") format("woff2"),
+url("../fonts/flaticon.eot?75713cd0fe92267c82649658f1a3b271#iefix") format("embedded-opentype"),
+url("../fonts/flaticon.svg?75713cd0fe92267c82649658f1a3b271#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+.flaticon-verified:before {
+    content: "\f101";
+}
+.flaticon-coding:before {
+    content: "\f102";
+}
+.flaticon-smartphone:before {
+    content: "\f103";
+}
+.flaticon-software-developer:before {
+    content: "\f104";
+}
+.flaticon-vector:before {
+    content: "\f105";
+}
+.flaticon-palette:before {
+    content: "\f106";
+}
+.flaticon-add:before {
+    content: "\f107";
+}
+.flaticon-social-media:before {
+    content: "\f108";
+}
+.flaticon-promotion:before {
+    content: "\f109";
+}
+.flaticon-email-marketing:before {
+    content: "\f10a";
+}
+.flaticon-self-growth:before {
+    content: "\f10b";
+}
+.flaticon-right-arrow:before {
+    content: "\f10c";
+}
+.flaticon-left-arrow:before {
+    content: "\f10d";
+}
+.flaticon-facebook:before {
+    content: "\f10e";
+}
+.flaticon-dribbble:before {
+    content: "\f10f";
+}
+.flaticon-twitter:before {
+    content: "\f110";
+}
+.flaticon-heart:before {
+    content: "\f111";
+}
+.flaticon-telephone:before {
+    content: "\f112";
+}
+.flaticon-phone-call:before {
+    content: "\f113";
+}
+.flaticon-envelope:before {
+    content: "\f114";
+}
+.flaticon-mail:before {
+    content: "\f115";
+}
+.flaticon-location:before {
+    content: "\f116";
+}
+.flaticon-quote:before {
+    content: "\f117";
+}
+.flaticon-right-quote-sign:before {
+    content: "\f118";
+}
+.flaticon-left-quote:before {
+    content: "\f119";
+}
+.flaticon-bar-chart:before {
+    content: "\f11a";
+}
+
+
+
+
