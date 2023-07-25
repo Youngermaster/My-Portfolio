@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  jmyounghoyos-portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: jmyounghoyos-portfolio:release
+    container_name: jmyounghoyos-portfolio-0
+    ports:
+      - "6969:80"
