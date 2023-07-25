@@ -1,7 +1,7 @@
 {
-  "name": "tonu-react",
+  "name": "jmyounghoyos-portfolio",
   "version": "0.1.0",
-  "homepage": "http://tonu-react.themepresss.com",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.3",

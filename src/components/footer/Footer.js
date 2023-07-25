@@ -15,17 +15,17 @@ const Footer = (props) => {
                     <div className="col-12">
                         <div className="link-widget">
                             <ul>
-                                <li><Link to="/"><i className="ti-facebook"></i></Link></li>
-                                <li><Link to="/"><i className="ti-twitter-alt"></i></Link></li>
-                                <li><Link to="/"><i className="ti-linkedin"></i></Link></li>
-                                <li><Link to="/"><i className="ti-pinterest"></i></Link></li>
-                                <li><Link to="/"><i className="ti-vimeo-alt"></i></Link></li>
+                                <li><a href="/"><i className="ti-github"></i></a></li>
+                                <li><a href="/"><i className="ti-linkedin"></i></a></li>
+                                <li><a href="/"><i className="ti-instagram"></i></a></li>
+                                <li><a href="/"><i className="ti-youtube"></i></a></li>
+                                <li><a href="/"><i className="ti-twitter-alt"></i></a></li>
                             </ul>
                         </div>
                     </div>
                     <div className="col-12">
                         <div className="copyright">
-                            <p>© 2023. All rights reserved by themepresss.</p>
+                            <p>© 2023. All rights reserved by Juan Manuel Young Hoyos.</p>
                         </div>
                     </div>
                 </div>

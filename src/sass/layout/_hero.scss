@@ -128,6 +128,9 @@
 					display: none;
 				}
 			}
+			span {
+				color: $theme-primary-color;
+			}
 		}
 	}
 
@@ -189,18 +192,23 @@
 		@media(max-width:1600px) {
 			left: -110px
 		}
+
 		@media(max-width:1400px) {
 			left: -120px
 		}
+
 		@media(max-width:1300px) {
 			left: -90px
 		}
+
 		@media(max-width:991px) {
 			left: -120px
 		}
+
 		@media(max-width:800px) {
 			left: -100px
 		}
+
 		@media(max-width:575px) {
 			left: -120px
 		}
@@ -259,7 +267,7 @@
 		h1 {
 			font-size: 300px;
 			letter-spacing: 5px;
-			color: #f7f7f7;
+			color: #e8e8e8;
 			line-height: 200px;
 			text-transform: uppercase;
 

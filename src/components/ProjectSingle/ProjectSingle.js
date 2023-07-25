@@ -29,8 +29,7 @@ const ProjectSingle = ({ maxWidth, open, onClose, title, pImg, psub1img1, psub1i
 
     const DialogTitle = withStyles(styles)((props) => {
         const { children, classes, onClose, ...other } = props;
-        return (
-            <MuiDialogTitle disableTypography className={classes.root} {...other}>
+        return (            <MuiDialogTitle disableTypography className={classes.root} {...other}>
                 <Typography variant="h6">{children}</Typography>
                 {onClose ? (
                     <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
@@ -42,8 +41,7 @@ const ProjectSingle = ({ maxWidth, open, onClose, title, pImg, psub1img1, psub1i
     });
 
 
-    return (
-        <Fragment>
+    return (        <Fragment>
             <Dialog
                 open={open}
                 onClose={onClose}

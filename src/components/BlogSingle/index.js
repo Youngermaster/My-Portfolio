@@ -35,8 +35,7 @@ const BlogSingle = ({ maxWidth, open, onClose, title, bImg, create_at, author,co
 
     const DialogTitle = withStyles(styles)((props) => {
         const { children, classes, onClose, ...other } = props;
-        return (
-            <MuiDialogTitle disableTypography className={classes.root} {...other}>
+        return (            <MuiDialogTitle disableTypography className={classes.root} {...other}>
                 <Typography variant="h6">{children}</Typography>
                 {onClose ? (
                     <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
@@ -48,8 +47,7 @@ const BlogSingle = ({ maxWidth, open, onClose, title, bImg, create_at, author,co
     });
 
 
-    return (
-        <Fragment>
+    return (        <Fragment>
             <Dialog
                 open={open}
                 onClose={onClose}

@@ -1,6 +1,6 @@
 .theme-btn,
 .theme-btn-s2 {
-	background: #19181d;
+	background: $theme-primary-color;
 	color: $white;
 	display: inline-block;
 	font-weight: 600;
@@ -14,12 +14,14 @@
 	transition: all .3s;
 	border-radius: 0;
 	cursor: pointer;
+	box-shadow: -8px 6px 0 rgba(0, 0, 0, 1); // Adjust values as needed
 
 	&:hover,
 	&:focus,
 	&:active {
-		background: $theme-primary-color;
+		background: $blue;
 		color: $white;
+		box-shadow: -12px 8px 0 rgba(0, 0, 0, 1); // Adjust values as needed
 
 		&:after {
 			border-color: $white;
@@ -40,7 +42,7 @@
 	}
 }
 
-.theme-btn-s2{
+.theme-btn-s2 {
 	background: $theme-primary-color;
 	color: $white;
 

@@ -14,8 +14,7 @@ const Header = (props) => {
         window.scrollTo(10, 0);
     }
 
-    return (
-        <header id="header" className={props.topbarNone}>
+    return (        <header id="header" className={props.topbarNone}>
             <div className={`tp-site-header ${props.hclass}`}>
                 <nav className="navigation navbar navbar-expand-lg navbar-light">
                     <div className="container-fluid">

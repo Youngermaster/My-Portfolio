@@ -20,7 +20,6 @@ const ServiceSection = (props) => {
 
     return (
 
-
         <div className="tp-service-area section-padding">
             <div className="container">
                 <div className="tp-section-title">

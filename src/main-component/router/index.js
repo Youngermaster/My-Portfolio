@@ -5,8 +5,7 @@ import Homepage from '../HomePage/HomePage'
 
 const AllRoute = () => { 
 
-  return (
-    <div className="App">
+  return (    <div className="App">
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Homepage />} />

@@ -6,8 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => { 
 
-  return (
-    <div className="App" id='scrool'>
+  return (    <div className="App" id='scrool'>
           <AllRoute/>
           <ToastContainer/>
     </div>

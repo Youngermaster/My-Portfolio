@@ -39,8 +39,7 @@ const ContactForm = () => {
         }
     };
 
-    return (
-        <form method="post" className="contact-validation-active" onSubmit={(e) => submitHandler(e)} >
+    return (        <form method="post" className="contact-validation-active" onSubmit={(e) => submitHandler(e)} >
             <div className="row align-items-center">
                 <div className="col-md-6 col-md-6 col-12">
                     <div className="form-group">

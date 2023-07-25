@@ -8,8 +8,7 @@ const VideoModal = () => {
   
   const [isOpen, setOpen] = useState(false)
 
-  return (
-    <React.Fragment>
+  return (    <React.Fragment>
       <ModalVideo channel='youtube' autoplay isOpen={isOpen} videoId="7Jv48RQ_2gk" onClose={() => setOpen(false)} />
 
       <div className="video-btn">

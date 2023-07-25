@@ -22,7 +22,6 @@ const ProjectSection = (props) => {
         setState(item)
     }
     return (
-
         <section className="tp-project-section section-padding">
             <div className="container">
                 <div className="tp-section-title">

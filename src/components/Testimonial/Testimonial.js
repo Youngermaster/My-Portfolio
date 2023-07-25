@@ -81,7 +81,6 @@ const Testimonial = () => {
     };
 
     return (
-
         <section className="tp-testimonial-section section-padding">
             <div className="container">
                 <div className="tp-section-title">

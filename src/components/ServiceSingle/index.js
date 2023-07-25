@@ -27,8 +27,7 @@ const ServiceSingle = ({ maxWidth, open, onClose, title, dImg, sImg1, sImg2, }) 
 
     const DialogTitle = withStyles(styles)((props) => {
         const { children, classes, onClose, ...other } = props;
-        return (
-            <MuiDialogTitle disableTypography className={classes.root} {...other}>
+        return (            <MuiDialogTitle disableTypography className={classes.root} {...other}>
                 <Typography variant="h6">{children}</Typography>
                 {onClose ? (
                     <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
@@ -40,8 +39,7 @@ const ServiceSingle = ({ maxWidth, open, onClose, title, dImg, sImg1, sImg2, }) 
     });
 
 
-    return (
-        <Fragment>
+    return (        <Fragment>
             <Dialog
                 open={open}
                 onClose={onClose}

@@ -48,8 +48,7 @@ const Pricing = (props) => {
     ]
 
 
-    return (
-        <section className="tp-pricing-section section-padding">
+    return (        <section className="tp-pricing-section section-padding">
             <div className="container">
                 <div className="tp-section-title">
                     <span>Pricing</span>

@@ -46,8 +46,7 @@ const MobileMenu = () => {
         window.scrollTo(10, 0);
     }
 
-    return (
-        <div>
+    return (        <div>
             <div className={`mobileMenu ${menuActive ? "show" : ""}`}>
                 <div className="menu-close">
                     <div className="clox" onClick={() => setMenuState(!menuActive)}><i className="ti-close"></i></div>
@@ -55,8 +54,7 @@ const MobileMenu = () => {
 
                 <ul className="responsivemenu">
                     {menus.map((item, mn) => {
-                        return (
-                            <ListItem key={mn}>
+                        return (                            <ListItem key={mn}>
                             <Link
                                 to={item.link} spy={true} smooth={true}  duration={500} onClick={ClickHandler}>{item.title}</Link>
                             </ListItem>

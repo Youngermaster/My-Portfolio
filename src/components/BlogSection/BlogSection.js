@@ -24,7 +24,6 @@ const BlogSection = () => {
     const [number, setCount] = useState(3);
     const [buttonActive, setButtonState] = useState(false);
     return (
-
         <section className="tp-blog-section section-padding" id="blog">
             <div className="container">
                 <div className="tp-section-title">

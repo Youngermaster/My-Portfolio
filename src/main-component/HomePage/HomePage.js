@@ -14,8 +14,7 @@ import Footer from '../../components/footer/Footer';
 import Pricing from '../../components/Pricing';
 
 const HomePage = () => {
-    return (
-        <Fragment>
+    return (        <Fragment>
             <Navbar />
             <Element name='home'>
                 <Hero />

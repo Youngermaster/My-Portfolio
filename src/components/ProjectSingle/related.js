@@ -4,8 +4,7 @@ import Projects from '../../api/project'
 
 const RelatedProject = () => {
 
-    return (
-        <div className="tp-project-single-item">
+    return (        <div className="tp-project-single-item">
             <div className="tp-project-single-title">
                 <h3>Related Projects</h3>
             </div>

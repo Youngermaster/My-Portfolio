@@ -52,8 +52,7 @@ const PartnerSlider = () => {
       }
     ]
   };
-  return (
-    <section className="partners-section">
+  return (    <section className="partners-section">
       <h2 className="hidden">partner</h2>
       <div className="container">
         <div className="row">

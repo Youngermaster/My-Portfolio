@@ -3,8 +3,7 @@ import ContactForm from '../ContactFrom/ContactForm'
 
 
 const ContactArea = (props) => {
-    return (
-        <section className="tp-contact-form-area section-padding">
+    return (        <section className="tp-contact-form-area section-padding">
             <div className="container">
                 <div className="tp-contact-form-wrap">
                     <div className="tp-section-title">

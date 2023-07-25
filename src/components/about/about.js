@@ -3,7 +3,6 @@ import aImg from '../../images/about/img-1.jpg'
 
 const About = (props) => {
     return (
-
         <section className="tf-about-section section-padding">
             <div className="container">
                 <div className="tf-about-wrap">
@@ -13,7 +12,7 @@ const About = (props) => {
                                 <img src={aImg} alt="" />
                                 <div className="tf-about-img-text">
                                     <div className="tf-about-icon">
-                                        <h3>8+</h3>
+                                        <h3>3+</h3>
                                         <span>Years Exprience</span>
                                     </div>
                                 </div>
@@ -23,7 +22,7 @@ const About = (props) => {
                             <div className="tf-about-text">
                                 <small>about Me</small>
                                 <h2>Welcome to Tonu, Best Software Services</h2>
-                                <h5>I have 8+ years of experiences in Software Development for give you better services.</h5>
+                                <h5>I have 3+ years of experiences in Software Development for give you better services.</h5>
                                 <p>A wonderful serenity has taken possession of my entire soul, like these sweet
                                     mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm
                                     of existence in this spot, which was created for the bliss of souls like mine. I am
