@@ -2,9 +2,18 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Sections
 
-In the project directory, you can run:
+- NavBar.
+- Hero.
+- About Me.
+- My Services.
+- My Most Relevant Projects.
+- Tools I use (Carousel).
+- Achievements (Latest News).
+- Experience.
+- Contact Me.
+- Footer.
 
 ### `npm start`
 

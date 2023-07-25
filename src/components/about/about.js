@@ -21,25 +21,36 @@ const About = (props) => {
                         <div className="col-lg-6 col-md-12 col-12">
                             <div className="tf-about-text">
                                 <small>about Me</small>
-                                <h2>Welcome to Tonu, Best Software Services</h2>
-                                <h5>I have 3+ years of experiences in Software Development for give you better services.</h5>
-                                <p>A wonderful serenity has taken possession of my entire soul, like these sweet
-                                    mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm
-                                    of existence in this spot, which was created for the bliss of souls like mine. I am
-                                    so happy, my dear friend, so absorbed in the exquisite </p>
+                                <h2><span>Problems</span>? Consider Them <span>Solved</span> & <span>Coded</span></h2>
+                                <h5>With 3+ years in the tech industry, I focus
+                                    on crafting solutions that matter.</h5>
+                                <p>
+                                    From intricate algorithms to intuitive user
+                                    interfaces, each project I undertake is a
+                                    journey of turning challenges into
+                                    functional solutions. The thrill isn't just
+                                    in coding, but ensuring what I craft stands
+                                    robust against threats (Security), bridging
+                                    the gap between the digital and physical
+                                    world (IOT).
+                                </p>
 
                                 <div className="tf-funfact">
                                     <div className="tf-funfact-item">
-                                        <h3><span>500</span>+</h3>
-                                        <p>Projects Completed</p>
+                                        <h3><span>40+</span></h3>
+                                        <p>Challenges Tackled</p>
                                     </div>
+
+                                    <a href='https://profile.codersrank.io/user/youngermaster'>
+                                        <div className="tf-funfact-item">
+                                            <h3><span>60+</span></h3>
+                                            <p>Languages & Tools Used</p>
+                                        </div>
+                                    </a>
+
                                     <div className="tf-funfact-item">
-                                        <h3><span>52</span>+</h3>
-                                        <p>Awards Win</p>
-                                    </div>
-                                    <div className="tf-funfact-item">
-                                        <h3><span>2</span>M+</h3>
-                                        <p>Happy clients</p>
+                                        <h3><span>4</span>+</h3>
+                                        <p>Awards Won</p>
                                     </div>
                                 </div>
                             </div>
@@ -48,7 +59,7 @@ const About = (props) => {
                 </div>
             </div>
             <div className="visible-rotate-text">
-                <h1>About Me</h1>
+                <h1>Problem Solver</h1>
             </div>
         </section>
     )

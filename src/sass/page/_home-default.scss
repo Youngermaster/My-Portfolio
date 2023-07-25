@@ -105,6 +105,10 @@
                 @media(max-width:575px) {
                     font-size: 40px;
                 }
+
+                span {
+                    color: $theme-primary-color;
+                }
             }
 
             h5 {
@@ -408,6 +412,7 @@
 
                     h2 {
                         color: $white;
+
                         a {
                             color: $white;
 
@@ -621,6 +626,7 @@
 
         .submit-area {
             margin-top: 32px;
+
             @media(max-width:767px) {
                 text-align: center;
             }
@@ -871,6 +877,7 @@
     border-top: 1px solid $border-color;
     position: relative;
     overflow: hidden;
+
     .tp-pricing-wrap {
         .tp-pricing-item {
             background: $card-bg-color;
