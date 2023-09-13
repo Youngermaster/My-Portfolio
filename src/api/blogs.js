@@ -13,8 +13,6 @@ import blogSingleImg4 from "../images/blog-details/img-4.jpg";
 import blogSingleImg5 from "../images/blog-details/img-5.jpg";
 import blogSingleImg6 from "../images/blog-details/img-6.jpg";
 
-
-
 const blogs = [
     {
         id: '1',
@@ -22,11 +20,11 @@ const blogs = [
         screens: blogImg1,
         description: 'Consectetur adipiscing elit. Purusout phasellus malesuada lectus.',
         author: 'Marilou',
-        thumb:'Designer',
+        thumb: 'Designer',
         create_at: '25 Dec, 2023',
-        blogSingleImg:blogSingleImg1, 
-        comment:'35',
-        blClass:'format-standard-image',
+        blogSingleImg: blogSingleImg1,
+        comment: '35',
+        blClass: 'format-standard-image',
     },
     {
         id: '2',
@@ -34,11 +32,11 @@ const blogs = [
         screens: blogImg2,
         description: 'Consectetur adipiscing elit. Purusout phasellus malesuada lectus.',
         author: 'Konal',
-        thumb:'Developer',
+        thumb: 'Developer',
         create_at: '13 Dec,2023',
-        blogSingleImg:blogSingleImg2, 
-        comment:'80',
-        blClass:'format-standard-image',
+        blogSingleImg: blogSingleImg2,
+        comment: '80',
+        blClass: 'format-standard-image',
     },
     {
         id: '3',
@@ -46,11 +44,11 @@ const blogs = [
         screens: blogImg3,
         description: 'Consectetur adipiscing elit. Purusout phasellus malesuada lectus.',
         author: 'Aliza',
-        thumb:'Fasion',
+        thumb: 'Fasion',
         create_at: '22 Dec,2023',
-        blogSingleImg:blogSingleImg3,
-        comment:'95',
-        blClass:'format-video',
+        blogSingleImg: blogSingleImg3,
+        comment: '95',
+        blClass: 'format-video',
     },
     {
         id: '4',
@@ -58,11 +56,11 @@ const blogs = [
         screens: blogImg4,
         description: 'Consectetur adipiscing elit. Purusout phasellus malesuada lectus.',
         author: 'Biry',
-        thumb:'Fasion',
+        thumb: 'Fasion',
         create_at: '13 Dec,2023',
-        blogSingleImg:blogSingleImg4, 
-        comment:'80',
-        blClass:'format-standard-image',
+        blogSingleImg: blogSingleImg4,
+        comment: '80',
+        blClass: 'format-standard-image',
     },
     {
         id: '5',
@@ -70,11 +68,11 @@ const blogs = [
         screens: blogImg5,
         description: 'Consectetur adipiscing elit. Purusout phasellus malesuada lectus.',
         author: 'Sharah',
-        thumb:'Developer',
+        thumb: 'Developer',
         create_at: '13 Dec,2023',
-        blogSingleImg:blogSingleImg5, 
-        comment:'80',
-        blClass:'format-standard-image',
+        blogSingleImg: blogSingleImg5,
+        comment: '80',
+        blClass: 'format-standard-image',
     },
     {
         id: '6',
@@ -82,11 +80,12 @@ const blogs = [
         screens: blogImg6,
         description: 'Consectetur adipiscing elit. Purusout phasellus malesuada lectus.',
         author: 'Maria',
-        thumb:'Fasion',
+        thumb: 'Fasion',
         create_at: '22 Dec,2023',
-        blogSingleImg:blogSingleImg6,
-        comment:'95',
-        blClass:'format-video',
+        blogSingleImg: blogSingleImg6,
+        comment: '95',
+        blClass: 'format-video',
     },
 ];
+
 export default blogs;
