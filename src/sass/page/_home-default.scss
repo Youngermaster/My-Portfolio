@@ -267,10 +267,11 @@
     z-index: 11;
 
     .tp-service-item {
-      border-left: 1px solid #dddbdb;
+      border-left: 1px solid #DDDDDD;
       transition: all .3s;
       padding: 70px 30px;
-      background: $card-bg-color;
+      // background: $card-bg-color;
+      background: #FFFFFF;
 
       @media(max-width:1399px) {
         padding: 60px 15px;

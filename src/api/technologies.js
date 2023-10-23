@@ -1,5 +1,4 @@
 // Import default images
-import blogImg1 from "../images/blog/img-1.jpg";
 import python from "../images/technologies/python.png";
 import react from "../images/technologies/react.png";
 import rust from "../images/technologies/rust.png";
@@ -9,7 +8,6 @@ import docker from "../images/technologies/docker.png";
 import aws from "../images/technologies/aws.png";
 import mongoDB from "../images/technologies/mongodb.png";
 import graphql from "../images/technologies/graphql.png";
-// import latex from "../images/technologies/latex.png";
 // import godot from "../images/technologies/godot.png";
 // import neoVim from "../images/technologies/neovim.png";
 // import postgreSQL from "../images/technologies/postgresql.png";
@@ -75,12 +73,6 @@ const technologies = [
     description: "GraphQL enables efficient and flexible querying for APIs and data sources.",
     image: graphql,
   },
-  // {
-  //   id: "9",
-  //   name: "LaTeX",
-  //   description: "LaTeX is my choice for document preparation, especially for technical documents.",
-  //   image: latex,
-  // },
   // {
   //   id: "10",
   //   name: "Godot",

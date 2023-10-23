@@ -27,7 +27,7 @@ const HomePage = () => {
             <ServiceSection />
         </Element>
         <Marquee />
-        <Element name='Technologies'>
+        <Element name='technologies'>
             <TechnologiesSection />
         </Element>
         <Element name='project'>
