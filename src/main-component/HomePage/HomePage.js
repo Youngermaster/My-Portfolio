@@ -12,34 +12,39 @@ import { Element } from 'react-scroll'
 import BlogSection from '../../components/BlogSection/BlogSection';
 import Footer from '../../components/footer/Footer';
 import Pricing from '../../components/Pricing';
+import TechnologiesSection from '../../components/TechnologiesSection/TechnologiesSection';
 
 const HomePage = () => {
-    return (        <Fragment>
-            <Navbar />
-            <Element name='home'>
-                <Hero />
-            </Element>
-            <Element name='about'>
-                <About />
-            </Element>
-            <Element name='service'>
-                <ServiceSection />
-            </Element>
-            <Marquee />
-            <Element name='project'>
-                <ProjectSection />
-            </Element>
-            <Testimonial />
-            <Element name='blog'>
-                <BlogSection />
-            </Element>
-            <Pricing />
-            <Element name='contact'>
-                <ContactArea />
-            </Element>
-            <Footer />
-            <BackToTop />
-        </Fragment>
+    return (<Fragment>
+        <Navbar />
+        <Element name='home'>
+            <Hero />
+        </Element>
+        <Element name='about'>
+            <About />
+        </Element>
+        <Element name='service'>
+            <ServiceSection />
+        </Element>
+        <Marquee />
+        <Element name='Technologies'>
+            <TechnologiesSection />
+        </Element>
+        <Element name='project'>
+            <ProjectSection />
+        </Element>
+        {/* My Awards */}
+        <Testimonial />
+        <Element name='blog'>
+            <BlogSection />
+        </Element>
+        {/* <Pricing /> */}
+        <Element name='contact'>
+            <ContactArea />
+        </Element>
+        <Footer />
+        <BackToTop />
+    </Fragment>
     )
 };
 export default HomePage;

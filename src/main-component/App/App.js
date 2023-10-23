@@ -1,15 +1,14 @@
 import React from 'react';
 import AllRoute from '../router'
-import {ToastContainer} from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const App = () => {
 
-const App = () => { 
-
-  return (    <div className="App" id='scrool'>
-          <AllRoute/>
-          <ToastContainer/>
-    </div>
+  return (<div className="App" id='scrool'>
+    <AllRoute />
+    <ToastContainer />
+  </div>
   );
 }
 
