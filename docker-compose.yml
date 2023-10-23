@@ -8,4 +8,4 @@ services:
     image: jmyounghoyos-portfolio:release
     container_name: jmyounghoyos-portfolio-0
     ports:
-      - "6969:80"
+      - "3000:80"

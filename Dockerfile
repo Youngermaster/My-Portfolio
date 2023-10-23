@@ -1,4 +1,4 @@
-FROM node:latest AS builder
+FROM node:18-alpine AS builder
 
 # Declaring env
 ENV NODE_ENV production
@@ -9,11 +9,11 @@ WORKDIR /app
 # Copying all the files in our project
 COPY . .
 
-# Installing dependencies
-RUN npm install
+# Installing dependencies using Yarn
+RUN yarn install
 
 # Building our application
-RUN npm run build
+RUN yarn build
 
 # Fetching the latest nginx image
 FROM nginx

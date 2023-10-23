@@ -17,6 +17,19 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Contact Me.
 - Footer.
 
+## Docker build
+
+Use the following command to automatically spin up the container with the portfolio:
+```shell
+docker compose up -d
+```
+
+Or manually use the following commands to build and run the portfolio with Docker:
+```shell
+docker build -t jmyounghoyos-portfolio:release .
+docker run -d -p 3000:80 jmyounghoyos-portfolio:release --name jmyounghoyos-portfolio-0
+```
+
 ### `npm start`
 
 Runs the app in the development mode.\
