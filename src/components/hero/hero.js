@@ -30,9 +30,9 @@ const Hero = () => {
       </div>
       <div className="social-link">
         <ul>
-          <li><a href="https://github.com/Youngermaster">GitHub</a></li>
-          <li><a href="https://www.linkedin.com/in/juan-manuel-young-hoyos/">LinkedIn</a></li>
           <li><a href="https://www.instagram.com/jmyounghoyos/">Instagram</a></li>
+          <li><a href="https://www.linkedin.com/in/juan-manuel-young-hoyos/">LinkedIn</a></li>
+          <li><a href="https://github.com/Youngermaster">GitHub</a></li>
         </ul>
       </div>
       <div className="visible-text">
