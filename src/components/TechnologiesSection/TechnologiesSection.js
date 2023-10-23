@@ -4,8 +4,8 @@ import "slick-carousel/slick/slick-theme.css";
 import technologies from '../../api/technologies';
 
 const TechnologiesSection = () => {
-  const [number, setCount] = useState(12);
-  const [buttonActive, setButtonState] = useState(false);
+  const [number, setCount] = useState(18);
+  const [buttonActive, setButtonState] = useState(true);
 
   return (
     <section className="tp-blog-section section-padding" id="blog">
@@ -30,13 +30,13 @@ const TechnologiesSection = () => {
               </div>
             ))}
           </div>
-          <div className={`sec-title-btn text-center mt-3 ${buttonActive ? "d-none" : ""}`}>
+          {/* <div className={`sec-title-btn text-center mt-3 ${buttonActive ? "d-none" : ""}`}>
             <span onClick={() => setButtonState(!buttonActive)}>
               <button className="theme-btn" onClick={() => setCount(number + 8)}>
                 View All Technologies
               </button>
             </span>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="visible-rotate-text">
