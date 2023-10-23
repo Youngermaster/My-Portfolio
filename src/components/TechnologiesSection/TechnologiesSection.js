@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import technologies from '../../api/technologies';
 
 const TechnologiesSection = () => {
-  const [number, setCount] = useState(18);
+  const [number, setCount] = useState(20);
   const [buttonActive, setButtonState] = useState(true);
 
   return (

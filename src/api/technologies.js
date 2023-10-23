@@ -8,16 +8,17 @@ import docker from "../images/technologies/docker.png";
 import aws from "../images/technologies/aws.png";
 import mongoDB from "../images/technologies/mongodb.png";
 import graphql from "../images/technologies/graphql.png";
-// import figma from "../images/technologies/figma.png";
+import figma from "../images/technologies/figma.png";
+import postgreSQL from "../images/technologies/postgresql.png";
+import apacheKafka from "../images/technologies/apachekafka.png";
+import mqtt from "../images/technologies/mqtt.png";
+import linux from "../images/technologies/linux.png";
+import arduino from "../images/technologies/arduino.png";
+import raspberryPi from "../images/technologies/raspberrypi.png";
+import jenkins from "../images/technologies/jenkins.png";
 import godot from "../images/technologies/godot.png";
 import neoVim from "../images/technologies/neovim.png";
-import postgreSQL from "../images/technologies/postgresql.png";
-// import apacheKafka from "../images/technologies/apachekafka.png";
-// import mqtt from "../images/technologies/mqtt.png";
-import linux from "../images/technologies/linux.png";
-// import arduino from "../images/technologies/arduino.png";
-// import raspberryPi from "../images/technologies/raspberrypi.png";
-// import jenkins from "../images/technologies/jenkins.png";
+import obsidianMd from "../images/technologies/obsidian.png";
 
 const technologies = [
   {
@@ -74,66 +75,72 @@ const technologies = [
     description: "GraphQL enables efficient and flexible querying for APIs and data sources.",
     image: graphql,
   },
-  //   {
-  //   id: "9",
-  //   name: "Figma",
-  //   description: "I use Figma for collaborative interface design, brand design, and prototyping, making it easier to bring ideas to life.",
-  //   image: figma,
-  // },
+  {
+    id: "9",
+    name: "Figma",
+    description: "I use Figma for interface design, brand design, and prototyping, bringing ideas to life.",
+    image: figma,
+  },
   {
     id: "10",
+    name: "PostgreSQL",
+    description: "PostgreSQL is a robust relational database system I use for data management.",
+    image: postgreSQL,
+  },
+  {
+    id: "11",
+    name: "Apache Kafka",
+    description: "I use Apache Kafka for building real-time data streaming applications.",
+    image: apacheKafka,
+  },
+  {
+    id: "12",
+    name: "MQTT",
+    description: "MQTT is my protocol of choice for IoT applications and real-time communication.",
+    image: mqtt,
+  },
+  {
+    id: "13",
+    name: "Linux",
+    description: "Linux is my preferred operating system for development and server hosting.",
+    image: linux,
+  },
+  {
+    id: "14",
+    name: "Arduino",
+    description: "Arduino is my platform for creating electronic and IoT projects.",
+    image: arduino,
+  },
+  {
+    id: "15",
+    name: "Raspberry Pi",
+    description: "Raspberry Pi is ideal for small-scale computing and IoT applications.",
+    image: raspberryPi,
+  },
+  {
+    id: "16",
+    name: "Jenkins",
+    description: "Jenkins enables me to automate and streamline the software development pipeline.",
+    image: jenkins,
+  },
+  {
+    id: "17",
     name: "Godot",
     description: "I use Godot for developing 2D and 3D games and interactive simulations.",
     image: godot,
   },
   {
-    id: "11",
+    id: "18",
     name: "NeoVim",
     description: "NeoVim is my text editor of choice for efficient and extensible code editing.",
     image: neoVim,
   },
   {
-    id: "12",
-    name: "PostgreSQL",
-    description: "PostgreSQL is a robust relational database system I use for data management.",
-    image: postgreSQL,
+    id: "19",
+    name: "Obsidian.md",
+    description: "I use Obsidian.md as a personal knowledge base and note-taking software.",
+    image: obsidianMd,
   },
-  // {
-  //   id: "13",
-  //   name: "Apache Kafka",
-  //   description: "I use Apache Kafka for building real-time data streaming applications.",
-  //   image: apacheKafka,
-  // },
-  // {
-  //   id: "14",
-  //   name: "MQTT",
-  //   description: "MQTT is my protocol of choice for IoT applications and real-time communication.",
-  //   image: mqtt,
-  // },
-  {
-    id: "15",
-    name: "Linux",
-    description: "Linux is my preferred operating system for development and server hosting.",
-    image: linux,
-  },
-  // {
-  //   id: "16",
-  //   name: "Arduino",
-  //   description: "Arduino is my platform for creating electronic and IoT projects.",
-  //   image: arduino,
-  // },
-  // {
-  //   id: "17",
-  //   name: "Raspberry Pi",
-  //   description: "Raspberry Pi is ideal for small-scale computing and IoT applications.",
-  //   image: raspberryPi,
-  // },
-  // {
-  //   id: "18",
-  //   name: "Jenkins",
-  //   description: "Jenkins enables me to automate and streamline the software development pipeline.",
-  //   image: jenkins,
-  // },
 ];
 
 export default technologies;
