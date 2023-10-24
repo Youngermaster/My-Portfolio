@@ -37,10 +37,9 @@ const Hero = () => {
       </div>
       <div className="visible-text">
         <h1>
-          DEVSECOPS  <br />
-          APPS <br />
-          AI <br />
-          IOT
+          DEVSECOPS<br />
+          IOT AI<br />
+          APPS<br />
         </h1>
       </div>
     </section>

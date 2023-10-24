@@ -35,20 +35,18 @@ const About = (props) => {
                   world (IOT).
                 </p>
 
-                <div className="tf-funfact">
-                  <div className="tf-funfact-item">
+                <div className="tf-funfact row justify-content-center text-center">
+                  <div className="tf-funfact-item col-md-4 col-sm-6 mt-3">
                     <h3><span>40+</span></h3>
                     <p>Challenges Tackled</p>
                   </div>
-
-                  <a href='https://profile.codersrank.io/user/youngermaster'>
-                    <div className="tf-funfact-item">
+                  <a href='https://profile.codersrank.io/user/youngermaster' className="col-md-4 col-sm-6">
+                    <div className="tf-funfact-item mt-3">
                       <h3><span>60+</span></h3>
                       <p>Languages & Tools Used</p>
                     </div>
                   </a>
-
-                  <div className="tf-funfact-item">
+                  <div className="tf-funfact-item col-md-4 col-sm-6 mt-3">
                     <h3><span>4</span>+</h3>
                     <p>Awards Won</p>
                   </div>
