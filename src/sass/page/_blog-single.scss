@@ -5,8 +5,8 @@
 	background: $card-bg-color;
 	padding-top: 20px;
 
-	@media(max-width:991px){
-      padding: 40px 0;
+	@media(max-width:991px) {
+		padding: 40px 0;
 	}
 
 	.entry-meta {
@@ -18,7 +18,7 @@
 			margin: 25px 0;
 		}
 
-		ul{
+		ul {
 			list-style: none;
 
 			li {
@@ -30,29 +30,30 @@
 
 				a {
 					color: $white;
-		
+
 					&:hover {
 						color: $theme-primary-color;
 					}
 				}
 
-				i{
+				i {
 					position: relative;
 					top: 0;
 					margin-right: 3px;
-					&.fi{
-						&:before{
+
+					&.fi {
+						&:before {
 							font-size: 13px;
 						}
 					}
 				}
-	
-				&+li{
+
+				&+li {
 					margin-left: 20px;
 					padding-left: 20px;
 					position: relative;
 
-					&:before{
+					&:before {
 						position: absolute;
 						left: 0;
 						top: 50%;
@@ -73,24 +74,24 @@
 						padding-left: 0;
 					}
 				}
-	
+
 				@include media-query(767px) {
 					font-size: 12px;
 				}
-	
+
 				@include media-query(440px) {
 					float: none;
 					display: block;
 					margin-bottom: 5px;
 				}
-	
+
 			}
 		}
-		
+
 	}
 
-	.entry-media{
-		img{
+	.entry-media {
+		img {
 			width: 100%;
 		}
 	}
@@ -134,7 +135,7 @@
 
 		blockquote {
 			background-color: $dark-gray;
-			color: $light;
+			color: white;
 			font-size: 20px;
 			line-height: 1.6em;
 			padding: 65px;
@@ -143,7 +144,7 @@
 			border: 0;
 			text-align: center;
 			position: relative;
-			text-decoration: underline;
+			// text-decoration: underline;
 
 			@include media-query(767px) {
 				padding: 55px 25px;
@@ -161,11 +162,11 @@
 				width: 60px;
 				height: 60px;
 				line-height: 60px;
-				border:2px solid $card-bg-color;
+				border: 2px solid $card-bg-color;
 				background: $dark-gray;
 				color: $theme-primary-color;
 				border-radius: 50%;
-				
+
 			}
 
 
@@ -175,13 +176,13 @@
 			overflow: hidden;
 			margin: 40px -7.5px 0;
 
-			> div {
+			>div {
 				width: calc(50% - 15px);
 				float: left;
 				margin: 0 7.5px 15px;
 			}
 
-			img{
+			img {
 				width: 100%;
 			}
 		}
@@ -189,14 +190,15 @@
 
 
 	/*** tag-share ***/
-	.tag-share,.tag-share-s2 {
+	.tag-share,
+	.tag-share-s2 {
 		border-bottom: 1px solid $border-color;
 		margin: 75px 0 0;
 		padding-bottom: 30px;
 		color: $heading-color;
 
-		@media(max-width:767px){
-          margin-top: 40px;
+		@media(max-width:767px) {
+			margin-top: 40px;
 		}
 
 		ul {
@@ -212,7 +214,7 @@
 				}
 			}
 
-			> li + li {
+			>li+li {
 				margin-left: 10px;
 
 				@include media-query(767px) {
@@ -226,7 +228,7 @@
 			display: flex;
 			align-items: center;
 
-			> span {
+			>span {
 				font-family: $heading-font;
 				color: $white;
 				font-weight: 600;
@@ -267,92 +269,93 @@
 
 
 	}
-	.tag-share-s2{
-     margin: 0;
-	 margin-top: 30px;
-	 border-bottom: 0;
 
-	 .tag{
-		 a{
-			 padding: 0;
-			 font-size: 16px;
-			 text-transform: capitalize;
-			 background: none;
-			 text-decoration: underline;
-			 color: $text-color;
-		 }
-	 }
+	.tag-share-s2 {
+		margin: 0;
+		margin-top: 30px;
+		border-bottom: 0;
+
+		.tag {
+			a {
+				padding: 0;
+				font-size: 16px;
+				text-transform: capitalize;
+				background: none;
+				text-decoration: underline;
+				color: $text-color;
+			}
+		}
 	}
 
 
 	/*** author-box ***/
 	.author-box {
-	    margin: 35px 0 60px;
-	    
-	    .author-avatar {
-	    	float: left;
+		margin: 35px 0 60px;
 
-	    	@include media-query(767px) {
-	    		float: none;
-	    	}
+		.author-avatar {
+			float: left;
 
-			img{
+			@include media-query(767px) {
+				float: none;
+			}
+
+			img {
 				border-radius: 50%;
 			}
-	    }
+		}
 
-	    .author-content {
-	    	display: block;
-		    overflow: hidden;
-		    padding-left: 25px;
+		.author-content {
+			display: block;
+			overflow: hidden;
+			padding-left: 25px;
 
-		    @include media-query(767px) {
-	    		padding: 0;
-	    		margin: 15px 0 0 0;
-	    	}
-	    }
+			@include media-query(767px) {
+				padding: 0;
+				margin: 15px 0 0 0;
+			}
+		}
 
-	    .author-content p {
-	    	margin-bottom: 20px;
-	    }
+		.author-content p {
+			margin-bottom: 20px;
+		}
 
-	    .author-name {
-	    	font-family: $heading-font;
-	    	font-size: 24px;
-	    	font-weight: 600;
-	    	display: inline-block;
-		    margin-bottom: 10px;
-		    color: $white;
-	    }
+		.author-name {
+			font-family: $heading-font;
+			font-size: 24px;
+			font-weight: 600;
+			display: inline-block;
+			margin-bottom: 10px;
+			color: $white;
+		}
 
-	    .social-link {
-	    	display: inline-block;
-	    	list-style: none;
-	    }
+		.social-link {
+			display: inline-block;
+			list-style: none;
+		}
 
-	    .social-link li {
-	    	float: left;
-	    	margin-right: 12px;
-	    }
+		.social-link li {
+			float: left;
+			margin-right: 12px;
+		}
 
-	    .social-link a {
-	    	display: block;
-	    	font-size: 13px;
-	    	color: $white;
-	    }
+		.social-link a {
+			display: block;
+			font-size: 13px;
+			color: $white;
+		}
 
-	    .social-link a:hover {
-	    	color: $theme-primary-color;
-	    }
+		.social-link a:hover {
+			color: $theme-primary-color;
+		}
 	}
 
 	/*** more-posts ***/
 	.more-posts {
 		overflow: hidden;
-	    border: 1px solid $border-color;
-	    padding: 0 25px;
+		border: 1px solid $border-color;
+		padding: 0 25px;
 
-		> div {
+		>div {
 			width: 50%;
 			float: left;
 
@@ -362,26 +365,26 @@
 			}
 		}
 
-		> div > a {
+		>div>a {
 			display: inline-block;
 		}
 
 		.previous-post,
 		.next-post {
-		    padding: 40px 0;
+			padding: 40px 0;
 
-		     @include media-query(767px) {
+			@include media-query(767px) {
 				padding: 25px 15px !important;
 			}
 		}
 
 		.next-post {
 			text-align: right;
-		    border-left: 1px solid $border-color;
-		    padding-left: 15px;
-		    padding-right: 5px;
+			border-left: 1px solid $border-color;
+			padding-left: 15px;
+			padding-right: 5px;
 
-		    @include media-query(767px) {
+			@include media-query(767px) {
 				border-left: 0;
 				text-align: left;
 				border-top: 1px solid $border-color;
@@ -437,8 +440,8 @@
 			}
 		}
 
-		.previous-post > a > span,
-		.next-post > a > span {
+		.previous-post>a>span,
+		.next-post>a>span {
 			display: block;
 		}
 
@@ -461,7 +464,7 @@
 			}
 		}
 
-		a:hover .post-control-link  {
+		a:hover .post-control-link {
 			color: $theme-primary-color;
 		}
 	}
@@ -471,7 +474,7 @@
 		margin-top: 70px;
 
 
-		li > div {
+		li>div {
 			border-bottom: 1px solid $border-color;
 			padding: 35px;
 
@@ -493,7 +496,7 @@
 				}
 			}
 
-			> li:last-child div {
+			>li:last-child div {
 				border-bottom: 0;
 			}
 		}
@@ -510,7 +513,7 @@
 			}
 		}
 
-		li > div {
+		li>div {
 			position: relative;
 		}
 
@@ -573,12 +576,12 @@
 			text-align: center;
 			border-radius: 50px;
 			display: inline-block;
-            font-family: $base-font;
+			font-family: $base-font;
 			text-decoration: underline;
 			text-transform: uppercase;
 			letter-spacing: 1px;
 
-			&:hover{
+			&:hover {
 				color: $theme-primary-color;
 			}
 		}
@@ -608,10 +611,10 @@
 			border: 1px solid $border-color;
 			padding: 6px 15px;
 			margin-bottom: 15px;
-	        outline: 0;
-	        border-radius: 30px;
-	        box-shadow: none;
-	        @include transition-time(0.3s);
+			outline: 0;
+			border-radius: 30px;
+			box-shadow: none;
+			@include transition-time(0.3s);
 			color: $white;
 
 			&:focus {
@@ -638,7 +641,7 @@
 			overflow: hidden;
 		}
 
-		.form-inputs > input:nth-child(1) {
+		.form-inputs>input:nth-child(1) {
 			width: 49%;
 			float: left;
 
@@ -648,7 +651,7 @@
 			}
 		}
 
-		.form-inputs > input:nth-child(2) {
+		.form-inputs>input:nth-child(2) {
 			width: 49%;
 			float: right;
 

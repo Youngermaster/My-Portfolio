@@ -13,6 +13,7 @@ import BlogSection from '../../components/BlogSection/BlogSection';
 import Footer from '../../components/footer/Footer';
 import Pricing from '../../components/Pricing';
 import TechnologiesSection from '../../components/TechnologiesSection/TechnologiesSection';
+import AwardsSection from '../../components/AwardsSection/AwardsSection';
 
 const HomePage = () => {
     return (<Fragment>
@@ -33,8 +34,10 @@ const HomePage = () => {
         <Element name='project'>
             <ProjectSection />
         </Element>
-        {/* My Awards */}
-        <Testimonial />
+         <Element name='Awards'>
+            <AwardsSection />
+        </Element>
+        {/* <Testimonial /> */}
         <Element name='blog'>
             <BlogSection />
         </Element>
