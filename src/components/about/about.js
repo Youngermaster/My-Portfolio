@@ -9,7 +9,10 @@ const About = (props) => {
           <div className="row align-items-center">
             <div className="col-lg-6 col-md-12 col-12">
               <div className="tf-about-img">
-                <img src={profile} alt="" />
+                <img
+                  src={profile}
+                  alt="Juan Manuel Young Hoyos in a balcony with Milan's 2007 jersey"
+                />
                 <div className="tf-about-img-text">
                   <div className="tf-about-icon">
                     <h3>3+</h3>
