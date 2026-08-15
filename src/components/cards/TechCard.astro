@@ -1,0 +1,46 @@
+---
+/**
+ * A technology: comic panel plus name and one line on how I actually use it.
+ *
+ * The panels are black-and-white ligne claire drawings, so the original's
+ * grayscale-until-hover treatment would be invisible here. Instead the card
+ * lifts its ink shadow on hover — the same physical-object language the buttons
+ * use.
+ */
+import type { CollectionEntry } from 'astro:content';
+import Panel from '../ui/Panel.astro';
+
+interface Props {
+  entry: CollectionEntry<'technologies'>;
+}
+
+const { entry }: Props = Astro.props;
+const { name, description, panel } = entry.data;
+---
+
+<article class="card">
+  <Panel src={panel} alt={name} width={420} fallbackText={name} tint="sky" zoomOnHover />
+  <h3>{name}</h3>
+  <p>{description}</p>
+</article>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 18px;
+  }
+
+  p {
+    color: var(--color-body);
+    font-size: 15px;
+    line-height: 1.55;
+    margin-top: 8px;
+  }
+</style>

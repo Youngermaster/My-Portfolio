@@ -1,0 +1,54 @@
+---
+/**
+ * A plain anchor to the top of the document. No JavaScript — `scroll-behavior:
+ * smooth` on :root does the animating, and it still works if scripts fail.
+ */
+import { useTranslations, type Locale } from '../../i18n/utils';
+import Icon from '../ui/Icon.astro';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang }: Props = Astro.props;
+const t = useTranslations(lang);
+---
+
+<a class="back-to-top" href="#top" aria-label={t('nav.backToTop')} title={t('nav.backToTop')}>
+  <Icon name="arrow-up" size={20} />
+</a>
+
+<style>
+  .back-to-top {
+    align-items: center;
+    background: var(--color-ink);
+    bottom: 28px;
+    box-shadow: var(--shadow-ink-sm);
+    color: var(--color-paper);
+    display: flex;
+    height: 48px;
+    justify-content: center;
+    position: fixed;
+    right: 28px;
+    transition:
+      background-color 0.3s,
+      box-shadow 0.3s;
+    width: 48px;
+    z-index: 30;
+  }
+
+  .back-to-top:hover {
+    background: var(--color-red);
+    box-shadow: var(--shadow-ink);
+    color: var(--color-paper);
+  }
+
+  @media (max-width: 767px) {
+    .back-to-top {
+      bottom: 18px;
+      height: 42px;
+      right: 18px;
+      width: 42px;
+    }
+  }
+</style>

@@ -1,0 +1,19 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import ProjectDetailPage from '../../../components/pages/ProjectDetailPage.astro';
+import { getProjects, entryKey } from '../../../lib/content';
+
+export const getStaticPaths = (async () => {
+  const projects = await getProjects('es');
+  return projects.map((entry) => ({
+    params: { slug: entryKey(entry.id) },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { entry }: Props = Astro.props;
+---
+
+<ProjectDetailPage lang="es" entry={entry} />

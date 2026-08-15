@@ -1,0 +1,76 @@
+---
+/**
+ * The wrapper every homepage section uses: the shared vertical rhythm, the
+ * hairline that separates it from the section above, and the optional ghost
+ * word behind it.
+ *
+ * Owning the anchor id here is deliberate — the old site had three sections
+ * sharing `id="blog"` and a nav link pointing at an anchor that did not exist.
+ */
+import GhostText from './GhostText.astro';
+import type { SectionId } from '../../consts';
+
+interface Props {
+  id: SectionId | (string & {});
+  /** Pale oversized word behind the section. Omit for no ghost. */
+  ghost?: string[];
+  /**
+   * `rotate` is the diagonal word every ordinary section uses; `hero` is the
+   * horizontal stack the hero alone gets, matching the original design's split
+   * between `.visible-rotate-text` and `.visible-text`.
+   */
+  ghostVariant?: 'rotate' | 'hero';
+  /** `panel` is the grey #f5f5f5 band, `ink` the near-black one. */
+  surface?: 'paper' | 'panel' | 'ink';
+  /** Sections that supply their own top border (or need none) opt out. */
+  hairline?: boolean;
+  class?: string;
+}
+
+const {
+  id,
+  ghost,
+  ghostVariant = 'rotate',
+  surface = 'paper',
+  hairline = true,
+  class: className,
+} = Astro.props;
+---
+
+<section id={id} class:list={['section', 'section-padding', surface, { hairline }, className]}>
+  {ghost && <GhostText lines={ghost} variant={ghostVariant} />}
+  <slot />
+</section>
+
+<style>
+  .section {
+    position: relative;
+    z-index: 1;
+    /* The ghost word is deliberately far wider than the viewport. Clipping it
+       per-section is what keeps it a background texture instead of a source of
+       horizontal page scroll. */
+    overflow: hidden;
+  }
+
+  .hairline {
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .paper {
+    background: var(--color-paper);
+  }
+
+  .panel {
+    background: var(--color-panel);
+  }
+
+  .ink {
+    background: var(--color-invert);
+    color: color-mix(in srgb, var(--color-paper) 78%, transparent);
+  }
+
+  .ink :global(h2),
+  .ink :global(h3) {
+    color: var(--color-paper);
+  }
+</style>

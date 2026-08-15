@@ -1,0 +1,152 @@
+---
+/**
+ * Contact: a mailto call to action and the social links. No form.
+ *
+ * The old site shipped a three-field form that validated input and then threw
+ * it away — no endpoint, no email, nothing. A mailto button and a list of
+ * profiles do the same job honestly, and cannot silently break.
+ */
+import { AUTHOR, SOCIALS } from '../../consts';
+import { useTranslations, type Locale } from '../../i18n/utils';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import SectionTitle from '../ui/SectionTitle.astro';
+import Button from '../ui/Button.astro';
+import Icon, { type IconName } from '../ui/Icon.astro';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang }: Props = Astro.props;
+const t = useTranslations(lang);
+
+const iconFor = (id: string): IconName => (id === 'blog' ? 'rss' : (id as IconName));
+---
+
+<Section id="contact" ghost={[t('contact.ghost')]}>
+  <Container>
+    <div class="wrap">
+      <SectionTitle
+        eyebrow={t('contact.eyebrow')}
+        title={t('contact.title')}
+        align="center"
+        class="title"
+      />
+      <p class="lede">{t('contact.lede')}</p>
+
+      <div class="cta">
+        <Button href={`mailto:${AUTHOR.email}`} icon="mail">{t('contact.emailCta')}</Button>
+        <a class="email" href={`mailto:${AUTHOR.email}`}>{AUTHOR.email}</a>
+      </div>
+
+      <p class="based">
+        <Icon name="map-pin" size={16} />
+        <span>{t('contact.basedIn')} {AUTHOR.location}</span>
+      </p>
+
+      <h3 class="elsewhere">{t('contact.elsewhere')}</h3>
+      <ul class="socials">
+        {
+          SOCIALS.map((social) => (
+            <li>
+              <a href={social.url} target="_blank" rel="noopener noreferrer">
+                <Icon name={iconFor(social.id)} size={18} />
+                <span>{social.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .wrap {
+    margin-inline: auto;
+    max-width: 760px;
+    text-align: center;
+  }
+
+  .lede {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-inline: auto;
+    margin-top: 20px;
+    max-width: 560px;
+  }
+
+  .cta {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 40px;
+  }
+
+  .email {
+    color: var(--color-muted);
+    font-family: var(--font-heading);
+    font-size: 16px;
+    letter-spacing: 0.02em;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    /* Long addresses must not force the page to scroll sideways. */
+    overflow-wrap: anywhere;
+  }
+
+  .email:hover {
+    color: var(--color-red-ink);
+  }
+
+  .based {
+    align-items: center;
+    color: var(--color-muted);
+    display: flex;
+    font-size: 15px;
+    gap: 7px;
+    justify-content: center;
+    margin-top: 28px;
+  }
+
+  .elsewhere {
+    border-top: 1px solid var(--color-hairline);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    margin-top: 52px;
+    padding-top: 40px;
+    text-transform: uppercase;
+  }
+
+  .socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 24px;
+  }
+
+  .socials a {
+    align-items: center;
+    border: 1px solid var(--color-hairline);
+    color: var(--color-dark);
+    display: inline-flex;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 500;
+    gap: 9px;
+    padding: 11px 18px;
+    transition:
+      background-color 0.3s,
+      border-color 0.3s,
+      color 0.3s;
+  }
+
+  .socials a:hover {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+</style>

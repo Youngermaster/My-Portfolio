@@ -1,0 +1,82 @@
+---
+/**
+ * A service: comic panel, title, one-line blurb.
+ *
+ * The card inverts to near-black on hover — the original's most distinctive
+ * card behaviour, and the reason the panel keeps a white border rather than
+ * bleeding into the background.
+ */
+import type { CollectionEntry } from 'astro:content';
+import Panel from '../ui/Panel.astro';
+
+interface Props {
+  entry: CollectionEntry<'services'>;
+}
+
+const { entry }: Props = Astro.props;
+const { title, blurb, panel } = entry.data;
+---
+
+<article class="card">
+  <Panel
+    src={panel}
+    alt={title}
+    width={520}
+    fallbackText={title}
+    tint="cream"
+    ratio="4 / 3"
+    zoomOnHover
+    class="panel"
+  />
+  <div class="text">
+    <h3>{title}</h3>
+    <p>{blurb}</p>
+  </div>
+</article>
+
+<style>
+  .card {
+    background: var(--color-paper);
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    height: 100%;
+    padding: 24px;
+    transition:
+      background-color 0.3s,
+      color 0.3s;
+  }
+
+  .card:hover {
+    background: var(--color-invert);
+  }
+
+  .card:hover h3 {
+    color: var(--color-paper);
+  }
+
+  .card:hover p {
+    color: color-mix(in srgb, var(--color-paper) 75%, transparent);
+  }
+
+  h3 {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.15;
+    transition: color 0.3s;
+  }
+
+  p {
+    color: var(--color-body);
+    font-size: 16px;
+    line-height: 1.55;
+    margin-top: 12px;
+    transition: color 0.3s;
+  }
+
+  @media (max-width: 767px) {
+    h3 {
+      font-size: 22px;
+    }
+  }
+</style>

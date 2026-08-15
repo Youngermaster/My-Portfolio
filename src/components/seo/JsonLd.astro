@@ -1,0 +1,74 @@
+---
+/**
+ * Structured data.
+ *
+ * `Person` and `WebSite` on every page, plus `CreativeWork` on project pages.
+ * This is what lets a search engine understand that the site is one person's
+ * portfolio rather than a company's — and it is derived from the same consts
+ * and collections the visible page uses, so it cannot describe a different
+ * reality from what a reader sees.
+ */
+import { AUTHOR, SITE_URL, SOCIALS } from '../../consts';
+import { localeTag, type Locale } from '../../i18n/utils';
+
+interface CreativeWork {
+  name: string;
+  description: string;
+  url: string;
+  year: number;
+  keywords: string[];
+}
+
+interface Props {
+  lang: Locale;
+  /** Present on project detail pages only; carries its own canonical URL. */
+  work?: CreativeWork;
+  /** Distinct technology names, used for `knowsAbout`. */
+  knowsAbout?: string[];
+}
+
+const { lang, work, knowsAbout = [] }: Props = Astro.props;
+
+const person = {
+  '@type': 'Person',
+  '@id': `${SITE_URL}/#person`,
+  name: AUTHOR.name,
+  url: SITE_URL,
+  jobTitle: AUTHOR.jobTitle,
+  email: `mailto:${AUTHOR.email}`,
+  worksFor: { '@type': 'Organization', name: AUTHOR.company },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: AUTHOR.alumniOf },
+  address: { '@type': 'PostalAddress', addressLocality: 'Medellín', addressCountry: 'CO' },
+  sameAs: SOCIALS.map((social) => social.url),
+  ...(knowsAbout.length > 0 ? { knowsAbout } : {}),
+};
+
+const website = {
+  '@type': 'WebSite',
+  '@id': `${SITE_URL}/#website`,
+  url: SITE_URL,
+  name: AUTHOR.name,
+  inLanguage: localeTag[lang],
+  publisher: { '@id': `${SITE_URL}/#person` },
+};
+
+const creativeWork = work
+  ? {
+      '@type': 'CreativeWork',
+      name: work.name,
+      description: work.description,
+      url: work.url,
+      dateCreated: String(work.year),
+      inLanguage: localeTag[lang],
+      keywords: work.keywords.join(', '),
+      author: { '@id': `${SITE_URL}/#person` },
+    }
+  : null;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [person, website, ...(creativeWork ? [creativeWork] : [])],
+};
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(graph)} />

@@ -1,0 +1,139 @@
+---
+/**
+ * Off-canvas drawer for narrow viewports.
+ *
+ * Built on a real <dialog>, so the browser supplies the modal semantics for
+ * free: focus is trapped, Escape closes it, and the rest of the page becomes
+ * inert. That is roughly 40 lines of hand-rolled focus management we do not
+ * have to write or keep correct.
+ */
+import type { NavLink } from '../../i18n/nav';
+import { useTranslations, type Locale } from '../../i18n/utils';
+import Icon from '../ui/Icon.astro';
+
+interface Props {
+  lang: Locale;
+  links: NavLink[];
+}
+
+const { lang, links }: Props = Astro.props;
+const t = useTranslations(lang);
+---
+
+<button type="button" class="trigger" data-menu-open aria-label={t('nav.openMenu')}>
+  <Icon name="menu" size={24} />
+</button>
+
+<dialog class="drawer" data-menu aria-label={t('nav.menu')}>
+  <div class="drawer-head">
+    <span class="drawer-title">{t('nav.menu')}</span>
+    <button type="button" class="close" data-menu-close aria-label={t('nav.closeMenu')}>
+      <Icon name="close" size={24} />
+    </button>
+  </div>
+
+  <nav>
+    <ul>
+      {
+        links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              data-menu-link
+              target={link.external ? '_blank' : undefined}
+              rel={link.external ? 'noopener noreferrer' : undefined}
+            >
+              {t(link.labelKey)}
+              {link.external && <Icon name="external-link" size={15} />}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</dialog>
+
+<style>
+  .trigger {
+    background: none;
+    border: 0;
+    color: var(--color-ink);
+    cursor: pointer;
+    display: none;
+    padding: 8px;
+  }
+
+  @media (max-width: 991px) {
+    .trigger {
+      display: inline-flex;
+    }
+  }
+
+  .drawer {
+    background: var(--color-night);
+    border: 0;
+    color: var(--color-paper);
+    height: 100dvh;
+    margin: 0;
+    margin-left: auto;
+    max-height: 100dvh;
+    max-width: 320px;
+    padding: 0;
+    width: 85vw;
+  }
+
+  .drawer::backdrop {
+    background: rgb(0 0 0 / 0.55);
+  }
+
+  .drawer-head {
+    align-items: center;
+    border-bottom: 1px solid rgb(255 255 255 / 0.12);
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 24px;
+  }
+
+  .drawer-title {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .close {
+    background: none;
+    border: 0;
+    color: var(--color-paper);
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  /* The brand red, not `--color-red-ink`: this sits on the near-black drawer,
+     where the darker variant would have *less* contrast, not more. */
+  .close:hover {
+    color: var(--color-red);
+  }
+
+  .drawer nav a {
+    align-items: center;
+    border-bottom: 1px solid rgb(255 255 255 / 0.08);
+    color: var(--color-paper);
+    display: flex;
+    font-family: var(--font-heading);
+    font-size: 19px;
+    font-weight: 500;
+    gap: 8px;
+    padding: 18px 24px;
+  }
+
+  .drawer nav a:hover,
+  .drawer nav a:focus-visible {
+    background: var(--color-red);
+  }
+</style>
+
+<script>
+  import '../../scripts/mobile-menu';
+</script>

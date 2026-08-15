@@ -1,4 +1,7 @@
-.git
-*Dockerfile*
-*docker-compose*
 node_modules
+dist
+.astro
+.git
+.github
+.DS_Store
+*.log

@@ -1,0 +1,248 @@
+---
+/**
+ * About: photo with the glass stat card, the bio, and three counters.
+ *
+ * Every number here is derived from the content collections rather than typed
+ * in. The old site hardcoded "3+ years", "40+ challenges tackled" and "60+
+ * languages & tools" — figures that were already wrong when I found them.
+ */
+import { Image } from 'astro:assets';
+import { AUTHOR, yearsOfExperience } from '../../consts';
+import { useTranslations, type Locale } from '../../i18n/utils';
+import { countRoles, getTechnologies, getAwards } from '../../lib/content';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import SectionTitle from '../ui/SectionTitle.astro';
+
+import photo from '../../assets/about/jmyounghoyos.jpg';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang }: Props = Astro.props;
+const t = useTranslations(lang);
+
+const [roles, technologies, awards] = await Promise.all([
+  countRoles(lang),
+  getTechnologies(lang),
+  getAwards(lang),
+]);
+
+const years = yearsOfExperience();
+
+/** Section prose lives with the section; src/i18n/ui.ts holds reusable labels. */
+const copy = {
+  en: {
+    title: 'Problems? Consider them solved and coded',
+    highlight: ['solved', 'coded'],
+    lede: 'I build the parts of a system that have to keep working when nobody is watching.',
+    body: [
+      'Right now that means leading a health interoperability platform that lets Colombian providers meet a national mandate — a queue-based pipeline of NestJS microservices producing HL7 FHIR R4 records, designed to survive an upstream government API that is frequently neither fast nor available.',
+      'Before that: React Native and Next.js in production at Publicis, red teaming and DevSecOps at Aligo and Geta Club Play, and a decade of tutoring that is still the reason I can explain any of it. Outside work I write robotics libraries in Rust and ship small mobile apps through Grisú.',
+    ],
+  },
+  es: {
+    title: '¿Problemas? Dalos por resueltos y programados',
+    highlight: ['resueltos', 'programados'],
+    lede: 'Construyo las partes de un sistema que tienen que seguir funcionando cuando nadie está mirando.',
+    body: [
+      'Ahora mismo eso significa liderar una plataforma de interoperabilidad en salud que permite a los prestadores colombianos cumplir un mandato nacional — un pipeline basado en colas, con microservicios NestJS que producen registros HL7 FHIR R4, diseñado para sobrevivir a una API gubernamental que rara vez es rápida o está disponible.',
+      'Antes de eso: React Native y Next.js en producción en Publicis, red teaming y DevSecOps en Aligo y Geta Club Play, y una década dando clases particulares que sigue siendo la razón por la que puedo explicar cualquiera de estas cosas. Fuera del trabajo escribo librerías de robótica en Rust y publico aplicaciones móviles con Grisú.',
+    ],
+  },
+} as const;
+
+const c = copy[lang];
+
+const stats = [
+  { value: `${roles}`, label: t('about.stat.roles') },
+  { value: `${technologies.length}+`, label: t('about.stat.tech') },
+  { value: `${awards.length}`, label: t('about.stat.awards') },
+];
+---
+
+<Section id="about" ghost={[t('about.ghost')]}>
+  <Container>
+    <div class="grid">
+      <div class="media">
+        <Image
+          src={photo}
+          alt={`${t('about.photoAlt')} — ${AUTHOR.location}`}
+          widths={[420, 640, 900]}
+          sizes="(max-width: 991px) 90vw, 44vw"
+          loading="lazy"
+        />
+        {
+          /* The one blurred surface in the whole design — deliberate contrast
+            against an otherwise entirely flat system. */
+        }
+        <div class="glass">
+          <p class="glass-value">{years}+</p>
+          <p class="glass-label">{t('about.yearsLabel')}</p>
+        </div>
+      </div>
+
+      <div class="copy">
+        <SectionTitle eyebrow={t('about.eyebrow')} title={c.title} highlight={[...c.highlight]} />
+        <p class="lede">{c.lede}</p>
+        {c.body.map((paragraph) => <p class="body">{paragraph}</p>)}
+
+        <ul class="stats">
+          {
+            stats.map((stat) => (
+              <li>
+                <span class="stat-value">{stat.value}</span>
+                <span class="stat-label">{stat.label}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .grid {
+    align-items: center;
+    display: grid;
+    gap: 60px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 991px) {
+    .grid {
+      gap: 48px;
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* --- photo + glass card --- */
+
+  .media {
+    position: relative;
+  }
+
+  .media :global(img) {
+    border-radius: var(--radius-photo);
+    height: auto;
+    width: 100%;
+  }
+
+  .glass {
+    align-items: center;
+    backdrop-filter: blur(15px);
+    background: rgb(0 0 0 / 0.65);
+    border-radius: var(--radius-glass);
+    bottom: 24px;
+    color: var(--color-paper);
+    display: flex;
+    flex-direction: column;
+    height: 235px;
+    justify-content: center;
+    position: absolute;
+    right: -30px;
+    text-align: center;
+    width: 201px;
+  }
+
+  @media (max-width: 1199px) {
+    .glass {
+      right: 16px;
+    }
+  }
+
+  @media (max-width: 575px) {
+    .glass {
+      height: 150px;
+      right: 8px;
+      width: 140px;
+    }
+  }
+
+  .glass-value {
+    font-family: var(--font-heading);
+    font-size: 76px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .glass-label {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.125;
+    margin-top: 8px;
+    max-width: 133px;
+  }
+
+  @media (max-width: 575px) {
+    .glass-value {
+      font-size: 48px;
+    }
+
+    .glass-label {
+      font-size: 12px;
+      max-width: 110px;
+    }
+  }
+
+  /* --- copy --- */
+
+  .lede {
+    color: var(--color-faded);
+    font-family: var(--font-heading);
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 1.15;
+    margin-top: 24px;
+    max-width: 540px;
+  }
+
+  .body {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-top: 22px;
+    max-width: 560px;
+  }
+
+  @media (max-width: 767px) {
+    .lede {
+      font-size: 22px;
+    }
+  }
+
+  /* --- stats --- */
+
+  .stats {
+    border-top: 1px solid var(--color-hairline);
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 44px;
+    padding-top: 32px;
+  }
+
+  @media (max-width: 575px) {
+    .stats {
+      gap: 20px;
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .stat-value {
+    color: var(--color-red);
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 56px;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .stat-label {
+    color: var(--color-muted);
+    display: block;
+    font-size: 15px;
+    margin-top: 8px;
+  }
+</style>

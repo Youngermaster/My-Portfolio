@@ -1,0 +1,128 @@
+---
+/**
+ * The oversized pale word sitting behind a section.
+ *
+ * Two flavours, both from the original design:
+ *  - `hero`     horizontal, 300px, anchored near the top
+ *  - `rotate`   centred and rotated -45deg, 230px
+ *
+ * Purely decorative, so it is aria-hidden and never selectable — it would
+ * otherwise pollute the accessible name of every section it sits behind.
+ */
+interface Props {
+  variant?: 'rotate' | 'hero';
+  /** Each string becomes its own line. */
+  lines: string[];
+  class?: string;
+}
+
+const { variant = 'rotate', lines, class: className } = Astro.props;
+---
+
+<div class:list={['ghost', variant, className]} aria-hidden="true">
+  <span class="text">
+    {
+      lines.map((line, i) => (
+        <>
+          {i > 0 && <br />}
+          {line}
+        </>
+      ))
+    }
+  </span>
+</div>
+
+<style>
+  .ghost {
+    color: var(--color-ghost);
+    font-family: var(--font-heading);
+    letter-spacing: 5px;
+    pointer-events: none;
+    position: absolute;
+    text-transform: uppercase;
+    user-select: none;
+    z-index: -1;
+  }
+
+  .text {
+    display: block;
+    font-weight: 500;
+  }
+
+  /* --- hero: horizontal, near the top, left-aligned --- */
+
+  .hero {
+    /* Anchored to the page frame rather than centred, so the stack starts just
+       inside the left hairline and runs rightwards behind the illustration —
+       the arrangement the original hero used. */
+    left: var(--edge-inset);
+    top: 50px;
+  }
+
+  /* Line height is ~0.88 of the size rather than the original's 0.67, which
+     packed the three words tight enough that their ascenders and descenders
+     ran into each other. Loosening it lets each word read as its own line. */
+  .hero .text {
+    font-size: 300px;
+    line-height: 265px;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 1500px) {
+    .hero .text {
+      font-size: 250px;
+      line-height: 200px;
+    }
+  }
+
+  @media (max-width: 1199px) {
+    .hero .text {
+      font-size: 200px;
+      line-height: 176px;
+    }
+  }
+
+  @media (max-width: 991px) {
+    .hero .text {
+      font-size: 150px;
+      line-height: 132px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero {
+      display: none;
+    }
+  }
+
+  /* --- rotate: centred, diagonal --- */
+
+  .rotate {
+    left: 50%;
+    opacity: 0.85;
+    text-align: center;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
+
+  .rotate .text {
+    font-size: 230px;
+    line-height: 200px;
+    transform: rotate(-45deg);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 1400px) {
+    .rotate .text {
+      font-size: 180px;
+      line-height: 160px;
+    }
+  }
+
+  @media (max-width: 991px) {
+    .rotate {
+      display: none;
+    }
+  }
+</style>

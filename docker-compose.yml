@@ -1,11 +1,10 @@
-version: '3'
-
+# `docker compose up --build` → http://localhost:3000
+#
+# Local preview only. Deployment is a manual upload of `dist/` to Hostinger.
 services:
-  jmyounghoyos-portfolio:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: jmyounghoyos-portfolio:release
-    container_name: jmyounghoyos-portfolio-0
+  portfolio:
+    build: .
+    image: jmyounghoyos-portfolio:local
+    container_name: jmyounghoyos-portfolio
     ports:
-      - "3000:80"
+      - '3000:80'

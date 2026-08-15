@@ -1,94 +1,135 @@
-# My Portfolio
+# jmyounghoyos.com
 
-This is my personal portfolio made with React.
+Personal portfolio for Juan Manuel Young Hoyos. Astro 7, static output, bilingual
+(English / Spanish), and — by design — no client-side framework.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The art direction is *ligne claire*: flat colour, black ink, hard corners, and a
+set of hand-drawn Tintin-style comic panels. There is a
+[living styleguide](https://jmyounghoyos.com/styleguide) that renders every
+device in the system on one page.
 
-## Sections
+---
 
-- NavBar.
-- Hero.
-- About Me.
-- My Services.
-- My Most Relevant Projects.
-- Tools I use (Carousel).
-- Achievements (Latest News).
-- Experience.
-- Contact Me.
-- Footer.
+## Running it
 
-## Docker build
-
-Use the following command to automatically spin up the container with the portfolio:
-```shell
-docker compose up -d
+```bash
+pnpm install
+pnpm dev        # http://localhost:4321
+pnpm build      # typecheck, build to dist/, prune unreferenced assets
+pnpm preview    # serve dist/ locally
 ```
 
-Or manually use the following commands to build and run the portfolio with Docker:
-```shell
-docker build -t jmyounghoyos-portfolio:release .
-docker run -d -p 3000:80 jmyounghoyos-portfolio:release --name jmyounghoyos-portfolio-0
+Requires **Node 22+** and **pnpm**. There is one lockfile and it is
+`pnpm-lock.yaml`; do not add another.
+
+| Script | What it does |
+| --- | --- |
+| `pnpm dev` | Dev server |
+| `pnpm build` | `astro check` → `astro build` → prune unreferenced assets |
+| `pnpm build:fast` | Same without the typecheck |
+| `pnpm check` | TypeScript **and** content-collection schema validation |
+| `pnpm preview` | Serve the built site |
+| `pnpm format` | Prettier |
+| `pnpm og` | Regenerate the social share cards in `public/og/` |
+| `pnpm optimize:panels` | Re-encode images in `src/assets/` in place (idempotent) |
+
+## Deploying
+
+The site is uploaded to **Hostinger by hand**. There is no deploy automation and
+that is deliberate.
+
+```bash
+pnpm build
+# then upload the contents of dist/ to public_html/
 ```
 
-### `npm start`
+`dist/` is roughly 5 MB and includes a `.htaccess` that wires up the 404
+pages (Spanish under `/es/`), long-lived caching for `/_astro/`, and gzip. If the site is ever served from a subdirectory rather
+than the domain root, set `base` in `astro.config.mjs` before building.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+`docker compose up --build` serves the built site on <http://localhost:3000>
+through nginx — that is for checking clean URLs and the 404 page before an
+upload, **not** a deployment path.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## How it is put together
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+src/
+├─ assets/          comic panels, portrait, photos (processed by astro:assets)
+├─ components/
+│  ├─ ui/           primitives with no domain knowledge — Button, Panel, Section…
+│  ├─ layout/       header, footer, drawer, language switcher, page chrome
+│  ├─ sections/     the homepage sections
+│  ├─ cards/        one card per content type
+│  ├─ pages/        whole pages, composed once and shared by both locales
+│  └─ seo/          BaseHead, JsonLd
+├─ content/         the collections (see below)
+├─ i18n/            ui.ts (strings) · routes.ts (localized paths) · utils.ts · nav.ts
+├─ icons/           22 inline SVGs, replacing five icon fonts
+├─ lib/content.ts   every collection query goes through here
+├─ scripts/         the handful of vanilla scripts that ship
+└─ styles/          global.css (@theme tokens) · comic.css
+```
 
-### `npm run build`
+### Content
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Five collections, validated by Zod in `src/content.config.ts`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Every entry id has the shape `<locale>/<key>`, and `key` is identical across
+locales.** That single invariant is what makes the language switcher land on the
+equivalent page instead of the homepage.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| Collection | Where | Format |
+| --- | --- | --- |
+| `projects` | `src/content/projects/{en,es}/*.md` | Markdown — these get detail pages |
+| `awards` | `src/content/awards/{en,es}/*.md` | Markdown |
+| `services` | `src/content/services/{en,es}/*.md` | Markdown |
+| `experience` | `src/content/experience.yaml` | YAML, both locales in one file |
+| `technologies` | `src/content/technologies.yaml` | YAML, both locales in one file |
 
-### `npm run eject`
+The frontmatter field is `key`, **not** `slug` — Astro's `glob()` loader treats
+`slug` as an id override, which would collapse `en/mobile.md` and `es/mobile.md`
+into one entry.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+In the YAML files, **any value containing `": "` must be quoted**, or the parser
+reads it as a nested mapping.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Adding things
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **A project** — add `src/content/projects/en/<key>.md` *and* the `es`
+  counterpart with the same `key`. Detail pages appear automatically at
+  `/projects/<key>` and `/es/proyectos/<key>`.
+- **A panel** — drop the artwork in `src/assets/panels/`, point `panel:` at it,
+  and run `pnpm optimize:panels`. Without one, the card renders a lettered
+  placeholder rather than breaking.
+- **A UI string** — add it to `en` in `src/i18n/ui.ts`; TypeScript will then
+  fail the build until the Spanish translation exists.
+- **An icon** — drop the SVG in `src/icons/` and add its name to `IconName`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### JavaScript
 
-## Learn More
+Three small vanilla scripts and nothing else: sticky-header state and
+scroll-spy (`header.ts`), the mobile drawer (`mobile-menu.ts`), and the project
+tag filter (`project-filter.ts`). No `client:*` directives, no hydration, no
+framework. Everything else is CSS.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Accessibility notes
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`--color-red` (`#F0403E`) is the brand fill and is 3.81:1 on white — fine for
+shapes and large display type, below AA for text at reading size. So there are
+two tokens: `--color-red` for fills and large type, `--color-red-ink`
+(`#D03634`) for anything read as words. Buttons are 19px/700, which puts them
+over the WCAG large-text bar while keeping the brand red untouched.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Provenance
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This replaces a Create React App build on a purchased template
+("Olulu"). `../My-Portfolio` still holds that version untouched. Deliberately
+not carried over: the dead contact form, the three sections sharing `id="blog"`,
+the fabricated statistics, the hardcoded `© 2023`, the 3.1 MB of icon fonts, and
+the commercially licensed Futura PT (replaced by Jost, which is free and
+geometric).

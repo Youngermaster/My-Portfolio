@@ -1,0 +1,168 @@
+---
+/**
+ * A comic panel: thick ink border, hard corners, offset ink shadow.
+ *
+ * Wraps an optimised <Image> when given one, and falls back to a lettered
+ * title card when the artwork does not exist yet. That fallback is what lets
+ * new projects and awards ship before their panel has been drawn — a missing
+ * asset degrades to a deliberate-looking placeholder instead of breaking.
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  src?: ImageMetadata;
+  alt: string;
+  /** Rendered width; the height follows the source aspect ratio. */
+  width?: number;
+  /** Shown by the fallback card when `src` is absent. */
+  fallbackText?: string;
+  /** Fallback card background. Cycle these so a grid of them looks intentional. */
+  tint?: 'yellow' | 'blue' | 'red' | 'sky' | 'cream' | 'panel';
+  /** Scale the image on hover, as the original project/blog cards did. */
+  zoomOnHover?: boolean;
+  /** Desaturate until hover, as the original tech cards did. */
+  grayscaleOnHover?: boolean;
+  ratio?: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+const {
+  src,
+  alt,
+  width = 600,
+  fallbackText,
+  tint = 'panel',
+  zoomOnHover = false,
+  grayscaleOnHover = false,
+  ratio = '1 / 1',
+  class: className,
+  loading = 'lazy',
+} = Astro.props;
+
+// Initials for the fallback card: "olivaw slam" -> "OS".
+const initials = (fallbackText ?? alt)
+  .split(/[\s\-_]+/)
+  .filter(Boolean)
+  .slice(0, 2)
+  .map((word) => word[0]?.toUpperCase() ?? '')
+  .join('');
+---
+
+<div
+  class:list={[
+    'comic-panel',
+    `tint-${tint}`,
+    { zoom: zoomOnHover, gray: grayscaleOnHover },
+    className,
+  ]}
+  style={`--panel-ratio:${ratio}`}
+>
+  {
+    src ? (
+      <Image src={src} alt={alt} width={width} loading={loading} decoding="async" />
+    ) : (
+      <div class="fallback" role="img" aria-label={alt}>
+        <span class="initials">{initials}</span>
+        {fallbackText && <span class="caption">{fallbackText}</span>}
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .comic-panel {
+    aspect-ratio: var(--panel-ratio);
+    background: var(--color-paper);
+    border: 3px solid var(--color-ink);
+    box-shadow: var(--shadow-ink-sm);
+    container-type: inline-size;
+    overflow: hidden;
+    position: relative;
+    transition: box-shadow 0.3s;
+  }
+
+  .comic-panel :global(img) {
+    height: 100%;
+    object-fit: cover;
+    transition:
+      transform 0.3s,
+      filter 0.3s;
+    width: 100%;
+  }
+
+  .zoom:hover :global(img) {
+    transform: scale(1.2);
+  }
+
+  .gray :global(img) {
+    filter: grayscale(100%);
+  }
+
+  .gray:hover :global(img) {
+    filter: grayscale(0);
+  }
+
+  /* --- fallback title card --- */
+
+  .fallback {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 100%;
+    justify-content: center;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .initials {
+    color: var(--color-ink);
+    font-family: var(--font-heading);
+    font-size: clamp(38px, 22cqw, 88px);
+    font-weight: 900;
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  .caption {
+    color: var(--color-ink);
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* Fallback tints, drawn from the illustration palette so placeholders sit
+     inside the same colour world as the real artwork. */
+  .tint-yellow .fallback {
+    background: var(--color-yellow);
+  }
+  .tint-blue .fallback {
+    background: var(--color-sky);
+  }
+  .tint-red .fallback {
+    background: var(--color-skin);
+  }
+  .tint-sky .fallback {
+    background: var(--color-sky-light);
+  }
+  .tint-cream .fallback {
+    background: var(--color-cream);
+  }
+  .tint-panel .fallback {
+    background: var(--color-panel);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .comic-panel :global(img) {
+      transition: filter 0.3s;
+    }
+
+    .zoom:hover :global(img) {
+      transform: none;
+    }
+  }
+</style>

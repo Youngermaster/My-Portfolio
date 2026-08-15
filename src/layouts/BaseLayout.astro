@@ -1,0 +1,104 @@
+---
+/**
+ * The one <html> shell. Every page goes through here, so the head, the page
+ * chrome and the lang attribute can never drift between locales.
+ */
+import BaseHead from '../components/seo/BaseHead.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import EdgeRules from '../components/layout/EdgeRules.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import BackToTop from '../components/layout/BackToTop.astro';
+import { useTranslations, type Locale } from '../i18n/utils';
+import { alternatesFor, type RouteKey } from '../i18n/routes';
+import { getTechnologies } from '../lib/content';
+import { SITE_URL } from '../consts';
+
+import '../styles/global.css';
+import '../styles/comic.css';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Locale;
+  routeKey: RouteKey;
+  /** Slug for detail pages — feeds the language switcher and hreflang. */
+  subPath?: string;
+  image?: string;
+  ogType?: 'website' | 'article' | 'profile';
+  /** Emits a `CreativeWork` node. Project detail pages supply this. */
+  work?: {
+    name: string;
+    description: string;
+    year: number;
+    keywords: string[];
+  };
+}
+
+const { title, description, lang, routeKey, subPath, image, ogType, work }: Props = Astro.props;
+
+const t = useTranslations(lang);
+
+const canonical = new URL(alternatesFor(routeKey, subPath)[lang], SITE_URL).href;
+
+// `knowsAbout` comes from the same collection the Tech Stack section renders,
+// so the structured data can never advertise a skill the page does not show.
+const technologies = await getTechnologies(lang);
+const knowsAbout = technologies.map((entry) => entry.data.name);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <BaseHead
+      title={title}
+      description={description}
+      lang={lang}
+      routeKey={routeKey}
+      subPath={subPath}
+      image={image}
+      ogType={ogType}
+    />
+    <JsonLd
+      lang={lang}
+      knowsAbout={knowsAbout}
+      work={work ? { ...work, url: canonical } : undefined}
+    />
+    <slot name="head" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">{t('nav.skipToContent')}</a>
+    <div id="top"></div>
+
+    <EdgeRules />
+    <Header lang={lang} routeKey={routeKey} subPath={subPath} />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <Footer lang={lang} routeKey={routeKey} subPath={subPath} />
+    <BackToTop lang={lang} />
+  </body>
+</html>
+
+<style>
+  .skip-link {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    left: 50%;
+    padding: 12px 24px;
+    position: fixed;
+    top: 0;
+    transform: translate(-50%, -120%);
+    transition: transform 0.2s;
+    z-index: 100;
+  }
+
+  .skip-link:focus-visible {
+    transform: translate(-50%, 0);
+  }
+</style>

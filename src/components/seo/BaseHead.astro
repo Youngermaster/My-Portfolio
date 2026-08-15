@@ -1,0 +1,91 @@
+---
+/**
+ * Everything that goes in <head> except the fonts.
+ *
+ * Canonical and hreflang are computed from the route key, so every page
+ * declares its own alternates correctly — the old site shipped no canonical,
+ * no Open Graph and no hreflang at all, and being a client-rendered SPA meant
+ * crawlers saw an empty <div id="root">.
+ */
+import { Font } from 'astro:assets';
+import { AUTHOR, SITE_URL } from '../../consts';
+import { alternatesFor, type RouteKey } from '../../i18n/routes';
+import { LOCALES, localeTag, ogLocale, otherLocale, type Locale } from '../../i18n/utils';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Locale;
+  routeKey: RouteKey;
+  subPath?: string;
+  /** Absolute or root-relative path to the social share image. */
+  image?: string;
+  ogType?: 'website' | 'article' | 'profile';
+}
+
+const {
+  title,
+  description,
+  lang,
+  routeKey,
+  subPath,
+  // One card per language, so a Spanish link preview is not in English.
+  image = lang === 'es' ? '/og/og-es.png' : '/og/og-default.png',
+  ogType = 'website',
+}: Props = Astro.props;
+
+const alternates = alternatesFor(routeKey, subPath);
+const canonical = new URL(alternates[lang], SITE_URL).href;
+const imageUrl = new URL(image, SITE_URL).href;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="author" content={AUTHOR.name} />
+<meta name="theme-color" content="#F0403E" />
+<meta name="color-scheme" content="light" />
+
+<link rel="canonical" href={canonical} />
+{
+  LOCALES.map((locale) => (
+    <link
+      rel="alternate"
+      hreflang={localeTag[locale]}
+      href={new URL(alternates[locale], SITE_URL).href}
+    />
+  ))
+}
+<link rel="alternate" hreflang="x-default" href={new URL(alternates.en, SITE_URL).href} />
+
+<!-- Open Graph -->
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content={AUTHOR.name} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content={ogLocale[lang]} />
+<meta property="og:locale:alternate" content={ogLocale[otherLocale(lang)]} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+<meta name="twitter:creator" content="@jmyounghoyos" />
+
+<!-- Icons -->
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+<link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<Font cssVariable="--font-jost" preload />
+<Font cssVariable="--font-josefin" preload />

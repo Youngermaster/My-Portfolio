@@ -1,0 +1,138 @@
+---
+/**
+ * An award: panel, title, issuer, date, and the story in one paragraph.
+ *
+ * The old site opened a modal that hardcoded the same two gallery images for
+ * every award. Here the whole record is on the card, and any links go straight
+ * out — nothing to open, nothing to get wrong.
+ */
+import type { CollectionEntry } from 'astro:content';
+import { formatMonth, useTranslations, type Locale } from '../../i18n/utils';
+import Panel from '../ui/Panel.astro';
+import Icon, { type IconName } from '../ui/Icon.astro';
+
+interface Props {
+  lang: Locale;
+  entry: CollectionEntry<'awards'>;
+}
+
+const { lang, entry }: Props = Astro.props;
+const t = useTranslations(lang);
+const { title, issuer, date, summary, panel, tint, links } = entry.data;
+
+const linkIcon: Record<string, IconName> = {
+  repo: 'github',
+  site: 'globe',
+  video: 'youtube',
+  profile: 'external-link',
+  demo: 'external-link',
+  appstore: 'appstore',
+  playstore: 'playstore',
+};
+---
+
+<article class="card">
+  <Panel
+    src={panel}
+    alt={title}
+    width={520}
+    fallbackText={title}
+    tint={tint}
+    ratio="16 / 10"
+    zoomOnHover
+  />
+
+  <div class="body">
+    <p class="meta">
+      <Icon name="award" size={15} />
+      <span>{formatMonth(date, lang)}</span>
+    </p>
+
+    <h3>{title}</h3>
+    <p class="issuer">{t('awards.issuedBy')} {issuer}</p>
+    <p class="summary">{summary}</p>
+
+    {
+      links.length > 0 && (
+        <ul class="links">
+          {links.map((link) => (
+            <li>
+              <a href={link.url} target="_blank" rel="noopener noreferrer">
+                <Icon name={linkIcon[link.kind] ?? 'external-link'} size={15} />
+                <span>{link.label}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding-top: 18px;
+  }
+
+  .meta {
+    align-items: center;
+    color: var(--color-red-ink);
+    display: flex;
+    font-family: var(--font-heading);
+    font-size: 13px;
+    gap: 7px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    font-size: 23px;
+    font-weight: 600;
+    line-height: 1.15;
+    margin-top: 10px;
+  }
+
+  .issuer {
+    color: var(--color-faded);
+    font-size: 14px;
+    margin-top: 6px;
+  }
+
+  .summary {
+    color: var(--color-body);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-top: 14px;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: auto;
+    padding-top: 18px;
+  }
+
+  .links a {
+    align-items: center;
+    color: var(--color-dark);
+    display: inline-flex;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 500;
+    gap: 6px;
+  }
+
+  .links a:hover {
+    color: var(--color-red-ink);
+  }
+</style>

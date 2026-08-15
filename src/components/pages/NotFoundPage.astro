@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import Button from '../ui/Button.astro';
+import { useTranslations, type Locale } from '../../i18n/utils';
+import { homePath } from '../../i18n/routes';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang }: Props = Astro.props;
+const t = useTranslations(lang);
+---
+
+<BaseLayout title={t('404.title')} description={t('404.lede')} lang={lang} routeKey="home">
+  <Section id="home" hairline={false} ghost={['404']}>
+    <Container>
+      <div class="wrap">
+        <p class="code">404</p>
+        <h1>{t('404.title')}</h1>
+        <p class="lede">{t('404.lede')}</p>
+        <Button href={homePath(lang)} icon="arrow-right">{t('404.cta')}</Button>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  .wrap {
+    max-width: 620px;
+    padding-block: 60px;
+  }
+
+  .code {
+    color: var(--color-red);
+    font-family: var(--font-heading);
+    font-size: 120px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  h1 {
+    font-size: 48px;
+    font-weight: 500;
+    margin-block: 16px 12px;
+  }
+
+  .lede {
+    font-size: 19px;
+    margin-bottom: 36px;
+  }
+
+  @media (max-width: 767px) {
+    .code {
+      font-size: 80px;
+    }
+
+    h1 {
+      font-size: 32px;
+    }
+  }
+</style>

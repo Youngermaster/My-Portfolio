@@ -1,0 +1,46 @@
+---
+/**
+ * The homepage, composed once for both locales.
+ *
+ * `pages/index.astro` and `pages/es/index.astro` are thin wrappers around this,
+ * so the section order is defined in exactly one place and the two languages
+ * cannot drift apart. Section anchors come from SECTION_IDS via each <Section>,
+ * which is what keeps the nav and the page in sync.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../sections/Hero.astro';
+import About from '../sections/About.astro';
+import Services from '../sections/Services.astro';
+import Marquee from '../sections/Marquee.astro';
+import Experience from '../sections/Experience.astro';
+import Technologies from '../sections/Technologies.astro';
+import Projects from '../sections/Projects.astro';
+import Awards from '../sections/Awards.astro';
+import Contact from '../sections/Contact.astro';
+import { useTranslations, type Locale } from '../../i18n/utils';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang }: Props = Astro.props;
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  title={t('site.title')}
+  description={t('site.description')}
+  lang={lang}
+  routeKey="home"
+  ogType="profile"
+>
+  <Hero lang={lang} />
+  <About lang={lang} />
+  <Services lang={lang} />
+  <Marquee lang={lang} />
+  <Technologies lang={lang} />
+  <Awards lang={lang} />
+  <Projects lang={lang} />
+  <Experience lang={lang} />
+  <Contact lang={lang} />
+</BaseLayout>

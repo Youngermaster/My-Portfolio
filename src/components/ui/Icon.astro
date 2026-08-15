@@ -1,0 +1,85 @@
+---
+/**
+ * Inlines an SVG from src/icons/ at build time.
+ *
+ * Replaces the five icon fonts the old site loaded (FontAwesome, Themify,
+ * Flaticon, Icomoon, Glyphicons — 3.1 MB of woff/ttf/eot for ~17 glyphs).
+ * Inlining means no extra request, no FOIT, and `currentColor` styling.
+ */
+export type IconName =
+  | 'appstore'
+  | 'arrow-right'
+  | 'arrow-up'
+  | 'award'
+  | 'briefcase'
+  | 'calendar'
+  | 'close'
+  | 'external-link'
+  | 'github'
+  | 'gitlab'
+  | 'globe'
+  | 'hackthebox'
+  | 'instagram'
+  | 'linkedin'
+  | 'mail'
+  | 'map-pin'
+  | 'menu'
+  | 'playstore'
+  | 'rss'
+  | 'stackoverflow'
+  | 'x'
+  | 'youtube';
+
+interface Props {
+  name: IconName;
+  /** Rendered size in px. Icons are square. */
+  size?: number;
+  class?: string;
+  /** Omit for decorative icons — they stay aria-hidden. */
+  label?: string;
+}
+
+const { name, size = 20, class: className, label } = Astro.props;
+
+const files = import.meta.glob<string>('../../icons/*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+
+const raw = files[`../../icons/${name}.svg`];
+if (!raw) {
+  throw new Error(`Icon "${name}" not found. Add src/icons/${name}.svg and the name to IconName.`);
+}
+
+// Strip the source's own sizing/aria so this component owns both.
+const inner = raw
+  .replace(/^[\s\S]*?<svg[^>]*>/, '')
+  .replace(/<\/svg>\s*$/, '')
+  .trim();
+
+const viewBox = raw.match(/viewBox="([^"]+)"/)?.[1] ?? '0 0 24 24';
+const isFilled = raw.includes('fill="currentColor"');
+---
+
+<svg
+  class={className}
+  width={size}
+  height={size}
+  viewBox={viewBox}
+  fill={isFilled ? 'currentColor' : 'none'}
+  stroke={isFilled ? undefined : 'currentColor'}
+  stroke-width={isFilled ? undefined : 2}
+  stroke-linecap={isFilled ? undefined : 'square'}
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : 'true'}
+  focusable="false"
+  set:html={inner}
+/>
+
+<style>
+  svg {
+    flex-shrink: 0;
+  }
+</style>

@@ -1,0 +1,220 @@
+---
+/**
+ * Footer: wordmark, section links, socials, and the copyright line.
+ *
+ * The year is computed at build time rather than hardcoded — the old footer
+ * still said "© 2023" three years on.
+ */
+import { AUTHOR, SOCIALS } from '../../consts';
+import { footerNav } from '../../i18n/nav';
+import { useTranslations, type Locale } from '../../i18n/utils';
+import { homePath, type RouteKey } from '../../i18n/routes';
+import Container from '../ui/Container.astro';
+import Icon, { type IconName } from '../ui/Icon.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+interface Props {
+  lang: Locale;
+  routeKey: RouteKey;
+  subPath?: string;
+}
+
+const { lang, routeKey, subPath }: Props = Astro.props;
+
+const t = useTranslations(lang);
+const links = footerNav(lang);
+const year = new Date().getFullYear();
+
+// `blog` has an RSS-ish glyph; every other social id doubles as its icon name.
+const iconFor = (id: string): IconName => (id === 'blog' ? 'rss' : (id as IconName));
+---
+
+<footer class="site-footer">
+  <Container size="wide">
+    <div class="top">
+      <div class="brand">
+        <a class="wordmark" href={homePath(lang)}>
+          <span class="mark">JM</span>
+          <span class="name">{AUTHOR.name}</span>
+        </a>
+        <p class="location">
+          <Icon name="map-pin" size={15} />
+          {AUTHOR.location}
+        </p>
+      </div>
+
+      <nav class="links" aria-label={t('nav.menu')}>
+        <ul>
+          {
+            links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  target={link.external ? '_blank' : undefined}
+                  rel={link.external ? 'noopener noreferrer' : undefined}
+                >
+                  {t(link.labelKey)}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <ul class="socials">
+        {
+          SOCIALS.map((social) => (
+            <li>
+              <a
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                title={social.label}
+              >
+                <Icon name={iconFor(social.id)} size={18} />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="bottom">
+      <p>&copy; {year} {AUTHOR.name}. {t('footer.rights')}</p>
+      <div class="bottom-right">
+        <p class="built">{t('footer.builtWith')}</p>
+        <LanguageSwitcher lang={lang} routeKey={routeKey} subPath={subPath} />
+      </div>
+    </div>
+  </Container>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--color-hairline);
+    padding-block: 70px 30px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .top {
+    display: grid;
+    gap: 48px;
+    grid-template-columns: 1.2fr 2fr auto;
+  }
+
+  @media (max-width: 991px) {
+    .top {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+  }
+
+  /* --- brand --- */
+
+  .wordmark {
+    align-items: center;
+    display: inline-flex;
+    gap: 10px;
+  }
+
+  .mark {
+    background: var(--color-red);
+    box-shadow: var(--shadow-ink-sm);
+    color: var(--color-paper);
+    font-family: var(--font-heading);
+    font-size: 17px;
+    font-weight: 900;
+    line-height: 1;
+    padding: 9px 10px;
+  }
+
+  .name {
+    color: var(--color-dark);
+    font-family: var(--font-heading);
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  .location {
+    align-items: center;
+    color: var(--color-muted);
+    display: flex;
+    font-size: 15px;
+    gap: 6px;
+    margin-top: 18px;
+  }
+
+  /* --- links --- */
+
+  .links ul {
+    columns: 2;
+    column-gap: 40px;
+  }
+
+  .links a {
+    color: var(--color-body);
+    display: block;
+    font-size: 16px;
+    padding-block: 6px;
+  }
+
+  .links a:hover {
+    color: var(--color-red-ink);
+  }
+
+  /* --- socials --- */
+
+  .socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    height: fit-content;
+  }
+
+  .socials a {
+    align-items: center;
+    border: 1px solid var(--color-hairline);
+    border-radius: 50%;
+    color: var(--color-dark);
+    display: flex;
+    height: 44px;
+    justify-content: center;
+    transition:
+      background-color 0.3s,
+      border-color 0.3s,
+      color 0.3s;
+    width: 44px;
+  }
+
+  .socials a:hover {
+    background: var(--color-red);
+    border-color: var(--color-red);
+    color: var(--color-paper);
+  }
+
+  /* --- bottom bar --- */
+
+  .bottom {
+    align-items: center;
+    border-top: 1px solid var(--color-hairline);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: space-between;
+    margin-top: 56px;
+    padding-top: 24px;
+  }
+
+  .bottom p {
+    color: var(--color-muted);
+    font-size: 14px;
+  }
+
+  .bottom-right {
+    align-items: center;
+    display: flex;
+    gap: 20px;
+  }
+</style>
