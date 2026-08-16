@@ -31,7 +31,9 @@ Requires **Node 22+** and **pnpm**. There is one lockfile and it is
 | `pnpm preview` | Serve the built site |
 | `pnpm format` | Prettier |
 | `pnpm og` | Regenerate the social share cards in `public/og/` |
-| `pnpm optimize:panels` | Re-encode images in `src/assets/` in place (idempotent) |
+| `pnpm optimize:panels` | Re-encode the comic panels in `src/assets/` in place (idempotent) |
+| `pnpm images:check` | Fail if any image carries EXIF/IPTC/XMP. Runs in CI. |
+| `pnpm images:scrub` | Strip that metadata in place (`--sign` to add your own instead) |
 
 ## Deploying
 
@@ -114,6 +116,26 @@ Three small vanilla scripts and nothing else: sticky-header state and
 scroll-spy (`header.ts`), the mobile drawer (`mobile-menu.ts`), and the project
 tag filter (`project-filter.ts`). No `client:*` directives, no hydration, no
 framework. Everything else is CSS.
+
+### Image metadata
+
+A photo off a phone carries GPS coordinates, the camera make/model/serial, the
+lens, the timestamp, and on iOS a per-image identifier. None of that should be
+published, so `pnpm images:check` runs in CI and fails the build if any image in
+`src/assets`, `src/icons` or `public` still has it. `pnpm images:scrub` strips it.
+
+Two things the scrubber is careful about:
+
+- It bakes EXIF **orientation** into the pixels before discarding the metadata.
+  Astro does not apply orientation, so stripping it naively turns a portrait
+  phone photo on its side.
+- `--sign` writes your own author/copyright fields, but never onto anything under
+  `src/assets/easter-egg/` — signing a photo you did not take is a false claim,
+  and on the CC BY image there it would contradict the required attribution.
+
+Filling the fields with junk instead of emptying them is worse, not better: junk
+is still a field that travels with the file, and one constant string across every
+image is a fingerprint linking them together.
 
 ### Accessibility notes
 

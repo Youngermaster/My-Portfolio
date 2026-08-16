@@ -32,6 +32,10 @@ jobs:
       # translation fails here rather than at upload time.
       - run: pnpm check
 
+      # Fails if any committed image is carrying EXIF/IPTC/XMP — which is how a
+      # phone photo's GPS coordinates and device serial reach the internet.
+      - run: pnpm images:check
+
       - run: pnpm build:fast
 
       - run: pnpm format:check
