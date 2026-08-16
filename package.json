@@ -20,7 +20,8 @@
     "og": "node scripts/make-og-images.mjs",
     "optimize:panels": "node scripts/optimize-panels.mjs",
     "images:check": "node scripts/scrub-image-metadata.mjs --check",
-    "images:scrub": "node scripts/scrub-image-metadata.mjs"
+    "images:scrub": "node scripts/scrub-image-metadata.mjs",
+    "deploy": "node scripts/deploy-to-pages.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",

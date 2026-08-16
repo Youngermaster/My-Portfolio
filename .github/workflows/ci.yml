@@ -27,18 +27,20 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      # `astro check` validates TypeScript *and* every content-collection entry
-      # against its Zod schema, so a malformed project or a missing Spanish
-      # translation fails here rather than at upload time.
-      - run: pnpm check
+      # Cheap checks first, so a formatting slip fails in seconds rather than
+      # after the whole build has run.
+      - run: pnpm format:check
 
       # Fails if any committed image is carrying EXIF/IPTC/XMP — which is how a
       # phone photo's GPS coordinates and device serial reach the internet.
       - run: pnpm images:check
 
-      - run: pnpm build:fast
+      # `astro check` validates TypeScript *and* every content-collection entry
+      # against its Zod schema, so a malformed project or a missing Spanish
+      # translation fails here rather than at upload time.
+      - run: pnpm check
 
-      - run: pnpm format:check
+      - run: pnpm build:fast
 
       - name: Upload dist
         uses: actions/upload-artifact@v4
