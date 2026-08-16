@@ -1,0 +1,72 @@
+---
+import { useTranslations, type Locale } from '../../i18n/utils';
+import { getTechnologies } from '../../lib/content';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import SectionTitle from '../ui/SectionTitle.astro';
+import TechCard from '../cards/TechCard.astro';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang }: Props = Astro.props;
+const t = useTranslations(lang);
+const technologies = await getTechnologies(lang);
+---
+
+<Section id="technologies" ghost={[t('technologies.ghost')]}>
+  <Container size="wide">
+    <SectionTitle
+      eyebrow={t('technologies.eyebrow')}
+      title={t('technologies.title')}
+      align="center"
+    />
+    <ul class="grid">
+      {
+        technologies.map((entry) => (
+          <li>
+            <TechCard entry={entry} />
+          </li>
+        ))
+      }
+    </ul>
+  </Container>
+</Section>
+
+<style>
+  .grid {
+    display: grid;
+    gap: 40px 28px;
+    grid-template-columns: repeat(5, 1fr);
+    margin-top: 56px;
+  }
+
+  @media (max-width: 1400px) {
+    .grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media (max-width: 991px) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 420px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .grid > li {
+    display: flex;
+  }
+</style>

@@ -1,0 +1,14 @@
+{
+  "name": "Juan Manuel Young Hoyos",
+  "short_name": "JMYH",
+  "description": "Portfolio of Juan Manuel Young Hoyos — technical lead, robotics in Rust, mobile apps and security.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#F0403E",
+  "icons": [
+    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "maskable" }
+  ]
+}

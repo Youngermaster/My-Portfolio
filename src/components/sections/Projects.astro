@@ -1,0 +1,76 @@
+---
+/**
+ * Homepage projects: the featured tier only, with a link through to the full
+ * index. The old site had a "view all" button that doubled a counter in React
+ * state; a real page is better for linking, for crawlers, and for zero JS.
+ */
+import { useTranslations, type Locale } from '../../i18n/utils';
+import { getFeaturedProjects } from '../../lib/content';
+import { projectsPath } from '../../i18n/routes';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import SectionTitle from '../ui/SectionTitle.astro';
+import Button from '../ui/Button.astro';
+import ProjectCard from '../cards/ProjectCard.astro';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang }: Props = Astro.props;
+const t = useTranslations(lang);
+const projects = await getFeaturedProjects(lang, 6);
+---
+
+<Section id="projects" ghost={[t('projects.ghost')]} surface="panel">
+  <Container size="wide">
+    <SectionTitle eyebrow={t('projects.eyebrow')} title={t('projects.title')} />
+
+    <ul class="grid">
+      {
+        projects.map((entry, index) => (
+          <li>
+            <ProjectCard lang={lang} entry={entry} eager={index < 3} />
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="more">
+      <Button href={projectsPath(lang)} variant="outline" icon="arrow-right">
+        {t('projects.viewAll')}
+      </Button>
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .grid {
+    display: grid;
+    gap: 44px 28px;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 56px;
+  }
+
+  @media (max-width: 991px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 575px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .grid > li {
+    display: flex;
+  }
+
+  .more {
+    display: flex;
+    justify-content: center;
+    margin-top: 56px;
+  }
+</style>

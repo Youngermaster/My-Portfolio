@@ -1,0 +1,329 @@
+---
+/**
+ * The hero: two-word headline, name rule, calls to action, social rail, and the
+ * ligne claire self-portrait that defines the whole art direction.
+ *
+ * The portrait is an SVG rendered with a plain <img> rather than <Image>:
+ * astro:assets would rasterise it, and this is vector line art whose crispness
+ * is the point.
+ */
+import { AUTHOR, SOCIALS } from '../../consts';
+import { useTranslations, type Locale } from '../../i18n/utils';
+import { projectsPath } from '../../i18n/routes';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import Button from '../ui/Button.astro';
+import Icon, { type IconName } from '../ui/Icon.astro';
+
+import portrait from '../../assets/hero/younger.svg';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang }: Props = Astro.props;
+const t = useTranslations(lang);
+
+const rail = SOCIALS.filter((s) => s.primary);
+const iconFor = (id: string): IconName => (id === 'blog' ? 'rss' : (id as IconName));
+---
+
+{
+  /*
+  The hero is the one section with the horizontal ghost stack; every other
+  section uses the diagonal variant. That split comes straight from the original
+  design, where the hero had `.visible-text` and the rest `.visible-rotate-text`.
+*/
+}
+<Section
+  id="home"
+  hairline={false}
+  ghost={[t('hero.ghost1'), t('hero.ghost2'), t('hero.ghost3')]}
+  ghostVariant="hero"
+  class="hero"
+>
+  <Container size="wide">
+    <div class="grid">
+      <div class="copy">
+        <h1>
+          <span class="line">{t('hero.title.line1')}</span>
+          <span class="line">{t('hero.title.line2')}</span>
+        </h1>
+
+        {
+          /*
+          The 100px rule after the name is the original's `:before` device,
+          rebuilt as a flex sibling so it never overlaps a longer Spanish name.
+        */
+        }
+        <p class="name">
+          <span class="name-text">{AUTHOR.name}</span>
+          <span class="rule" aria-hidden="true"></span>
+        </p>
+
+        <div class="ctas">
+          <Button href="#contact">{t('hero.cta')}</Button>
+          <Button href={projectsPath(lang)} variant="outline" icon="arrow-right">
+            {t('hero.ctaSecondary')}
+          </Button>
+        </div>
+      </div>
+
+      <div class="art">
+        <img src={portrait.src} alt={t('hero.portraitAlt')} width="916" height="1063" />
+      </div>
+    </div>
+  </Container>
+
+  {
+    /*
+    On wide screens this becomes a vertical rail in the left gutter, sitting
+    outside the page-edge hairline. Below that there is no gutter to sit in, so
+    the same markup falls back to a horizontal row under the hero.
+  */
+  }
+  <ul class="rail">
+    {
+      rail.map((social) => (
+        <li>
+          <a href={social.url} target="_blank" rel="noopener noreferrer" title={social.label}>
+            <Icon name={iconFor(social.id)} size={17} class="rail-icon" />
+            <span class="rail-label">{social.label}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Section>
+
+<style>
+  .hero {
+    padding-block: 90px 110px;
+  }
+
+  .grid {
+    align-items: center;
+    display: grid;
+    gap: 40px;
+    grid-template-columns: 1.05fr 0.95fr;
+  }
+
+  @media (max-width: 991px) {
+    .grid {
+      gap: 24px;
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  }
+
+  /* --- headline --- */
+
+  h1 {
+    font-size: 100px;
+    font-weight: 900;
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  .line {
+    display: block;
+  }
+
+  .line:last-child {
+    color: var(--color-red);
+  }
+
+  @media (max-width: 1500px) {
+    h1 {
+      font-size: 80px;
+    }
+  }
+
+  @media (max-width: 1199px) {
+    h1 {
+      font-size: 66px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    h1 {
+      font-size: 48px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    h1 {
+      font-size: 38px;
+    }
+  }
+
+  /* --- name + rule --- */
+
+  .name {
+    align-items: center;
+    display: flex;
+    gap: 20px;
+    margin-block: 28px 40px;
+  }
+
+  .name-text {
+    color: var(--color-body);
+    font-size: 20px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+  }
+
+  .rule {
+    background: #202020;
+    flex: 0 0 100px;
+    height: 1px;
+  }
+
+  @media (max-width: 991px) {
+    .name {
+      justify-content: center;
+    }
+
+    .rule {
+      display: none;
+    }
+  }
+
+  @media (max-width: 575px) {
+    .name-text {
+      font-size: 15px;
+      letter-spacing: 3px;
+    }
+  }
+
+  /* --- ctas --- */
+
+  .ctas {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 26px;
+  }
+
+  @media (max-width: 991px) {
+    .ctas {
+      justify-content: center;
+    }
+  }
+
+  /* --- artwork --- */
+
+  .art img {
+    height: auto;
+    margin-inline: auto;
+    max-width: 580px;
+    width: 100%;
+  }
+
+  @media (max-width: 1199px) {
+    .art img {
+      max-width: 460px;
+    }
+  }
+
+  @media (max-width: 991px) {
+    .art img {
+      max-width: 360px;
+    }
+  }
+
+  /* --- social rail: horizontal fallback --- */
+
+  .rail {
+    display: flex;
+    gap: 28px;
+    margin-top: 56px;
+    padding-inline: 60px;
+  }
+
+  .rail a {
+    align-items: center;
+    color: var(--color-muted);
+    display: inline-flex;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 500;
+    gap: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  .rail a:hover {
+    color: var(--color-red-ink);
+  }
+
+  @media (max-width: 991px) {
+    .rail {
+      justify-content: center;
+      padding-inline: 20px;
+    }
+  }
+
+  @media (max-width: 575px) {
+    .rail {
+      gap: 18px;
+    }
+
+    .rail-label {
+      display: none;
+    }
+  }
+
+  /* --- social rail: vertical, in the left gutter ---------------------------
+     Only above 1300px, because that is the narrowest viewport where
+     `--edge-inset` still leaves room to sit clear of the page-edge hairline.
+     Below it the horizontal fallback above takes over.
+  ------------------------------------------------------------------------- */
+
+  @media (min-width: 1301px) {
+    .rail {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+      /* Centred in the gutter between the viewport edge and the hairline. */
+      left: 0;
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: var(--edge-inset);
+      z-index: 2;
+    }
+
+    /* The red tick between labels, echoing the original's dashes. */
+    .rail li + li::before {
+      background: var(--color-red);
+      content: '';
+      display: block;
+      height: 1px;
+      margin: 0 auto 26px;
+      width: 18px;
+    }
+
+    .rail a {
+      /* `row` here, not `column`: in vertical writing mode the inline axis is
+         the vertical one, so `row` is what stacks the icon above the label. */
+      flex-direction: row;
+      gap: 10px;
+      /* Reads bottom-to-top, the way the original rail did. */
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    /* Cancel the parent's flip so the glyph itself stays upright. */
+    .rail :global(.rail-icon) {
+      transform: rotate(180deg);
+    }
+
+    .rail-label {
+      letter-spacing: 0.12em;
+      text-transform: none;
+    }
+  }
+</style>

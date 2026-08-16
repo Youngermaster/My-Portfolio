@@ -1,0 +1,433 @@
+---
+/**
+ * Public living styleguide.
+ *
+ * Every signature device rendered in one place, so drift is visible at a glance
+ * and a component added months from now can be checked against the system
+ * without reverse-engineering the homepage. Kept public deliberately: it is
+ * both the reference and a piece of the portfolio.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import SectionTitle from '../ui/SectionTitle.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Button from '../ui/Button.astro';
+import Panel from '../ui/Panel.astro';
+import Tag from '../ui/Tag.astro';
+import Icon, { type IconName } from '../ui/Icon.astro';
+import { useTranslations, type Locale } from '../../i18n/utils';
+import { AUTHOR } from '../../consts';
+
+import younger from '../../assets/hero/younger.svg';
+import rustPanel from '../../assets/panels/technologies/rust.png';
+import aiPanel from '../../assets/panels/services/ai-development.png';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang }: Props = Astro.props;
+const t = useTranslations(lang);
+
+/**
+ * Copy lives here rather than in src/i18n/ui.ts: it is documentation about the
+ * design system, only ever used on this page, and keeping it local means the
+ * shared dictionary does not fill up with prose nothing else reads.
+ */
+const copy = {
+  en: {
+    eyebrow: 'Design system',
+    title: 'Ligne Claire, in CSS',
+    highlight: 'Ligne Claire',
+    lede: 'Flat colour, black ink, hard corners. Every device below is part of the site’s identity — this page exists so they cannot quietly drift apart.',
+    palette: 'Palette',
+    typeScale: 'Type scale',
+    typeSample:
+      'Body copy at 18px in Josefin Sans. Headings are Jost — a free geometric standing in for Futura PT, which the old site self-hosted without a webfont licence.',
+    heroLine: 'Problem Solver',
+    sectionHeading: 'Section heading, 64px',
+    subheading: 'Subheading, 30px, light',
+    buttons: 'Buttons',
+    badges: 'Eyebrow badge and tags',
+    panels: 'Comic panels',
+    panelsNote:
+      'Real artwork on the left, the placeholder title card on the right — that fallback is what lets a project ship before its panel has been drawn.',
+    artwork: 'Hero illustration',
+    icons: 'Icons',
+    iconsNote: 'inline SVGs, replacing the five icon fonts (3.1 MB) the old site loaded.',
+    motion: 'Marquee',
+    marquee: [
+      'Problem Solver',
+      'Robotics in Rust',
+      'Health Interoperability',
+      'Mobile Apps',
+      'Security',
+    ],
+    contact: 'Contact me',
+    external: 'External',
+    small: 'Small',
+    about: 'about me',
+  },
+  es: {
+    eyebrow: 'Sistema de diseño',
+    title: 'Línea Clara, en CSS',
+    highlight: 'Línea Clara',
+    lede: 'Color plano, tinta negra, esquinas rectas. Cada elemento de abajo hace parte de la identidad del sitio — esta página existe para que no se desalineen con el tiempo.',
+    palette: 'Paleta',
+    typeScale: 'Escala tipográfica',
+    typeSample:
+      'Texto a 18px en Josefin Sans. Los títulos usan Jost — una geométrica libre que reemplaza a Futura PT, que el sitio anterior alojaba sin licencia web.',
+    heroLine: 'Resuelvo Problemas',
+    sectionHeading: 'Título de sección, 64px',
+    subheading: 'Subtítulo, 30px, ligero',
+    buttons: 'Botones',
+    badges: 'Insignia y etiquetas',
+    panels: 'Viñetas',
+    panelsNote:
+      'Ilustración real a la izquierda, la tarjeta de reemplazo a la derecha — ese respaldo es lo que permite publicar un proyecto antes de dibujar su viñeta.',
+    artwork: 'Ilustración principal',
+    icons: 'Iconos',
+    iconsNote:
+      'SVG en línea, que reemplazan las cinco fuentes de iconos (3,1 MB) del sitio anterior.',
+    motion: 'Marquesina',
+    marquee: [
+      'Resuelvo Problemas',
+      'Robótica en Rust',
+      'Interoperabilidad en Salud',
+      'Aplicaciones Móviles',
+      'Seguridad',
+    ],
+    contact: 'Contáctame',
+    external: 'Externo',
+    small: 'Pequeño',
+    about: 'sobre mí',
+  },
+} as const;
+
+const c = copy[lang];
+
+const colors = [
+  ['ink', '#000000'],
+  ['red', '#F0403E'],
+  ['blue', '#269EEF'],
+  ['yellow', '#FFD152'],
+  ['ochre', '#F1B745'],
+  ['skin', '#FFC6A6'],
+  ['cream', '#FFEAB6'],
+  ['sky', '#9EDEFF'],
+  ['panel', '#F5F5F5'],
+  ['hairline', '#EBEBEB'],
+  ['ghost', '#E8E8E8'],
+  ['invert', '#181818'],
+] as const;
+
+const icons: IconName[] = [
+  'arrow-up',
+  'arrow-right',
+  'close',
+  'menu',
+  'external-link',
+  'mail',
+  'calendar',
+  'map-pin',
+  'award',
+  'briefcase',
+  'globe',
+  'github',
+  'gitlab',
+  'linkedin',
+  'instagram',
+  'x',
+  'youtube',
+  'stackoverflow',
+  'hackthebox',
+  'appstore',
+  'playstore',
+  'rss',
+];
+---
+
+<BaseLayout
+  title={`${t('styleguide.title')} — ${AUTHOR.name}`}
+  description={t('styleguide.description')}
+  lang={lang}
+  routeKey="styleguide"
+>
+  <Section id="sg-type" ghost={[t('styleguide.title')]} hairline={false}>
+    <Container>
+      <SectionTitle as="h1" eyebrow={c.eyebrow} title={c.title} highlight={[c.highlight]} />
+      <p class="lede">{c.lede}</p>
+    </Container>
+  </Section>
+
+  <Section id="sg-color" ghost={[c.palette]}>
+    <Container>
+      <h2 class="h">{c.palette}</h2>
+      <ul class="swatches">
+        {
+          colors.map(([name, hex]) => (
+            <li>
+              <span class="chip" style={`background:var(--color-${name})`} />
+              <strong>{name}</strong>
+              <code>{hex}</code>
+            </li>
+          ))
+        }
+      </ul>
+    </Container>
+  </Section>
+
+  <Section id="sg-scale" ghost={[c.typeScale]}>
+    <Container>
+      <h2 class="h">{c.typeScale}</h2>
+      <div class="stack">
+        <p class="t-hero">{c.heroLine}</p>
+        <p class="t-section">{c.sectionHeading}</p>
+        <p class="t-sub">{c.subheading}</p>
+        <p class="t-body">{c.typeSample}</p>
+        <p class="t-fun">56+</p>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="sg-buttons" ghost={[c.buttons]}>
+    <Container>
+      <h2 class="h">{c.buttons}</h2>
+      <div class="row">
+        <Button>{c.contact}</Button>
+        <Button variant="blue">Blue</Button>
+        <Button variant="ink">Ink</Button>
+        <Button variant="outline">Outline</Button>
+      </div>
+      <div class="row">
+        <Button size="sm" icon="arrow-right">{c.small}</Button>
+        <Button size="sm" variant="outline" external href="https://github.com/Youngermaster">
+          {c.external}
+        </Button>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="sg-eyebrow" ghost={[c.badges]}>
+    <Container>
+      <h2 class="h">{c.badges}</h2>
+      <div class="row"><Eyebrow>{c.about}</Eyebrow></div>
+      <div class="row">
+        <Tag>Rust</Tag>
+        <Tag variant="red">Robotics</Tag>
+        <Tag variant="ink">NestJS</Tag>
+        <Tag variant="solid">Featured</Tag>
+        <Tag size="sm">small</Tag>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="sg-panels" ghost={[c.panels]} surface="panel">
+    <Container>
+      <h2 class="h">{c.panels}</h2>
+      <p class="note">{c.panelsNote}</p>
+      <div class="grid">
+        <Panel src={rustPanel} alt="Rust" zoomOnHover grayscaleOnHover />
+        <Panel src={aiPanel} alt="AI development" zoomOnHover />
+        <Panel alt="Olivaw SLAM" fallbackText="olivaw slam" tint="yellow" />
+        <Panel alt="Olivaw Lidar" fallbackText="olivaw lidar" tint="blue" />
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="sg-hero-art" ghost={[c.artwork]}>
+    <Container>
+      <h2 class="h">{c.artwork}</h2>
+      <img class="hero-art" src={younger.src} alt={t('hero.portraitAlt')} width="380" />
+    </Container>
+  </Section>
+
+  <Section id="sg-icons" ghost={[c.icons]} surface="panel">
+    <Container>
+      <h2 class="h">{c.icons}</h2>
+      <p class="note">{icons.length} {c.iconsNote}</p>
+      <ul class="icons">
+        {
+          icons.map((name) => (
+            <li>
+              <Icon name={name} size={26} />
+              <code>{name}</code>
+            </li>
+          ))
+        }
+      </ul>
+    </Container>
+  </Section>
+
+  <Section id="sg-marquee" ghost={[c.motion]}>
+    <Container>
+      <h2 class="h">{c.motion}</h2>
+    </Container>
+    {/* The track is duplicated so the -50% translate loops seamlessly. */}
+    <div class="marquee">
+      <div class="marquee-track" aria-hidden="true">
+        {
+          Array.from({ length: 2 }).map(() => (
+            <span>
+              {c.marquee.map((phrase) => (
+                <>
+                  {phrase} <i>.</i>{' '}
+                </>
+              ))}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .h {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 28px;
+  }
+
+  .lede {
+    font-size: 20px;
+    margin-top: 24px;
+    max-width: 620px;
+  }
+
+  .note {
+    margin-bottom: 24px;
+    max-width: 620px;
+  }
+
+  .row {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-bottom: 32px;
+  }
+
+  .stack > * + * {
+    margin-top: 22px;
+  }
+
+  .t-hero {
+    color: var(--color-dark);
+    font-family: var(--font-heading);
+    font-size: 100px;
+    font-weight: 900;
+    line-height: 1.05;
+  }
+
+  .t-section {
+    color: var(--color-dark);
+    font-family: var(--font-heading);
+    font-size: 64px;
+    font-weight: 500;
+    line-height: 1.008;
+  }
+
+  .t-sub {
+    color: var(--color-faded);
+    font-family: var(--font-heading);
+    font-size: 30px;
+    font-weight: 300;
+  }
+
+  .t-body {
+    font-size: 18px;
+    max-width: 560px;
+  }
+
+  .t-fun {
+    color: var(--color-red);
+    font-family: var(--font-heading);
+    font-size: 56px;
+  }
+
+  .swatches {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .swatches li {
+    display: grid;
+    gap: 4px;
+  }
+
+  .chip {
+    border: 2px solid var(--color-ink);
+    display: block;
+    height: 64px;
+  }
+
+  .swatches strong {
+    color: var(--color-dark);
+    font-family: var(--font-heading);
+    font-size: 14px;
+  }
+
+  .swatches code {
+    color: var(--color-muted);
+    font-size: 12px;
+  }
+
+  .grid {
+    display: grid;
+    gap: 32px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+
+  .hero-art {
+    height: auto;
+  }
+
+  .icons {
+    display: grid;
+    gap: 22px;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+
+  .icons li {
+    align-items: center;
+    color: var(--color-ink);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .icons code {
+    color: var(--color-muted);
+    font-size: 11px;
+  }
+
+  .marquee {
+    background: var(--color-panel);
+    margin-top: 40px;
+    overflow: hidden;
+    padding: 40px 0;
+  }
+
+  .marquee-track {
+    animation: marquee 30s linear infinite;
+    display: flex;
+    white-space: nowrap;
+    width: max-content;
+  }
+
+  .marquee-track span {
+    color: var(--color-dark);
+    font-family: var(--font-heading);
+    font-size: 48px;
+    font-weight: 400;
+    padding-right: 20px;
+  }
+
+  .marquee-track i {
+    color: var(--color-red);
+    font-style: normal;
+  }
+</style>

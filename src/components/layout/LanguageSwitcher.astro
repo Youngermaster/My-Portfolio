@@ -1,0 +1,81 @@
+---
+/**
+ * Two plain links, no JavaScript.
+ *
+ * The target path comes from the caller's own route key and slug, so switching
+ * language on `/projects/olivaw-slam` lands on `/es/proyectos/olivaw-slam`
+ * rather than the Spanish homepage.
+ */
+import { alternatesFor, type RouteKey } from '../../i18n/routes';
+import { LOCALES, type Locale } from '../../i18n/utils';
+
+interface Props {
+  lang: Locale;
+  routeKey: RouteKey;
+  /** Slug for detail pages; omit on index pages. */
+  subPath?: string;
+  class?: string;
+}
+
+const { lang, routeKey, subPath, class: className }: Props = Astro.props;
+
+const alternates = alternatesFor(routeKey, subPath);
+const labels: Record<Locale, string> = { en: 'EN', es: 'ES' };
+const titles: Record<Locale, string> = { en: 'English', es: 'Español' };
+---
+
+<div class:list={['switcher', className]}>
+  {
+    LOCALES.map((locale, index) => (
+      <>
+        {index > 0 && (
+          <span class="sep" aria-hidden="true">
+            /
+          </span>
+        )}
+        <a
+          href={alternates[locale]}
+          hreflang={locale}
+          lang={locale}
+          title={titles[locale]}
+          class:list={['lang', { current: locale === lang }]}
+          aria-current={locale === lang ? 'true' : undefined}
+        >
+          {labels[locale]}
+        </a>
+      </>
+    ))
+  }
+</div>
+
+<style>
+  .switcher {
+    align-items: center;
+    display: flex;
+    gap: 6px;
+  }
+
+  .lang {
+    color: var(--color-muted);
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 4px 2px;
+  }
+
+  .lang:hover {
+    color: var(--color-red-ink);
+  }
+
+  .current {
+    color: var(--color-ink);
+    /* A short red rule under the active language, echoing the nav underline. */
+    box-shadow: inset 0 -3px 0 var(--color-red);
+  }
+
+  .sep {
+    color: var(--color-hairline);
+    font-size: 13px;
+  }
+</style>

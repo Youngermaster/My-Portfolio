@@ -1,25 +1,21 @@
-FROM node:alpine AS builder
+# Local preview of the production build.
+#
+# NOT the deployment path — the site is uploaded to Hostinger by hand from
+# `dist/`. This exists so the static output can be served the way a real web
+# server would serve it (clean URLs, a proper 404) before you upload it.
 
-# Declaring env
-ENV NODE_ENV production
-
-# Setting up the work directory
+FROM node:22-alpine AS build
 WORKDIR /app
 
-# Copying all the files in our project
+RUN corepack enable
+
+# Install dependencies first so this layer is cached across source changes.
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
+
 COPY . .
+RUN pnpm build
 
-# Installing dependencies
-RUN npm install
-
-# Building our application
-RUN npm run build
-
-# Fetching the latest nginx image
-FROM nginx
-
-# Copying built assets from builder
-COPY --from=builder /app/build /usr/share/nginx/html
-
-# Copying our nginx.conf
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf

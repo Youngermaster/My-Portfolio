@@ -1,0 +1,460 @@
+# Work history.
+#
+# Both locales live in this one file; the loader in src/content.config.ts splits
+# it into `<locale>/<key>` entries.
+#
+# NOTE ON YAML: any value containing ": " must be quoted, or the parser reads it
+# as a nested mapping. Every string here is quoted for that reason.
+#
+# A company holds one or more `positions`. Three of them (Publicis Global
+# Delivery, Design Systems Inno, Geta Club Play) cover several roles — flattening
+# those would lose the fact that they were moves inside one organisation.
+#
+# Dates are `YYYY-MM`; `end: null` means "to the present day".
+# `order` is ascending, 1 being the most recent.
+
+en:
+  - key: okorum
+    company: "Okorum Technologies"
+    location: "Medellín, Antioquia, Colombia"
+    start: "2025-12"
+    end: null
+    order: 1
+    positions:
+      - title: "Technical Lead"
+        employmentType: full-time
+        start: "2025-12"
+        end: null
+        location: "Medellín, Antioquia, Colombia"
+        workplace: hybrid
+        highlights:
+          - "Led the design and delivery of a national-scale health interoperability platform that lets Colombian healthcare providers comply with Resolución 1888 de 2025, which mandates the Resumen Digital de Atención en Salud (RDA) for electronic health records using HL7 FHIR R4."
+          - "Delivered a fully compliant RDA generation pipeline ahead of the national deadline, architecting the backend as a Turborepo monorepo of NestJS microservices that coordinate the send, validate, convert and generate stages through message queues."
+          - "Kept data integrity and regulatory compliance intact despite an unreliable upstream government API, by engineering fault tolerance and resumability into the queue-based system so in-flight submissions recover when the national platform is slow or unavailable."
+          - "Cut repeated health-code validation cost with a Redis caching layer on a configurable refresh interval, so the same clinical codes are not re-validated on every request — keeping the pipeline fast under sustained multi-provider load alongside MongoDB persistence."
+          - "Shipped the platform's core capabilities against a hard national compliance deadline by leading a cross-functional engineering team through design, implementation and delivery."
+          - "Made production operation on AWS reliable with a GitHub Actions CI/CD pipeline and full-stack observability for logs, traces and metrics using Grafana, Loki and the LGTM stack."
+        skills:
+          ["NestJS", "HL7 FHIR", "TypeScript", "Redis", "MongoDB", "AWS", "Grafana", "Turborepo"]
+
+  - key: grisu
+    company: "Grisú"
+    companyUrl: "https://grisu.co"
+    location: "Colombia"
+    start: "2023-07"
+    end: null
+    order: 2
+    positions:
+      - title: "Full Stack Developer"
+        employmentType: self-employed
+        start: "2023-07"
+        end: null
+        location: "Colombia"
+        workplace: remote
+        highlights:
+          - "Led the audit and development of EcoDrive with React Native, Kafka and Python FastAPI, compressing a four-month timeline into weeks."
+          - "Built and shipped Yak Bak!, a nostalgia-driven React Native simulator of the 90s toy, plus the Spindle decision wheel and Aurelius, all live on the App Store and Google Play."
+          - "Provided architectural design consultancy for Industrias Falcon Colombia."
+          - "Designed and rolled out the architecture for GameConnect, and did its UI design so implementation could follow a settled spec."
+          - "Rebuilt the company landing page in React, lifting site traffic by 150%."
+          - "Currently developing a hyper-casual mobile game with React Native and Godot."
+        skills: ["React Native", "Expo", "Godot", "Python", "Kafka", "TypeScript", "Go"]
+
+  - key: publicis-global-delivery
+    company: "Publicis Global Delivery (PGD)"
+    location: "Colombia"
+    start: "2023-12"
+    end: "2025-11"
+    order: 3
+    positions:
+      - title: "Frontend Developer"
+        employmentType: full-time
+        start: "2025-01"
+        end: "2025-11"
+        location: "Colombia"
+        workplace: remote
+        highlights:
+          - "Worked on the redesign of Duluth Trading Company's e-commerce in Next.js and TypeScript, improving load performance and delivering responsive UX across desktop, tablet and mobile."
+          - "Shipped production features and stability fixes to an internal AI agent web app built in Nuxt.js, improving workflow reliability for distributed teams."
+          - "Owned the full delivery loop: implementation, code review, performance tuning and rollout through GitLab CI/CD."
+        skills: ["Next.js", "React", "TypeScript", "Nuxt.js", "GitLab CI"]
+      - title: "React Native Developer"
+        employmentType: full-time
+        start: "2023-12"
+        end: "2024-12"
+        location: "Colombia"
+        workplace: remote
+        highlights:
+          - "Engineered React Native components and integrated Zustand and Algolia, measurably improving engagement and conversion on the e-commerce platform."
+          - "Wrote comprehensive unit tests in Jest, raising application quality and reducing bug incidence."
+          - "Worked with QA to resolve tickets across core logic and UI, verifying consistency across devices with BrowserStack."
+          - "Used Dynatrace to monitor and optimise application performance, improving user experience and system reliability."
+          - "Helped implement a CI/CD pipeline in GitHub Actions for Android APK generation, speeding up deployment and overall development efficiency."
+        skills: ["React Native", "Zustand", "Algolia", "Jest", "Dynatrace", "GitHub Actions"]
+
+  - key: arc-design
+    company: "Arc Design"
+    companyUrl: "https://arcdesign.io"
+    location: "Spain"
+    start: "2023-07"
+    end: "2025-03"
+    order: 4
+    positions:
+      - title: "Full Stack Developer"
+        employmentType: part-time
+        start: "2023-07"
+        end: "2025-03"
+        location: "Spain"
+        workplace: remote
+        highlights:
+          - "Designed an algorithm built on hashmaps and geohashes that substantially improved the application's performance and scalability."
+          - "Led the architectural design, introducing MQTT and running simulations in Python."
+          - "Built and deployed static sites on AWS and Hostinger in React, including arcdesign.io."
+          - "Integrated the algorithm into a React Native environment for better mobile performance."
+        skills: ["Linux", "Python", "React", "React Native", "MQTT", "AWS", "Geohashing"]
+
+  - key: design-systems-inno
+    company: "Design Systems Inno"
+    location: "Medellín, Antioquia, Colombia"
+    start: "2022-12"
+    end: "2023-06"
+    order: 5
+    positions:
+      - title: "Problem Solver"
+        employmentType: full-time
+        start: "2023-01"
+        end: "2023-06"
+        location: "Medellín, Antioquia, Colombia"
+        workplace: hybrid
+        highlights:
+          - "Designed a system architecture for internal APIs with RabbitMQ handling intensive work asynchronously: clients receive a ticket ID to track progress while the backend runs the scraping and HTML parsing, then reports back."
+          - "Built internal APIs to automate company processes using Go Fiber, Python FastAPI and MongoDB."
+          - "Wrote web scraping tools and custom HTML parsers in Python with Playwright and Beautiful Soup."
+          - "Paired with colleagues to fix critical bugs, keeping deliveries on time without dropping quality."
+          - "Automated contract signing with a Python script."
+          - "Built several administration panels in React with Redux and Saga."
+          - "Optimised React build output, taking one bundle from 3.46 MB down to roughly 886 KB, with similar gains elsewhere."
+          - "Improved the quality and build speed of Dockerfiles for React and Angular applications."
+          - "Improved logic and code quality across several React Native apps using TypeScript."
+        skills:
+          ["Go", "Python", "FastAPI", "MongoDB", "RabbitMQ", "Playwright", "React", "Docker"]
+      - title: "Security Consultant"
+        employmentType: contract
+        start: "2022-12"
+        end: "2022-12"
+        workplace: remote
+        highlights:
+          - "Ran an external penetration testing engagement over a week and a half."
+          - "Documented the findings across the software and part of the infrastructure."
+          - "Wrote up recommendations for improving software and infrastructure quality."
+        skills: ["Penetration Testing"]
+
+  - key: aligo
+    company: "Aligo - Defensores Informáticos"
+    location: "Medellín, Antioquia, Colombia"
+    start: "2022-08"
+    end: "2022-10"
+    order: 6
+    positions:
+      - title: "Red Teamer"
+        employmentType: full-time
+        start: "2022-08"
+        end: "2022-10"
+        location: "Medellín, Antioquia, Colombia"
+        workplace: on-site
+        highlights:
+          - "Pentested websites using Burp Suite, Metasploit, custom scripts and manual exploitation."
+          - "Ran OSINT with Maltego, Sherlock and fuzzers."
+          - "Developed pentesting tooling and custom scripts in Nim, Python and Go."
+          - "Built templates for phishing campaigns."
+          - "Used OWASP ZAP, Nessus and Acunetix to speed up engagements."
+        skills: ["Python", "Go", "Nim", "Burp Suite", "Metasploit", "Nessus", "OSINT"]
+
+  - key: geta-club-play
+    company: "Geta Club Play"
+    location: "Medellín, Antioquia, Colombia"
+    start: "2021-02"
+    end: "2022-06"
+    order: 7
+    positions:
+      - title: "Cyber Security Analyst"
+        employmentType: full-time
+        start: "2021-09"
+        end: "2022-06"
+        highlights:
+          - "Was handed an external pentest report with roughly 800 vulnerabilities across our projects and brought it below 390 in four months — about half of them fixed."
+          - "Used OWASP ZAP's DAST capabilities to review the company's web applications automatically."
+          - "Used SonarQube's SAST capabilities to review the company's code automatically."
+          - "Built a low-cost DevSecOps pipeline to catch common vulnerabilities before release."
+          - "Worked with the AI team to sanitise user requests and close off SQL injection."
+          - "Worked with IT on backup policies for employee files and repositories."
+          - "Simulated reverse-engineering attacks on project APKs, then worked with the development team to mitigate the paths that exposed useful information."
+          - "Developed a security plan with the IT team based on ISO/IEC 27001."
+          - "Implemented hardening across parts of our infrastructure."
+          - "Worked with the AI team on part of a SOC that could deliver value to technical and non-technical staff alike."
+        skills:
+          ["DAST", "SAST", "OWASP ZAP", "SonarQube", "ISO 27001", "DevSecOps", "Reverse Engineering"]
+      - title: "Cyber Security Trainee"
+        employmentType: full-time
+        start: "2021-08"
+        end: "2021-08"
+        highlights:
+          - "Planned four months of cyber security work across three company products."
+          - "Implemented a DevSecOps pipeline for those three products."
+          - "Introduced static application security testing across several products."
+          - "Found vulnerabilities and worked through them with the development team."
+        skills: ["DevSecOps", "SAST"]
+      - title: "Software Quality Assurance Tester"
+        employmentType: full-time
+        start: "2021-02"
+        end: "2021-08"
+        location: "Medellín, Antioquia, Colombia"
+        highlights:
+          - "Captured more than 100 bugs in four months across seven company products, raising the acceptance criteria leadership held the team to."
+          - "Led a four-person team providing quality assurance on three projects alongside the development team."
+          - "Automated over 15% of testing with Selenium and ran the remainder manually."
+          - "Refactored and retrofitted a legacy C++ WebAssembly application, improving code quality by 45%."
+          - "Ran more than 20 desk checks, cutting pull request volume by 25% and saving the tech lead's time."
+          - "Wrote test plans for two Unity 3D projects and documented them, and reviewed documentation for an Angular / .NET Core project."
+          - "Ran functional, online, usability and stress tests."
+        skills: ["Python", "Selenium", "Unity", "Test Planning", "QA"]
+
+  - key: personalized-tutorials
+    company: "Personalized tutorials"
+    location: "Medellín, Colombia"
+    start: "2012-01"
+    end: "2022-05"
+    order: 8
+    positions:
+      - title: "Independent Tutor"
+        employmentType: self-employed
+        start: "2012-01"
+        end: "2022-05"
+        highlights:
+          - "Tutored adults, teenagers and children in mathematics, physics, programming, chemistry and social studies, narrowing over time to maths and programming."
+          - "Helped more than 100 students with personalised tutoring across those subjects."
+          - "Worked closely with more than ten students who were failing, taking them to near-top marks and a pass."
+        skills: ["C++", "Teaching", "Mathematics", "Physics"]
+
+es:
+  - key: okorum
+    company: "Okorum Technologies"
+    location: "Medellín, Antioquia, Colombia"
+    start: "2025-12"
+    end: null
+    order: 1
+    positions:
+      - title: "Líder Técnico"
+        employmentType: full-time
+        start: "2025-12"
+        end: null
+        location: "Medellín, Antioquia, Colombia"
+        workplace: hybrid
+        highlights:
+          - "Lideré el diseño y la entrega de una plataforma de interoperabilidad en salud a escala nacional que permite a los prestadores colombianos cumplir la Resolución 1888 de 2025, que exige el Resumen Digital de Atención en Salud (RDA) para historias clínicas electrónicas usando HL7 FHIR R4."
+          - "Entregué un pipeline de generación de RDA totalmente conforme antes del plazo nacional, con un backend arquitecturado como monorepo Turborepo de microservicios NestJS que coordinan las etapas de envío, validación, conversión y generación mediante colas de mensajes."
+          - "Mantuve la integridad de los datos y el cumplimiento normativo pese a una API gubernamental poco confiable, incorporando tolerancia a fallos y reanudación en el sistema de colas para que los envíos en curso se recuperen cuando la plataforma nacional está lenta o caída."
+          - "Reduje el costo de validar códigos de salud repetidos con una capa de caché en Redis con intervalo de refresco configurable, evitando revalidar los mismos códigos clínicos en cada petición y manteniendo el pipeline rápido bajo carga sostenida de múltiples prestadores, junto a persistencia en MongoDB."
+          - "Entregué las capacidades centrales de la plataforma contra un plazo de cumplimiento nacional inamovible, liderando un equipo de ingeniería multidisciplinario a través del diseño, la implementación y la entrega."
+          - "Hice confiable la operación en producción sobre AWS con un pipeline de CI/CD en GitHub Actions y observabilidad completa de logs, trazas y métricas usando Grafana, Loki y el stack LGTM."
+        skills:
+          ["NestJS", "HL7 FHIR", "TypeScript", "Redis", "MongoDB", "AWS", "Grafana", "Turborepo"]
+
+  - key: grisu
+    company: "Grisú"
+    companyUrl: "https://grisu.co"
+    location: "Colombia"
+    start: "2023-07"
+    end: null
+    order: 2
+    positions:
+      - title: "Desarrollador Full Stack"
+        employmentType: self-employed
+        start: "2023-07"
+        end: null
+        location: "Colombia"
+        workplace: remote
+        highlights:
+          - "Lideré la auditoría y el desarrollo de EcoDrive con React Native, Kafka y Python FastAPI, comprimiendo un cronograma de cuatro meses a unas pocas semanas."
+          - "Construí y publiqué Yak Bak!, un simulador en React Native del juguete noventero, además de la ruleta de decisiones Spindle y Aurelius, todos disponibles en App Store y Google Play."
+          - "Presté consultoría de diseño arquitectónico para Industrias Falcon Colombia."
+          - "Diseñé e implanté la arquitectura de GameConnect, y realicé su diseño de UI para que la implementación partiera de una especificación cerrada."
+          - "Reconstruí la landing page de la empresa en React, aumentando el tráfico del sitio en un 150%."
+          - "Actualmente desarrollo un juego móvil hyper-casual con React Native y Godot."
+        skills: ["React Native", "Expo", "Godot", "Python", "Kafka", "TypeScript", "Go"]
+
+  - key: publicis-global-delivery
+    company: "Publicis Global Delivery (PGD)"
+    location: "Colombia"
+    start: "2023-12"
+    end: "2025-11"
+    order: 3
+    positions:
+      - title: "Desarrollador Frontend"
+        employmentType: full-time
+        start: "2025-01"
+        end: "2025-11"
+        location: "Colombia"
+        workplace: remote
+        highlights:
+          - "Trabajé en el rediseño del e-commerce de Duluth Trading Company en Next.js y TypeScript, mejorando el rendimiento de carga y entregando una experiencia responsiva en escritorio, tableta y móvil."
+          - "Entregué funcionalidades en producción y correcciones de estabilidad a una aplicación web interna de agentes de IA construida en Nuxt.js, mejorando la confiabilidad del flujo de trabajo para equipos distribuidos."
+          - "Fui responsable del ciclo completo de entrega: implementación, revisión de código, ajuste de rendimiento y despliegue con CI/CD en GitLab."
+        skills: ["Next.js", "React", "TypeScript", "Nuxt.js", "GitLab CI"]
+      - title: "Desarrollador React Native"
+        employmentType: full-time
+        start: "2023-12"
+        end: "2024-12"
+        location: "Colombia"
+        workplace: remote
+        highlights:
+          - "Desarrollé componentes en React Native e integré Zustand y Algolia, mejorando de forma medible la interacción y la conversión en la plataforma de e-commerce."
+          - "Escribí pruebas unitarias exhaustivas con Jest, elevando la calidad de la aplicación y reduciendo la incidencia de errores."
+          - "Trabajé con QA para resolver tickets de lógica central y de interfaz, verificando la consistencia entre dispositivos con BrowserStack."
+          - "Usé Dynatrace para monitorear y optimizar el rendimiento de la aplicación, mejorando la experiencia de usuario y la confiabilidad del sistema."
+          - "Ayudé a implementar un pipeline de CI/CD en GitHub Actions para generar APKs de Android, acelerando el despliegue y la eficiencia general del desarrollo."
+        skills: ["React Native", "Zustand", "Algolia", "Jest", "Dynatrace", "GitHub Actions"]
+
+  - key: arc-design
+    company: "Arc Design"
+    companyUrl: "https://arcdesign.io"
+    location: "España"
+    start: "2023-07"
+    end: "2025-03"
+    order: 4
+    positions:
+      - title: "Desarrollador Full Stack"
+        employmentType: part-time
+        start: "2023-07"
+        end: "2025-03"
+        location: "España"
+        workplace: remote
+        highlights:
+          - "Diseñé un algoritmo basado en hashmaps y geohashes que mejoró sustancialmente el rendimiento y la escalabilidad de la aplicación."
+          - "Lideré el diseño arquitectónico, incorporando MQTT y ejecutando simulaciones en Python."
+          - "Construí y desplegué sitios estáticos en AWS y Hostinger con React, incluido arcdesign.io."
+          - "Integré el algoritmo en un entorno React Native para mejorar el rendimiento móvil."
+        skills: ["Linux", "Python", "React", "React Native", "MQTT", "AWS", "Geohashing"]
+
+  - key: design-systems-inno
+    company: "Design Systems Inno"
+    location: "Medellín, Antioquia, Colombia"
+    start: "2022-12"
+    end: "2023-06"
+    order: 5
+    positions:
+      - title: "Problem Solver"
+        employmentType: full-time
+        start: "2023-01"
+        end: "2023-06"
+        location: "Medellín, Antioquia, Colombia"
+        workplace: hybrid
+        highlights:
+          - "Diseñé una arquitectura de sistema para APIs internas con RabbitMQ atendiendo el trabajo pesado de forma asíncrona: el cliente recibe un ticket para seguir el progreso mientras el backend ejecuta el scraping y el parseo de HTML, y luego responde."
+          - "Construí APIs internas para automatizar procesos de la empresa usando Go Fiber, Python FastAPI y MongoDB."
+          - "Escribí herramientas de web scraping y parsers de HTML a medida en Python con Playwright y Beautiful Soup."
+          - "Trabajé en pareja con colegas para corregir errores críticos, manteniendo las entregas a tiempo sin sacrificar calidad."
+          - "Automaticé la firma de contratos con un script en Python."
+          - "Construí varios paneles de administración en React con Redux y Saga."
+          - "Optimicé la salida de compilación de React, llevando un bundle de 3,46 MB a cerca de 886 KB, con mejoras similares en otros proyectos."
+          - "Mejoré la calidad y la velocidad de compilación de los Dockerfiles de aplicaciones React y Angular."
+          - "Mejoré la lógica y la calidad del código en varias apps React Native usando TypeScript."
+        skills:
+          ["Go", "Python", "FastAPI", "MongoDB", "RabbitMQ", "Playwright", "React", "Docker"]
+      - title: "Consultor de Seguridad"
+        employmentType: contract
+        start: "2022-12"
+        end: "2022-12"
+        workplace: remote
+        highlights:
+          - "Ejecuté una prueba de penetración externa durante una semana y media."
+          - "Documenté los hallazgos en el software y en parte de la infraestructura."
+          - "Redacté recomendaciones para mejorar la calidad del software y de la infraestructura."
+        skills: ["Pentesting"]
+
+  - key: aligo
+    company: "Aligo - Defensores Informáticos"
+    location: "Medellín, Antioquia, Colombia"
+    start: "2022-08"
+    end: "2022-10"
+    order: 6
+    positions:
+      - title: "Red Teamer"
+        employmentType: full-time
+        start: "2022-08"
+        end: "2022-10"
+        location: "Medellín, Antioquia, Colombia"
+        workplace: on-site
+        highlights:
+          - "Realicé pentesting de sitios web con Burp Suite, Metasploit, scripts propios y explotación manual."
+          - "Hice OSINT con Maltego, Sherlock y fuzzers."
+          - "Desarrollé herramientas de pentesting y scripts a medida en Nim, Python y Go."
+          - "Construí plantillas para campañas de phishing."
+          - "Usé OWASP ZAP, Nessus y Acunetix para acelerar los ejercicios."
+        skills: ["Python", "Go", "Nim", "Burp Suite", "Metasploit", "Nessus", "OSINT"]
+
+  - key: geta-club-play
+    company: "Geta Club Play"
+    location: "Medellín, Antioquia, Colombia"
+    start: "2021-02"
+    end: "2022-06"
+    order: 7
+    positions:
+      - title: "Analista de Ciberseguridad"
+        employmentType: full-time
+        start: "2021-09"
+        end: "2022-06"
+        highlights:
+          - "Recibí un informe de pentesting externo con cerca de 800 vulnerabilidades en nuestros proyectos y lo bajé a menos de 390 en cuatro meses — alrededor de la mitad corregidas."
+          - "Usé las capacidades DAST de OWASP ZAP para revisar automáticamente las aplicaciones web de la empresa."
+          - "Usé las capacidades SAST de SonarQube para revisar automáticamente el código de la empresa."
+          - "Construí un pipeline de DevSecOps de bajo costo para detectar vulnerabilidades comunes antes del release."
+          - "Trabajé con el equipo de IA para sanear las peticiones de los usuarios y cerrar la vía a inyecciones SQL."
+          - "Trabajé con TI en políticas de respaldo para archivos y repositorios de los empleados."
+          - "Simulé ataques de ingeniería inversa sobre los APK de los proyectos y trabajé con el equipo de desarrollo para mitigar las rutas que exponían información útil."
+          - "Desarrollé un plan de seguridad junto al equipo de TI basado en la norma ISO/IEC 27001."
+          - "Implementé hardening en partes de nuestra infraestructura."
+          - "Trabajé con el equipo de IA en una parte del SOC que aportara valor tanto al personal técnico como al no técnico."
+        skills:
+          ["DAST", "SAST", "OWASP ZAP", "SonarQube", "ISO 27001", "DevSecOps", "Ingeniería Inversa"]
+      - title: "Practicante de Ciberseguridad"
+        employmentType: full-time
+        start: "2021-08"
+        end: "2021-08"
+        highlights:
+          - "Planifiqué cuatro meses de trabajo de ciberseguridad para tres productos de la empresa."
+          - "Implementé un pipeline de DevSecOps para esos tres productos."
+          - "Introduje pruebas estáticas de seguridad de aplicaciones en varios productos."
+          - "Encontré vulnerabilidades y las resolví junto al equipo de desarrollo."
+        skills: ["DevSecOps", "SAST"]
+      - title: "Analista de Calidad de Software"
+        employmentType: full-time
+        start: "2021-02"
+        end: "2021-08"
+        location: "Medellín, Antioquia, Colombia"
+        highlights:
+          - "Registré más de 100 errores en cuatro meses sobre siete productos de la empresa, elevando los criterios de aceptación que la dirección exigía al equipo."
+          - "Lideré un equipo de cuatro personas en el aseguramiento de calidad de tres proyectos, junto al equipo de desarrollo."
+          - "Automaticé más del 15% de las pruebas con Selenium y ejecuté el resto de forma manual."
+          - "Refactoricé y adapté una aplicación heredada en C++ y WebAssembly, mejorando la calidad del código en un 45%."
+          - "Ejecuté más de 20 desk checks, reduciendo en un 25% el volumen de pull requests y ahorrando tiempo al líder técnico."
+          - "Escribí y documenté planes de prueba para dos proyectos en Unity 3D, y revisé la documentación de un proyecto Angular / .NET Core."
+          - "Realicé pruebas funcionales, en línea, de usabilidad y de estrés."
+        skills: ["Python", "Selenium", "Unity", "Planes de Prueba", "QA"]
+
+  - key: personalized-tutorials
+    company: "Clases particulares"
+    location: "Medellín, Colombia"
+    start: "2012-01"
+    end: "2022-05"
+    order: 8
+    positions:
+      - title: "Tutor Independiente"
+        employmentType: self-employed
+        start: "2012-01"
+        end: "2022-05"
+        highlights:
+          - "Di clases particulares a adultos, jóvenes y niños en matemáticas, física, programación, química y ciencias sociales, concentrándome con el tiempo en matemáticas y programación."
+          - "Acompañé a más de 100 estudiantes con tutorías personalizadas en esas materias."
+          - "Trabajé de cerca con más de diez estudiantes que iban perdiendo, llevándolos a notas altas y a aprobar el curso."
+        skills: ["C++", "Enseñanza", "Matemáticas", "Física"]

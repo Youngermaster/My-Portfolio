@@ -1,0 +1,215 @@
+/* ---------------------------------------------------------------------------
+   Comic devices that cannot live inside a single component
+   ---------------------------------------------------------------------------
+   Everything here is either page-level chrome or a keyframe shared by more than
+   one component. Anything that belongs to exactly one component lives in that
+   component's scoped <style> block instead.
+--------------------------------------------------------------------------- */
+
+/* --- Page-edge hairlines -------------------------------------------------
+   Two full-height 1px rules framing the page, stepping inward as the viewport
+   narrows and disappearing on phones. Rendered by <EdgeRules />.
+------------------------------------------------------------------------- */
+
+/*
+ * `--edge-inset` lives on :root rather than on .edge-rules because the hero's
+ * vertical social rail sits in the same gutter — it has to know where the line
+ * is in order to stay clear of it.
+ */
+:root {
+  --edge-inset: 100px;
+}
+
+.edge-rules {
+  position: fixed;
+  inset: 0;
+  z-index: 11;
+  pointer-events: none;
+}
+
+.edge-rules::before,
+.edge-rules::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background: var(--color-hairline);
+}
+
+.edge-rules::before {
+  left: var(--edge-inset);
+}
+
+.edge-rules::after {
+  right: var(--edge-inset);
+}
+
+@media (max-width: 1600px) {
+  :root {
+    --edge-inset: 70px;
+  }
+}
+@media (max-width: 1500px) {
+  :root {
+    --edge-inset: 50px;
+  }
+}
+@media (max-width: 1300px) {
+  :root {
+    --edge-inset: 30px;
+  }
+}
+@media (max-width: 1200px) {
+  :root {
+    --edge-inset: 10px;
+  }
+}
+@media (max-width: 991px) {
+  :root {
+    --edge-inset: 50px;
+  }
+}
+@media (max-width: 800px) {
+  :root {
+    --edge-inset: 30px;
+  }
+}
+@media (max-width: 767px) {
+  .edge-rules {
+    display: none;
+  }
+}
+
+/* --- Marquee -------------------------------------------------------------
+   A single strip whose content is duplicated once, translated -50% so the seam
+   is invisible. Shared keyframe so any future ticker reuses it.
+------------------------------------------------------------------------- */
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* --- Prose ---------------------------------------------------------------
+   Markdown bodies from the content collections (project detail pages, award
+   write-ups). Deliberately narrow: this design has no rounded cards to hide
+   behind, so measure does the work.
+------------------------------------------------------------------------- */
+
+.prose {
+  color: var(--color-body);
+  font-size: 18px;
+  line-height: 1.7;
+  max-width: 68ch;
+}
+
+.prose > * + * {
+  margin-top: 1.25em;
+}
+
+.prose h2 {
+  color: var(--color-dark);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 2em;
+}
+
+.prose h3 {
+  color: var(--color-dark);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 1.75em;
+}
+
+.prose a {
+  color: var(--color-red-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose a:hover {
+  color: var(--color-blue);
+}
+
+.prose strong {
+  color: var(--color-dark);
+  font-weight: 600;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.5em;
+}
+
+.prose ul {
+  list-style: none;
+}
+
+/* Red square bullets — the eyebrow badge's motif, scaled down. */
+.prose ul > li {
+  position: relative;
+}
+
+.prose ul > li::before {
+  content: '';
+  position: absolute;
+  left: -1.1em;
+  top: 0.62em;
+  width: 7px;
+  height: 7px;
+  background: var(--color-red);
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose li + li {
+  margin-top: 0.5em;
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--color-red);
+  padding-left: 1.25em;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.prose code {
+  background: var(--color-panel);
+  border: 1px solid var(--color-hairline);
+  font-size: 0.9em;
+  padding: 0.15em 0.4em;
+}
+
+.prose pre {
+  background: var(--color-invert);
+  color: var(--color-paper);
+  overflow-x: auto;
+  padding: 1.25em;
+}
+
+.prose pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+.prose img {
+  border: 3px solid var(--color-ink);
+  box-shadow: var(--shadow-ink-sm);
+}

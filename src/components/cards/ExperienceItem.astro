@@ -1,0 +1,151 @@
+---
+/**
+ * One organisation, with all the roles held there.
+ *
+ * The company header carries the overall span; each position carries its own
+ * dates. That is what makes Publicis Global Delivery read as two years with a
+ * promotion in the middle rather than as two unrelated jobs.
+ */
+import type { CollectionEntry } from 'astro:content';
+import { formatRange, formatDuration, useTranslations, type Locale } from '../../i18n/utils';
+import Icon from '../ui/Icon.astro';
+import PositionItem from './PositionItem.astro';
+
+interface Props {
+  lang: Locale;
+  entry: CollectionEntry<'experience'>;
+}
+
+const { lang, entry }: Props = Astro.props;
+const t = useTranslations(lang);
+
+const { company, companyUrl, location, start, end, positions } = entry.data;
+const range = formatRange(start, end, lang, t('experience.present'));
+const duration = formatDuration(start, end, lang);
+const isCurrent = end === null;
+---
+
+<article class="company">
+  <header>
+    <h3>
+      {
+        companyUrl ? (
+          <a href={companyUrl} target="_blank" rel="noopener noreferrer">
+            {company}
+            <Icon name="external-link" size={15} />
+          </a>
+        ) : (
+          company
+        )
+      }
+      {isCurrent && <span class="now">{t('experience.present')}</span>}
+    </h3>
+
+    <p class="span">
+      {range}{duration && ` · ${duration}`}
+    </p>
+    {
+      location && (
+        <p class="place">
+          <Icon name="map-pin" size={14} />
+          <span>{location}</span>
+        </p>
+      )
+    }
+  </header>
+
+  <div class="positions">
+    {
+      positions.map((position, index) => (
+        <PositionItem lang={lang} position={position} showRail={index < positions.length - 1} />
+      ))
+    }
+  </div>
+</article>
+
+<style>
+  .company {
+    border-top: 1px solid var(--color-hairline);
+    display: grid;
+    gap: 32px;
+    grid-template-columns: 300px 1fr;
+    padding-top: 44px;
+  }
+
+  .company + .company {
+    margin-top: 44px;
+  }
+
+  @media (max-width: 991px) {
+    .company {
+      gap: 24px;
+      grid-template-columns: 1fr;
+    }
+  }
+
+  header {
+    /* Keeps the company name alongside its roles on tall entries. */
+    position: sticky;
+    top: 120px;
+    align-self: start;
+  }
+
+  @media (max-width: 991px) {
+    header {
+      position: static;
+    }
+  }
+
+  h3 {
+    align-items: baseline;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 26px;
+    font-weight: 600;
+    gap: 10px;
+    line-height: 1.15;
+  }
+
+  h3 a {
+    align-items: center;
+    display: inline-flex;
+    gap: 7px;
+  }
+
+  h3 a:hover {
+    color: var(--color-red);
+  }
+
+  .now {
+    background: var(--color-red);
+    color: var(--color-paper);
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 4px 8px;
+    text-transform: uppercase;
+  }
+
+  .span {
+    color: var(--color-muted);
+    font-family: var(--font-heading);
+    font-size: 15px;
+    margin-top: 10px;
+  }
+
+  .place {
+    align-items: center;
+    color: var(--color-faded);
+    display: flex;
+    font-size: 14px;
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  @media (max-width: 575px) {
+    h3 {
+      font-size: 22px;
+    }
+  }
+</style>

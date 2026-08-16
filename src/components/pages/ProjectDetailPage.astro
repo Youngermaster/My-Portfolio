@@ -1,0 +1,284 @@
+---
+/**
+ * A single project's page, composed once for both locales.
+ *
+ * The markdown body is the substance here — the card `summary` is a teaser, and
+ * these pages exist so a project can be linked to and read properly rather than
+ * summarised in a modal, which is what the old site did.
+ */
+import { render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import Panel from '../ui/Panel.astro';
+import Tag from '../ui/Tag.astro';
+import Button from '../ui/Button.astro';
+import Icon, { type IconName } from '../ui/Icon.astro';
+import { entryKey } from '../../lib/content';
+import { projectsPath } from '../../i18n/routes';
+import { useTranslations, type Locale } from '../../i18n/utils';
+import type { UIKey } from '../../i18n/ui';
+
+interface Props {
+  lang: Locale;
+  entry: CollectionEntry<'projects'>;
+}
+
+const { lang, entry }: Props = Astro.props;
+const t = useTranslations(lang);
+const { Content } = await render(entry);
+
+const { title, tagline, summary, year, tags, tech, panel, tint, links, status } = entry.data;
+const key = entryKey(entry.id);
+
+const linkIcon: Record<string, IconName> = {
+  repo: 'github',
+  site: 'globe',
+  video: 'youtube',
+  profile: 'external-link',
+  demo: 'external-link',
+  appstore: 'appstore',
+  playstore: 'playstore',
+};
+---
+
+<BaseLayout
+  title={`${title} — ${tagline}`}
+  description={summary}
+  lang={lang}
+  routeKey="projects"
+  subPath={key}
+  ogType="article"
+  work={{ name: title, description: summary, year, keywords: [...tags, ...tech] }}
+>
+  <Section id="project" hairline={false} class="detail">
+    <Container>
+      <a class="back" href={projectsPath(lang)}>
+        <Icon name="arrow-right" size={15} class="flip" />
+        <span>{t('projects.backToProjects')}</span>
+      </a>
+
+      <header>
+        <p class="meta">
+          <span>{year}</span>
+          <span aria-hidden="true">·</span>
+          <span>{t(`projects.status.${status}` as UIKey)}</span>
+        </p>
+        <h1>{title}</h1>
+        <p class="tagline">{tagline}</p>
+
+        <ul class="tags">
+          {
+            tags.map((tag) => (
+              <li>
+                <Tag variant="red" size="sm">
+                  {t(`projects.tag.${tag}` as UIKey)}
+                </Tag>
+              </li>
+            ))
+          }
+        </ul>
+      </header>
+
+      <div class="hero-panel">
+        <Panel
+          src={panel}
+          alt={title}
+          width={900}
+          fallbackText={title}
+          tint={tint}
+          ratio="16 / 9"
+          loading="eager"
+        />
+      </div>
+
+      <div class="body">
+        <div class="prose">
+          <Content />
+        </div>
+
+        <aside class="side">
+          {
+            tech.length > 0 && (
+              <section>
+                <h2>{t('projects.tech')}</h2>
+                <ul class="tech">
+                  {tech.map((item) => (
+                    <li>
+                      <Tag size="sm">{item}</Tag>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )
+          }
+
+          {
+            links.length > 0 && (
+              <section>
+                <h2>{t('projects.links')}</h2>
+                <ul class="links">
+                  {links.map((link) => (
+                    <li>
+                      <a href={link.url} target="_blank" rel="noopener noreferrer">
+                        <Icon name={linkIcon[link.kind] ?? 'external-link'} size={16} />
+                        <span>{link.label}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )
+          }
+        </aside>
+      </div>
+
+      <div class="more">
+        <Button href={projectsPath(lang)} variant="outline" icon="arrow-right">
+          {t('projects.backToProjects')}
+        </Button>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  .back {
+    align-items: center;
+    color: var(--color-muted);
+    display: inline-flex;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 500;
+    gap: 8px;
+  }
+
+  .back:hover {
+    color: var(--color-red-ink);
+  }
+
+  .back :global(.flip) {
+    transform: rotate(180deg);
+  }
+
+  header {
+    margin-top: 28px;
+    max-width: 860px;
+  }
+
+  .meta {
+    align-items: center;
+    color: var(--color-faded);
+    display: flex;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    gap: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: 64px;
+    font-weight: 500;
+    line-height: 1.02;
+    margin-top: 14px;
+  }
+
+  .tagline {
+    color: var(--color-faded);
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-top: 14px;
+  }
+
+  @media (max-width: 991px) {
+    h1 {
+      font-size: 44px;
+    }
+
+    .tagline {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 575px) {
+    h1 {
+      font-size: 32px;
+    }
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 22px;
+  }
+
+  .hero-panel {
+    margin-top: 44px;
+    max-width: 900px;
+  }
+
+  /* --- body --- */
+
+  .body {
+    display: grid;
+    gap: 56px;
+    grid-template-columns: minmax(0, 1fr) 260px;
+    margin-top: 56px;
+  }
+
+  @media (max-width: 991px) {
+    .body {
+      gap: 40px;
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .side section + section {
+    margin-top: 36px;
+  }
+
+  .side h2 {
+    border-bottom: 1px solid var(--color-hairline);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 16px;
+  }
+
+  .links {
+    margin-top: 16px;
+  }
+
+  .links a {
+    align-items: center;
+    color: var(--color-dark);
+    display: inline-flex;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 500;
+    gap: 9px;
+    padding-block: 7px;
+  }
+
+  .links a:hover {
+    color: var(--color-red-ink);
+  }
+
+  .more {
+    border-top: 1px solid var(--color-hairline);
+    margin-top: 64px;
+    padding-top: 44px;
+  }
+</style>

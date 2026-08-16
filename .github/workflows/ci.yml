@@ -1,0 +1,48 @@
+# Build and typecheck only.
+#
+# There is no deploy step by design: the site is uploaded to Hostinger by hand
+# from `dist/`. This workflow exists to catch a broken build or a content-schema
+# error before that upload, not to publish anything.
+name: CI
+
+on:
+  push:
+    branches: [main, astro-migration]
+  pull_request:
+    branches: [main, astro-migration]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # `astro check` validates TypeScript *and* every content-collection entry
+      # against its Zod schema, so a malformed project or a missing Spanish
+      # translation fails here rather than at upload time.
+      - run: pnpm check
+
+      # Fails if any committed image is carrying EXIF/IPTC/XMP — which is how a
+      # phone photo's GPS coordinates and device serial reach the internet.
+      - run: pnpm images:check
+
+      - run: pnpm build:fast
+
+      - run: pnpm format:check
+
+      - name: Upload dist
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          retention-days: 7

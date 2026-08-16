@@ -1,0 +1,31 @@
+---
+import { useTranslations, type Locale } from '../../i18n/utils';
+import { getExperience } from '../../lib/content';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import SectionTitle from '../ui/SectionTitle.astro';
+import ExperienceItem from '../cards/ExperienceItem.astro';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang }: Props = Astro.props;
+const t = useTranslations(lang);
+const companies = await getExperience(lang);
+---
+
+<Section id="experience" ghost={[t('experience.ghost')]}>
+  <Container>
+    <SectionTitle eyebrow={t('experience.eyebrow')} title={t('experience.title')} />
+    <div class="list">
+      {companies.map((entry) => <ExperienceItem lang={lang} entry={entry} />)}
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .list {
+    margin-top: 56px;
+  }
+</style>

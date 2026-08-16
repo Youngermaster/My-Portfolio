@@ -1,0 +1,100 @@
+---
+/**
+ * The scrolling strip between sections.
+ *
+ * Pure CSS: the phrase list is rendered twice and the track translates -50%, so
+ * the loop is seamless with no JavaScript and no measurement. The whole thing
+ * is aria-hidden — it is texture, and a screen reader announcing the same five
+ * phrases twice would be noise.
+ */
+import type { Locale } from '../../i18n/utils';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang }: Props = Astro.props;
+
+const phrases: Record<Locale, string[]> = {
+  en: [
+    'Robotics in Rust',
+    'Health interoperability',
+    'Mobile apps that ship',
+    'Security by default',
+    'Problem solver',
+  ],
+  es: [
+    'Robótica en Rust',
+    'Interoperabilidad en salud',
+    'Apps que se publican',
+    'Seguridad por defecto',
+    'Resuelvo problemas',
+  ],
+};
+
+const list = phrases[lang];
+---
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    {
+      Array.from({ length: 2 }).map(() => (
+        <span class="run">
+          {list.map((phrase) => (
+            <>
+              {phrase} <i>.</i>{' '}
+            </>
+          ))}
+        </span>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .marquee {
+    background: var(--color-panel);
+    border-block: 1px solid var(--color-hairline);
+    overflow: hidden;
+    padding-block: 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .marquee-track {
+    animation: marquee 45s linear infinite;
+    display: flex;
+    white-space: nowrap;
+    width: max-content;
+  }
+
+  .run {
+    color: var(--color-dark);
+    font-family: var(--font-heading);
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 1.02;
+    padding-right: 24px;
+  }
+
+  .run i {
+    color: var(--color-red);
+    font-style: normal;
+  }
+
+  @media (max-width: 991px) {
+    .marquee {
+      padding-block: 28px;
+    }
+
+    .run {
+      font-size: 30px;
+    }
+  }
+
+  @media (max-width: 575px) {
+    .run {
+      font-size: 22px;
+    }
+  }
+</style>

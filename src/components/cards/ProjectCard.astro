@@ -1,0 +1,136 @@
+---
+/**
+ * A project: comic panel, year, title, one-line summary, tech chips.
+ *
+ * The whole card is a link to the detail page, using a stretched pseudo-element
+ * so the anchor text stays the title (good for screen readers and for the link
+ * list a crawler builds) while the click target is the entire card.
+ *
+ * `data-tags` is what the tag filter reads — no JSON blob, no framework, just
+ * an attribute the filter script can match against.
+ */
+import type { CollectionEntry } from 'astro:content';
+import { projectPath } from '../../i18n/routes';
+import { entryKey } from '../../lib/content';
+import type { Locale } from '../../i18n/utils';
+import Panel from '../ui/Panel.astro';
+import Tag from '../ui/Tag.astro';
+
+interface Props {
+  lang: Locale;
+  entry: CollectionEntry<'projects'>;
+  /** Eager-load the first row so the largest contentful paint is not lazy. */
+  eager?: boolean;
+}
+
+const { lang, entry, eager = false }: Props = Astro.props;
+const { title, summary, year, tags, tech, panel, tint, status } = entry.data;
+
+const href = projectPath(lang, entryKey(entry.id));
+---
+
+<article class="card" data-project data-tags={tags.join(' ')}>
+  <Panel
+    src={panel}
+    alt={title}
+    width={560}
+    fallbackText={title}
+    tint={tint}
+    ratio="4 / 3"
+    zoomOnHover
+    loading={eager ? 'eager' : 'lazy'}
+  />
+
+  <div class="body">
+    <p class="meta">
+      <span>{year}</span>
+      {status === 'wip' && <span class="wip">WIP</span>}
+    </p>
+
+    <h3><a href={href}>{title}</a></h3>
+    <p class="summary">{summary}</p>
+
+    {
+      tech.length > 0 && (
+        <ul class="tech">
+          {tech.slice(0, 4).map((item) => (
+            <li>
+              <Tag size="sm">{item}</Tag>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding-top: 18px;
+  }
+
+  .meta {
+    align-items: center;
+    color: var(--color-faded);
+    display: flex;
+    font-family: var(--font-heading);
+    font-size: 13px;
+    gap: 10px;
+    letter-spacing: 0.08em;
+  }
+
+  .wip {
+    background: var(--color-yellow);
+    color: var(--color-ink);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 3px 6px;
+  }
+
+  h3 {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.15;
+    margin-top: 8px;
+  }
+
+  /* Stretched link: the whole card is clickable, the accessible name is the
+     title alone rather than every word inside the card. */
+  h3 a::after {
+    content: '';
+    inset: 0;
+    position: absolute;
+  }
+
+  .card:hover h3 a {
+    color: var(--color-red-ink);
+  }
+
+  .summary {
+    color: var(--color-body);
+    font-size: 15px;
+    line-height: 1.55;
+    margin-top: 10px;
+  }
+
+  .tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 16px;
+    /* Sits above the stretched link so the chips are not swallowed by it. */
+    position: relative;
+  }
+</style>

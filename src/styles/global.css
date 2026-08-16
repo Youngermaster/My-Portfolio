@@ -1,0 +1,220 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Design tokens
+   ---------------------------------------------------------------------------
+   The palette is shared by the CSS and by the hand-drawn ligne claire artwork
+   (src/assets/hero/younger.svg uses --color-red / --color-blue / --color-yellow
+   verbatim). Treat these as one system: if a colour is not here, it does not
+   belong in the design.
+--------------------------------------------------------------------------- */
+
+/*
+ * `static` emits every variable below, not just the ones Tailwind can see used
+ * in class names. Half of this palette is referenced from scoped component CSS
+ * and inline `var(--color-*)`, which the scanner cannot detect — without
+ * `static` those tokens silently resolve to nothing.
+ */
+@theme static {
+  /* Ink and the three primaries */
+  --color-ink: #000000;
+  --color-red: #f0403e;
+  --color-blue: #269eef;
+  --color-yellow: #ffd152;
+  --color-ochre: #f1b745;
+
+  /*
+   * `--color-red` is the brand fill: buttons, panel frames, the artwork. It is
+   * 3.81:1 on white, which is fine for the large display type and for shapes,
+   * but below AA for text at reading size.
+   *
+   * `--color-red-ink` is the same red taken darker for exactly that case —
+   * eyebrows, link hovers, small labels. 4.93:1 on white, 4.52:1 on the grey
+   * panel. Using two tokens keeps the identity intact where it is seen as a
+   * colour and keeps the text legible where it is read as words.
+   */
+  --color-red-ink: #d03634;
+
+  /* Illustration tints — used by decorative fills so new art matches the SVG */
+  --color-skin: #ffc6a6;
+  --color-cream: #ffeab6;
+  --color-cream-light: #fff5db;
+  --color-sky: #9edeff;
+  --color-sky-light: #e6fcff;
+
+  /* Surfaces */
+  --color-paper: #ffffff;
+  --color-panel: #f5f5f5;
+  --color-hairline: #ebebeb;
+  --color-ghost: #e8e8e8;
+  --color-invert: #181818;
+  --color-night: #19181d;
+
+  /*
+   * Text. Each of these clears 4.5:1 on both `--color-paper` and
+   * `--color-panel`, which is why they are a shade darker than the values the
+   * 2023 stylesheet used (#687693 fell to 4.19:1 on the grey band, and #a9a9a9
+   * was 2.35:1 on white — unreadable by any standard).
+   */
+  --color-body: #62708d;
+  --color-muted: #676767;
+  --color-dark: #323232;
+  --color-heading: #070143;
+  --color-faded: #6e6e6e;
+
+  /* Astro's font pipeline defines --font-jost / --font-josefin (see
+     astro.config.mjs). Aliasing them to semantic names here means swapping a
+     family is one line, and gives us `font-heading` / `font-body` utilities. */
+  --font-heading: var(--font-jost);
+  --font-body: var(--font-josefin);
+
+  /* The signature hard ink shadow. Zero blur, offset left and down. */
+  --shadow-ink: -8px 6px 0 rgb(0 0 0 / 1);
+  --shadow-ink-lg: -12px 8px 0 rgb(0 0 0 / 1);
+  --shadow-ink-sm: -5px 4px 0 rgb(0 0 0 / 1);
+
+  /* Vertical rhythm — matches the old `.section-padding` steps. */
+  --spacing-section: 120px;
+  --spacing-section-lg: 100px;
+  --spacing-section-md: 90px;
+  --spacing-section-sm: 80px;
+
+  /* Hard corners are the default in this design. Anything rounded is a
+     deliberate exception (photo, glass card, circles). */
+  --radius-*: initial;
+  --radius-photo: 10px;
+  --radius-glass: 8px;
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+
+@layer base {
+  :root {
+    /* The old stylesheet set `scroll-behavior: unset`, which silently broke
+       every anchor link. Smooth scrolling is the whole navigation model here. */
+    scroll-behavior: smooth;
+    /* Clears the sticky header when jumping to a section. */
+    scroll-padding-top: 95px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      scroll-behavior: auto;
+    }
+  }
+
+  html {
+    font-size: 15px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /*
+   * Deliberately NO `overflow-x: hidden` here.
+   *
+   * Setting one axis to a non-visible value forces the other to `auto`, which
+   * turns <body> into its own scroll container. The viewport still scrolls via
+   * <html>, but anchor navigation resolves against <body> — which has nothing
+   * to scroll — so every in-page link silently stops working.
+   *
+   * Horizontal overflow is contained where it originates instead: the ghost
+   * display type is clipped by `.section { overflow: hidden }`.
+   */
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-body);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 767px) {
+    body {
+      font-size: 15px;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--color-dark);
+    font-family: var(--font-heading);
+    font-weight: 500;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  p {
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  img,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+
+  ul,
+  ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Visible, on-brand focus ring. The design has no rounded corners, so the
+     outline is a hard red rectangle rather than a soft halo. */
+  :focus-visible {
+    outline: 3px solid var(--color-red);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--color-red);
+    color: var(--color-paper);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Utilities that earn their keep across many components
+--------------------------------------------------------------------------- */
+
+/* Vertical rhythm, stepping down exactly like the original `.section-padding`. */
+@utility section-padding {
+  padding-block: var(--spacing-section);
+
+  @media (max-width: 1400px) {
+    padding-block: var(--spacing-section-lg);
+  }
+  @media (max-width: 991px) {
+    padding-block: var(--spacing-section-md);
+  }
+  @media (max-width: 767px) {
+    padding-block: var(--spacing-section-sm);
+  }
+}
+
+/* Screen-reader-only, for skip links and icon-button labels. */
+@utility sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border-width: 0;
+}

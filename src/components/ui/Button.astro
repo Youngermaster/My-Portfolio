@@ -1,0 +1,170 @@
+---
+/**
+ * The signature button: flat red, hard corners, and a solid black shadow
+ * offset left-and-down with zero blur — the single most comic-book element in
+ * the design. On hover it turns blue and the shadow *grows*, so the button
+ * reads as a physical object being pushed.
+ *
+ * Renders as <a> when `href` is set, otherwise <button>.
+ */
+import Icon, { type IconName } from './Icon.astro';
+
+interface Props {
+  href?: string;
+  type?: 'button' | 'submit';
+  variant?: 'red' | 'blue' | 'ink' | 'outline';
+  size?: 'md' | 'sm';
+  icon?: IconName;
+  /** Adds target/rel and an external-link glyph. */
+  external?: boolean;
+  class?: string;
+  'aria-label'?: string;
+}
+
+const {
+  href,
+  type = 'button',
+  variant = 'red',
+  size = 'md',
+  icon,
+  external = false,
+  class: className,
+  ...rest
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+const trailingIcon: IconName | undefined = icon ?? (external ? 'external-link' : undefined);
+---
+
+<Tag
+  href={href}
+  type={href ? undefined : type}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener noreferrer' : undefined}
+  class:list={['btn', variant, size, className]}
+  {...rest}
+>
+  <span class="label"><slot /></span>
+  {trailingIcon && <Icon name={trailingIcon} size={size === 'sm' ? 15 : 17} />}
+</Tag>
+
+<style>
+  .btn {
+    align-items: center;
+    background: var(--color-red);
+    border: 0;
+    border-radius: 0;
+    color: var(--color-paper);
+    cursor: pointer;
+    display: inline-flex;
+    font-family: var(--font-heading);
+    /*
+     * 19px/700, not the original 16px/600.
+     *
+     * White on `--color-red` is 3.81:1 — below AA for normal text, but above
+     * the 3:1 bar WCAG applies to large text, which starts at 14pt bold
+     * (18.66px at weight 700). Sizing the label up clears AA while leaving the
+     * brand red exactly as it is, which is the trade worth making on the single
+     * most identity-defining element in the design.
+     */
+    font-size: 19px;
+    font-weight: 700;
+    gap: 10px;
+    line-height: 1;
+    padding: 15px 45px;
+    position: relative;
+    /* No capitalize: it title-cases Spanish labels ("Ver Mi Trabajo"), which is
+       wrong. Casing belongs to the copy in src/i18n/ui.ts. */
+    transition:
+      background-color 0.3s,
+      box-shadow 0.3s,
+      color 0.3s;
+    z-index: 1;
+
+    /* zero blur, offset left + down */
+    box-shadow: var(--shadow-ink);
+  }
+
+  .btn:hover,
+  .btn:focus-visible {
+    background: var(--color-blue);
+    box-shadow: var(--shadow-ink-lg);
+    color: var(--color-paper);
+  }
+
+  /* --- variants --- */
+
+  .blue {
+    background: var(--color-blue);
+  }
+
+  .blue:hover,
+  .blue:focus-visible {
+    background: var(--color-red);
+  }
+
+  .ink {
+    background: var(--color-ink);
+  }
+
+  .ink:hover,
+  .ink:focus-visible {
+    background: var(--color-red);
+  }
+
+  .outline {
+    background: transparent;
+    border: 2px solid var(--color-ink);
+    box-shadow: var(--shadow-ink-sm);
+    color: var(--color-ink);
+    padding: 13px 43px;
+  }
+
+  .outline:hover,
+  .outline:focus-visible {
+    background: var(--color-yellow);
+    box-shadow: var(--shadow-ink);
+    color: var(--color-ink);
+  }
+
+  /* --- sizes --- */
+
+  /* Still >= 18.66px at weight 700, so the large-text contrast bar holds. */
+  .sm {
+    box-shadow: var(--shadow-ink-sm);
+    font-size: 19px;
+    padding: 10px 22px;
+  }
+
+  .sm:hover,
+  .sm:focus-visible {
+    box-shadow: var(--shadow-ink);
+  }
+
+  .outline.sm {
+    padding: 9px 22px;
+  }
+
+  @media (max-width: 767px) {
+    .btn {
+      padding: 13px 22px;
+    }
+
+    .outline {
+      padding: 11px 20px;
+    }
+  }
+
+  /* The shadow shift is the whole personality; keep the colour change but
+     drop the movement for people who asked for less motion. */
+  @media (prefers-reduced-motion: reduce) {
+    .btn {
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      box-shadow: var(--shadow-ink);
+    }
+  }
+</style>

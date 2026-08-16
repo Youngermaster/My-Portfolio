@@ -1,0 +1,51 @@
+---
+/**
+ * The single horizontal measure for the site. Sits inside the page-edge
+ * hairlines (see EdgeRules) rather than touching them.
+ */
+interface Props {
+  /** `wide` is for full-bleed-ish grids; `narrow` for prose. */
+  size?: 'default' | 'wide' | 'narrow';
+  class?: string;
+  as?: 'div' | 'section' | 'header' | 'footer' | 'nav' | 'main';
+}
+
+const { size = 'default', class: className, as: Tag = 'div' }: Props = Astro.props;
+---
+
+<Tag class:list={['container', size, className]}>
+  <slot />
+</Tag>
+
+<style>
+  .container {
+    margin-inline: auto;
+    padding-inline: 15px;
+    width: 100%;
+  }
+
+  .default {
+    max-width: 1320px;
+  }
+
+  .wide {
+    max-width: 1560px;
+  }
+
+  .narrow {
+    max-width: 900px;
+  }
+
+  /* Clear the page-edge hairlines so content never sits underneath them. */
+  @media (min-width: 768px) {
+    .container {
+      padding-inline: 40px;
+    }
+  }
+
+  @media (min-width: 1201px) {
+    .container {
+      padding-inline: 60px;
+    }
+  }
+</style>

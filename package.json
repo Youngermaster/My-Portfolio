@@ -1,52 +1,45 @@
 {
-  "name": "my-portfolio",
+  "name": "jmyounghoyos-portfolio",
+  "type": "module",
   "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "@sanity/client": "^2.23.2",
-    "@sanity/image-url": "^1.0.1",
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
-    "framer-motion": "^6.2.3",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-icons": "^4.3.1",
-    "react-scripts": "5.0.0",
-    "react-tooltip": "^4.2.21",
-    "sass": "^1.51.0",
-    "web-vitals": "^2.1.4"
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=22"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build && node scripts/prune-unused-assets.mjs",
+    "build:fast": "astro build && node scripts/prune-unused-assets.mjs",
+    "preview": "astro preview",
+    "check": "astro check",
+    "format": "prettier --write \"**/*.{astro,ts,js,css,md,json,yaml}\"",
+    "format:check": "prettier --check \"**/*.{astro,ts,js,css,md,json,yaml}\"",
+    "astro": "astro",
+    "og": "node scripts/make-og-images.mjs",
+    "optimize:panels": "node scripts/optimize-panels.mjs",
+    "images:check": "node scripts/scrub-image-metadata.mjs --check",
+    "images:scrub": "node scripts/scrub-image-metadata.mjs"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "@astrojs/sitemap": "^3.6.0",
+    "astro": "^7.2.2",
+    "yaml": "^2.8.1"
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.26.1",
-    "eslint-plugin-react-hooks": "^4.2.0"
+    "@astrojs/check": "^0.9.10",
+    "@tailwindcss/vite": "^4.3.3",
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "sharp": "^0.35.3",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
   }
 }

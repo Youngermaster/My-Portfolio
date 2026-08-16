@@ -1,0 +1,182 @@
+---
+/**
+ * The full project index, composed once for both locales.
+ *
+ * The tag filter is a radio group: it is fully keyboard-operable and the labels
+ * are real form controls before any script runs. The script only toggles
+ * `hidden` — nothing here depends on JavaScript to render.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import SectionTitle from '../ui/SectionTitle.astro';
+import ProjectCard from '../cards/ProjectCard.astro';
+import { getProjects, getUsedProjectTags } from '../../lib/content';
+import { useTranslations, type Locale } from '../../i18n/utils';
+import type { UIKey } from '../../i18n/ui';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang }: Props = Astro.props;
+const t = useTranslations(lang);
+
+const projects = await getProjects(lang);
+const tags = await getUsedProjectTags(lang);
+const filters = ['all', ...tags];
+---
+
+<BaseLayout
+  title={`${t('projects.allTitle')} — Juan Manuel Young Hoyos`}
+  description={t('projects.allDescription')}
+  lang={lang}
+  routeKey="projects"
+>
+  <Section id="projects" hairline={false} ghost={[t('projects.ghost')]}>
+    <Container size="wide">
+      <SectionTitle as="h1" eyebrow={t('projects.eyebrow')} title={t('projects.allTitle')} />
+      <p class="lede">{t('projects.allDescription')}</p>
+
+      <fieldset class="filter" data-project-filter>
+        <legend class="sr-only">{t('projects.filter.label')}</legend>
+        {
+          filters.map((tag, index) => (
+            <label class="chip">
+              <input type="radio" name="project-tag" value={tag} checked={index === 0} />
+              <span>
+                {tag === 'all' ? t('projects.filter.all') : t(`projects.tag.${tag}` as UIKey)}
+              </span>
+            </label>
+          ))
+        }
+      </fieldset>
+
+      <p class="count">
+        {t('projects.showing')}
+        <strong data-project-count>{projects.length}</strong>
+      </p>
+
+      <ul class="grid">
+        {
+          projects.map((entry, index) => (
+            <li>
+              <ProjectCard lang={lang} entry={entry} eager={index < 3} />
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="empty" data-project-empty hidden>{t('projects.empty')}</p>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<script>
+  import '../../scripts/project-filter';
+</script>
+
+<style>
+  .lede {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-top: 22px;
+    max-width: 620px;
+  }
+
+  /* --- filter --- */
+
+  .filter {
+    border: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 44px 0 0;
+    padding: 0;
+  }
+
+  .chip input {
+    /* Visually hidden, still focusable and still a real radio. */
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .chip span {
+    border: 1px solid var(--color-hairline);
+    color: var(--color-muted);
+    cursor: pointer;
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 9px 16px;
+    transition:
+      background-color 0.2s,
+      border-color 0.2s,
+      color 0.2s;
+  }
+
+  .chip span:hover {
+    border-color: var(--color-ink);
+    color: var(--color-ink);
+  }
+
+  .chip input:checked + span {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .chip input:focus-visible + span {
+    outline: 3px solid var(--color-red);
+    outline-offset: 3px;
+  }
+
+  .count {
+    color: var(--color-faded);
+    font-family: var(--font-heading);
+    font-size: 14px;
+    margin-top: 20px;
+  }
+
+  .count strong {
+    color: var(--color-ink);
+  }
+
+  /* --- grid --- */
+
+  .grid {
+    display: grid;
+    gap: 44px 28px;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 32px;
+  }
+
+  @media (max-width: 991px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 575px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .grid > li {
+    display: flex;
+  }
+
+  .grid > li[hidden] {
+    display: none;
+  }
+
+  .empty {
+    color: var(--color-muted);
+    font-size: 18px;
+    margin-top: 40px;
+    text-align: center;
+  }
+</style>

@@ -1,0 +1,54 @@
+---
+/**
+ * A small hard-cornered chip. Used for tech stacks, project tags and skill
+ * lists — deliberately plain so a dense row of them stays quiet next to the
+ * loud buttons and panels.
+ */
+interface Props {
+  variant?: 'default' | 'red' | 'ink' | 'solid';
+  size?: 'md' | 'sm';
+  class?: string;
+}
+
+const { variant = 'default', size = 'md', class: className } = Astro.props;
+---
+
+<span class:list={['tag', variant, size, className]}>
+  <slot />
+</span>
+
+<style>
+  .tag {
+    border: 1px solid var(--color-hairline);
+    color: var(--color-muted);
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    padding: 7px 12px;
+    white-space: nowrap;
+  }
+
+  .sm {
+    font-size: 11px;
+    padding: 5px 9px;
+  }
+
+  .red {
+    border-color: var(--color-red);
+    color: var(--color-red-ink);
+  }
+
+  .ink {
+    border-color: var(--color-ink);
+    color: var(--color-ink);
+  }
+
+  .solid {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+</style>

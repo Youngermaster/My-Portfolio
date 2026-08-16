@@ -1,0 +1,180 @@
+---
+/**
+ * A single role inside a company.
+ *
+ * Rendered as its own block so that a company with several positions reads as
+ * a sequence of moves rather than one flattened blob — the distinction the
+ * nested schema exists to preserve.
+ */
+import { formatRange, formatDuration, useTranslations, type Locale } from '../../i18n/utils';
+import type { UIKey } from '../../i18n/ui';
+import Icon from '../ui/Icon.astro';
+import Tag from '../ui/Tag.astro';
+
+interface Position {
+  title: string;
+  employmentType?: 'full-time' | 'part-time' | 'contract' | 'self-employed' | 'freelance';
+  start: string;
+  end: string | null;
+  location?: string;
+  workplace?: 'on-site' | 'hybrid' | 'remote';
+  highlights: string[];
+  skills: string[];
+}
+
+interface Props {
+  lang: Locale;
+  position: Position;
+  /** Draw the connector rail; false for the last role in a company. */
+  showRail?: boolean;
+}
+
+const { lang, position, showRail = true }: Props = Astro.props;
+const t = useTranslations(lang);
+
+const range = formatRange(position.start, position.end, lang, t('experience.present'));
+const duration = formatDuration(position.start, position.end, lang);
+
+const meta = [
+  position.employmentType && t(`experience.type.${position.employmentType}` as UIKey),
+  position.workplace && t(`experience.workplace.${position.workplace}` as UIKey),
+  position.location,
+].filter(Boolean) as string[];
+---
+
+<div class:list={['position', { rail: showRail }]}>
+  <span class="dot" aria-hidden="true"></span>
+
+  <h4>{position.title}</h4>
+
+  <p class="dates">
+    <Icon name="calendar" size={14} />
+    <span>{range}</span>
+    {duration && <span class="duration">· {duration}</span>}
+  </p>
+
+  {meta.length > 0 && <p class="meta">{meta.join(' · ')}</p>}
+
+  <ul class="highlights">
+    {position.highlights.map((highlight) => <li>{highlight}</li>)}
+  </ul>
+
+  {
+    position.skills.length > 0 && (
+      <ul class="skills">
+        {position.skills.map((skill) => (
+          <li>
+            <Tag size="sm">{skill}</Tag>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</div>
+
+<style>
+  .position {
+    padding-bottom: 36px;
+    padding-left: 34px;
+    position: relative;
+  }
+
+  .position:last-child {
+    padding-bottom: 0;
+  }
+
+  /* The connector between consecutive roles at the same company. */
+  .rail::before {
+    background: var(--color-hairline);
+    bottom: 0;
+    content: '';
+    left: 5px;
+    position: absolute;
+    top: 18px;
+    width: 1px;
+  }
+
+  .dot {
+    background: var(--color-paper);
+    border: 3px solid var(--color-red);
+    height: 11px;
+    left: 0;
+    position: absolute;
+    top: 7px;
+    width: 11px;
+  }
+
+  h4 {
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .dates {
+    align-items: center;
+    color: var(--color-muted);
+    display: flex;
+    flex-wrap: wrap;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .duration {
+    color: var(--color-faded);
+  }
+
+  .meta {
+    color: var(--color-faded);
+    font-size: 14px;
+    margin-top: 4px;
+  }
+
+  .highlights {
+    margin-top: 16px;
+  }
+
+  .highlights li {
+    font-size: 16px;
+    line-height: 1.55;
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .highlights li + li {
+    margin-top: 10px;
+  }
+
+  /* Small red square bullets — the eyebrow badge's motif, scaled down. */
+  .highlights li::before {
+    background: var(--color-red);
+    content: '';
+    height: 6px;
+    left: 0;
+    position: absolute;
+    top: 10px;
+    width: 6px;
+  }
+
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 16px;
+  }
+
+  @media (max-width: 575px) {
+    .position {
+      padding-left: 24px;
+    }
+
+    h4 {
+      font-size: 18px;
+    }
+
+    .highlights li {
+      font-size: 15px;
+    }
+  }
+</style>

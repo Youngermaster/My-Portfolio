@@ -1,0 +1,56 @@
+---
+import { useTranslations, type Locale } from '../../i18n/utils';
+import { getAwards } from '../../lib/content';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import SectionTitle from '../ui/SectionTitle.astro';
+import AwardCard from '../cards/AwardCard.astro';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang }: Props = Astro.props;
+const t = useTranslations(lang);
+const awards = await getAwards(lang);
+---
+
+<Section id="awards" ghost={[t('awards.ghost')]}>
+  <Container size="wide">
+    <SectionTitle eyebrow={t('awards.eyebrow')} title={t('awards.title')} />
+    <ul class="grid">
+      {
+        awards.map((entry) => (
+          <li>
+            <AwardCard lang={lang} entry={entry} />
+          </li>
+        ))
+      }
+    </ul>
+  </Container>
+</Section>
+
+<style>
+  .grid {
+    display: grid;
+    gap: 44px 28px;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 56px;
+  }
+
+  @media (max-width: 1199px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 575px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .grid > li {
+    display: flex;
+  }
+</style>

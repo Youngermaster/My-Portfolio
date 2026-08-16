@@ -1,0 +1,24 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import ProjectDetailPage from '../../components/pages/ProjectDetailPage.astro';
+import { getProjects, entryKey } from '../../lib/content';
+
+/**
+ * One page per English project. The Spanish equivalent lives at
+ * /es/proyectos/[slug] and shares the same `key`, which is what lets the
+ * language switcher move between the two.
+ */
+export const getStaticPaths = (async () => {
+  const projects = await getProjects('en');
+  return projects.map((entry) => ({
+    params: { slug: entryKey(entry.id) },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { entry }: Props = Astro.props;
+---
+
+<ProjectDetailPage lang="en" entry={entry} />

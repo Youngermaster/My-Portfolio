@@ -1,0 +1,210 @@
+---
+/**
+ * Sticky header: wordmark, section nav, language switcher, mobile trigger.
+ *
+ * Sticky positioning is pure CSS. The only JavaScript is a sentinel-driven
+ * class for the drop shadow and an IntersectionObserver scroll-spy — both in
+ * src/scripts/header.ts, both a few lines, neither a framework island.
+ */
+import { mainNav } from '../../i18n/nav';
+import { useTranslations, type Locale } from '../../i18n/utils';
+import { homePath, type RouteKey } from '../../i18n/routes';
+import Container from '../ui/Container.astro';
+import Icon from '../ui/Icon.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import MobileMenu from './MobileMenu.astro';
+
+interface Props {
+  lang: Locale;
+  routeKey: RouteKey;
+  subPath?: string;
+}
+
+const { lang, routeKey, subPath }: Props = Astro.props;
+
+const t = useTranslations(lang);
+const onHomepage = routeKey === 'home';
+const links = mainNav(lang, onHomepage);
+---
+
+{/* Sentinel: while it is on screen the header is at rest. */}
+<div id="header-sentinel" aria-hidden="true"></div>
+
+<header class="site-header" data-header>
+  {
+    /*
+    The flex row is its own element rather than a class handed to <Container>:
+    Astro scopes styles per component, so a `.bar` rule written here would not
+    reach an element rendered by Container.astro.
+  */
+  }
+  <Container size="wide">
+    <div class="bar">
+      <a class="wordmark" href={homePath(lang)}>
+        <span class="mark">JM</span>
+        <span class="name">Young Hoyos</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label={t('nav.menu')}>
+        <ul>
+          {
+            links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  data-section={link.sectionId}
+                  target={link.external ? '_blank' : undefined}
+                  rel={link.external ? 'noopener noreferrer' : undefined}
+                >
+                  {t(link.labelKey)}
+                  {link.external && <Icon name="external-link" size={13} />}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="tools">
+        <LanguageSwitcher lang={lang} routeKey={routeKey} subPath={subPath} />
+        <MobileMenu lang={lang} links={links} />
+      </div>
+    </div>
+  </Container>
+</header>
+
+<style>
+  .site-header {
+    background: var(--color-paper);
+    border-bottom: 1px solid transparent;
+    position: sticky;
+    top: 0;
+    transition:
+      box-shadow 0.3s,
+      border-color 0.3s;
+    z-index: 40;
+  }
+
+  /* Applied once the sentinel scrolls out of view. */
+  .site-header:global(.is-stuck) {
+    border-bottom-color: var(--color-hairline);
+    box-shadow: 0 1px 5px rgb(0 0 0 / 0.1);
+  }
+
+  .bar {
+    align-items: center;
+    display: flex;
+    gap: 24px;
+    justify-content: space-between;
+  }
+
+  /* --- wordmark --- */
+
+  .wordmark {
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    gap: 10px;
+    padding-block: 18px;
+  }
+
+  .mark {
+    background: var(--color-red);
+    box-shadow: var(--shadow-ink-sm);
+    color: var(--color-paper);
+    font-family: var(--font-heading);
+    font-size: 17px;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    padding: 9px 10px;
+    transition: background-color 0.3s;
+  }
+
+  .wordmark:hover .mark {
+    background: var(--color-blue);
+  }
+
+  .name {
+    color: var(--color-dark);
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 420px) {
+    .name {
+      display: none;
+    }
+  }
+
+  /* --- desktop nav --- */
+
+  .desktop-nav ul {
+    align-items: center;
+    display: flex;
+  }
+
+  .desktop-nav a {
+    align-items: center;
+    color: var(--color-dark);
+    display: inline-flex;
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 500;
+    gap: 5px;
+    padding: 30px 14px;
+    position: relative;
+  }
+
+  /* 4px red underline, revealed on hover and while the section is in view. */
+  .desktop-nav a::after {
+    background: var(--color-red);
+    border-radius: 3px;
+    bottom: 22px;
+    content: '';
+    height: 4px;
+    left: 14px;
+    opacity: 0;
+    position: absolute;
+    right: 14px;
+    transition: opacity 0.3s;
+  }
+
+  .desktop-nav a:hover,
+  .desktop-nav a:global(.is-active) {
+    color: var(--color-red-ink);
+  }
+
+  .desktop-nav a:hover::after,
+  .desktop-nav a:global(.is-active)::after {
+    opacity: 1;
+  }
+
+  @media (max-width: 1199px) {
+    .desktop-nav a {
+      font-size: 15px;
+      padding-inline: 10px;
+    }
+  }
+
+  @media (max-width: 991px) {
+    .desktop-nav {
+      display: none;
+    }
+  }
+
+  /* --- tools --- */
+
+  .tools {
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    gap: 16px;
+  }
+</style>
+
+<script>
+  import '../../scripts/header';
+</script>

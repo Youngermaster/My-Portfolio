@@ -1,0 +1,56 @@
+# Hostinger (Apache / LiteSpeed) configuration for the static build.
+#
+# Astro emits directory-style URLs (`/projects/olivaw-slam/index.html`), which
+# Apache already resolves. What it does not do by default is serve the right
+# 404 page or cache fingerprinted assets, so both are set here.
+
+# --- error pages ---------------------------------------------------------
+# Spanish visitors get the Spanish 404. Apache picks the most specific match,
+# so the /es/ rule below wins for paths under /es/.
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # A missing page under /es/ should not answer in English.
+  RewriteCond %{REQUEST_URI} ^/es/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ /es/404/index.html [L,R=404]
+
+  # Serve `/about` when only `/about.html` exists.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.*)$ $1.html [L]
+</IfModule>
+
+# --- caching -------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Everything under /_astro/ is content-hashed, so it can be cached forever.
+  <FilesMatch "\.(webp|avif|png|jpe?g|svg|woff2?|css|js)$">
+    <If "%{REQUEST_URI} =~ m#^/_astro/#">
+      Header set Cache-Control "public, max-age=31536000, immutable"
+    </If>
+  </FilesMatch>
+
+  # HTML must revalidate, or a deploy is invisible until caches expire.
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml application/json
+</IfModule>
+
+# --- basic hardening -----------------------------------------------------
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+Options -Indexes
