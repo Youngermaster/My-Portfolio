@@ -83,7 +83,6 @@ const iconFor = (id: string): IconName => (id === 'blog' ? 'rss' : (id as IconNa
     <div class="bottom">
       <p>&copy; {year} {AUTHOR.name}. {t('footer.rights')}</p>
       <div class="bottom-right">
-        <p class="built">{t('footer.builtWith')}</p>
         <LanguageSwitcher lang={lang} routeKey={routeKey} subPath={subPath} />
       </div>
     </div>

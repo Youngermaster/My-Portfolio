@@ -54,7 +54,8 @@ const en = {
   // --- about ---
   'about.eyebrow': 'About me',
   'about.ghost': 'Problem Solver',
-  'about.photoAlt': 'Juan Manuel Young Hoyos',
+  'about.photoAlt':
+    'Juan Manuel Young Hoyos holding the leader arm of his two SO-100 robot arms, with the follower arm beside it',
   'about.yearsLabel': 'Years of experience',
   'about.stat.roles': 'Roles across 8 organisations',
   'about.stat.tech': 'Languages & tools used',
@@ -133,7 +134,6 @@ const en = {
 
   // --- footer ---
   'footer.rights': 'All rights reserved.',
-  'footer.builtWith': 'Built with Astro.',
 
   // --- 404 ---
   '404.title': 'Page not found',
@@ -144,6 +144,14 @@ const en = {
   'styleguide.title': 'Styleguide',
   'styleguide.description':
     'The design system behind this site: palette, type scale, buttons, comic panels and icons.',
+
+  // --- easter egg ---
+  'believe.title': 'What I believe',
+  'believe.description': 'You found it.',
+  'believe.eyebrow': 'You found it',
+  'believe.back': 'Back home',
+  'believe.credit': 'Photo',
+  'believe.panelCredit': 'Panel',
 } as const;
 
 export type UIKey = keyof typeof en;
@@ -188,7 +196,8 @@ const es: Record<UIKey, string> = {
   // --- about ---
   'about.eyebrow': 'Sobre mí',
   'about.ghost': 'Problem Solver',
-  'about.photoAlt': 'Juan Manuel Young Hoyos',
+  'about.photoAlt':
+    'Juan Manuel Young Hoyos sosteniendo el brazo líder de sus dos brazos robóticos SO-100, con el brazo seguidor al lado',
   'about.yearsLabel': 'Años de experiencia',
   'about.stat.roles': 'Cargos en 8 organizaciones',
   'about.stat.tech': 'Lenguajes y herramientas',
@@ -267,7 +276,6 @@ const es: Record<UIKey, string> = {
 
   // --- footer ---
   'footer.rights': 'Todos los derechos reservados.',
-  'footer.builtWith': 'Hecho con Astro.',
 
   // --- 404 ---
   '404.title': 'Página no encontrada',
@@ -278,6 +286,14 @@ const es: Record<UIKey, string> = {
   'styleguide.title': 'Guía de estilo',
   'styleguide.description':
     'El sistema de diseño detrás de este sitio: paleta, escala tipográfica, botones, viñetas e iconos.',
+
+  // --- easter egg ---
+  'believe.title': 'En lo que creo',
+  'believe.description': 'Lo encontraste.',
+  'believe.eyebrow': 'Lo encontraste',
+  'believe.back': 'Volver al inicio',
+  'believe.credit': 'Foto',
+  'believe.panelCredit': 'Viñeta',
 };
 
 export const ui = { en, es } satisfies Record<Locale, Record<UIKey, string>>;

@@ -68,3 +68,8 @@ if (sections.length > 0) {
 
   for (const section of sections) observer.observe(section);
 }
+
+// Marks this file as a module so its top-level names are scoped to it.
+// Without it TypeScript treats every script as sharing one global scope, and
+// two files declaring `const root` collide.
+export {};

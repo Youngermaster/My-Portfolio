@@ -10,7 +10,7 @@ import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import BackToTop from '../components/layout/BackToTop.astro';
 import { useTranslations, type Locale } from '../i18n/utils';
-import { alternatesFor, type RouteKey } from '../i18n/routes';
+import { alternatesFor, believePath, type RouteKey } from '../i18n/routes';
 import { getTechnologies } from '../lib/content';
 import { SITE_URL } from '../consts';
 
@@ -47,8 +47,13 @@ const technologies = await getTechnologies(lang);
 const knowsAbout = technologies.map((entry) => entry.data.name);
 ---
 
+{/*
+  `data-egg-path` is what src/scripts/easter-egg.ts reads. It carries the
+  locale-correct path, and is omitted on the easter egg page itself so the
+  Konami code does not reload the page you are already on.
+*/}
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} data-egg-path={routeKey === 'believe' ? undefined : believePath(lang)}>
   <head>
     <BaseHead
       title={title}
@@ -80,6 +85,10 @@ const knowsAbout = technologies.map((entry) => entry.data.name);
 
     <Footer lang={lang} routeKey={routeKey} subPath={subPath} />
     <BackToTop lang={lang} />
+
+    <script>
+      import '../scripts/easter-egg';
+    </script>
   </body>
 </html>
 

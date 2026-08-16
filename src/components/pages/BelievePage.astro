@@ -1,0 +1,351 @@
+---
+/**
+ * The easter egg.
+ *
+ * Deliberately unlinked: it is absent from the nav, excluded from the sitemap,
+ * and marked `noindex`. The only ways in are the Konami code and the hint left
+ * in the browser console — which makes it findable by exactly the people this
+ * portfolio is aimed at, and invisible to everyone else.
+ *
+ * Mirrors the bonus section on github.com/Youngermaster.
+ */
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+import { useTranslations, type Locale } from '../../i18n/utils';
+import { homePath } from '../../i18n/routes';
+
+import vegapunk from '../../assets/easter-egg/one-piece-1068-vegapunk-dream.png';
+import footballers from '../../assets/easter-egg/cristiano-ronaldo-lionel-messi-portugal-argentina-2011.jpg';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang }: Props = Astro.props;
+const t = useTranslations(lang);
+
+/** Local copy: prose that exists only on this page. */
+const copy = {
+  en: {
+    lede: 'Two things I keep coming back to.',
+    willHeading: 'Willpower',
+    einstein:
+      'There is a driving force stronger than steam, electricity and atomic energy: THE WILLPOWER.',
+    einsteinBy: 'Albert Einstein',
+    vegapunkNote:
+      'And the version of it I think about most — Vegapunk, on a world already teeming with the energy it keeps fighting over.',
+    vegapunkAlt:
+      'One Piece chapter 1068: Vegapunk arguing that the energy the world fights over is already all around it',
+    footballHeading: 'Getting back up',
+    greatest: 'The greatest players produce their greatest performances when they are needed.',
+    messiIntro: 'And the one that actually says it, in his own words:',
+    messiBy: 'Lionel Messi',
+    footballAlt:
+      'Cristiano Ronaldo and Lionel Messi during Portugal versus Argentina, 9 February 2011',
+    watch: 'Watch the scene',
+  },
+  es: {
+    lede: 'Dos cosas a las que siempre vuelvo.',
+    willHeading: 'Fuerza de voluntad',
+    einstein:
+      'Hay una fuerza motriz más poderosa que el vapor, la electricidad y la energía atómica: LA VOLUNTAD.',
+    einsteinBy: 'Albert Einstein',
+    vegapunkNote:
+      'Y la versión en la que más pienso — Vegapunk, sobre un mundo que ya rebosa de la energía por la que sigue peleando.',
+    vegapunkAlt:
+      'One Piece capítulo 1068: Vegapunk explicando que la energía por la que el mundo pelea ya está en todas partes',
+    footballHeading: 'Volver a levantarse',
+    greatest: 'Los más grandes dan su mejor versión justo cuando hace falta.',
+    messiIntro: 'Y el que lo dice de verdad, con sus propias palabras:',
+    messiBy: 'Lionel Messi',
+    footballAlt:
+      'Cristiano Ronaldo y Lionel Messi durante Portugal contra Argentina, 9 de febrero de 2011',
+    watch: 'Ver la escena',
+  },
+} as const;
+
+const c = copy[lang];
+
+/**
+ * Messi, on losing and going again — quoted in the original Spanish in both
+ * locales, because translating it would flatten the thing that makes it worth
+ * quoting.
+ */
+const messiQuote = [
+  'Quiero terminar mi carrera y ganar algo con la selección de Argentina, y si no, haberlo intentado todas las veces posibles, no quedarme con la sensación de que no se me dio y dejé pasar oportunidades por la gente que no quería que esté, o los comentarios malos hacia mí…',
+  'Levantarme, volverlo a intentar y volver a estar otra vez. Creo que ese es el mensaje para los niños y los chicos que me siguen, que les gusta verme. No sólo para el fútbol, sino para la vida. Porque eso es la vida: tropezar, volver a levantarse e intentarlo otra vez, y luchar por sus sueños.',
+];
+---
+
+<BaseLayout
+  title={`${t('believe.title')} — Juan Manuel Young Hoyos`}
+  description={t('believe.description')}
+  lang={lang}
+  routeKey="believe"
+>
+  {/* An easter egg that turns up in search results is no longer an easter egg. */}
+  <meta slot="head" name="robots" content="noindex, nofollow" />
+
+  <Section id="believe" hairline={false} ghost={[t('believe.title')]} class="believe">
+    <Container size="narrow">
+      <p class="eyebrow">
+        <Icon name="award" size={16} />
+        <span>{t('believe.eyebrow')}</span>
+      </p>
+      <h1>{t('believe.title')}</h1>
+      <p class="lede">{c.lede}</p>
+
+      <!-- ---------------------------------------------------------------- -->
+      <section class="chapter">
+        <h2>{c.willHeading}</h2>
+
+        <blockquote class="quote">
+          <p>{c.einstein}</p>
+          <cite>{c.einsteinBy}</cite>
+        </blockquote>
+
+        <p class="note">{c.vegapunkNote}</p>
+
+        <figure class="panel">
+          <a
+            href="https://youtu.be/XzjtV8ZFvQw?t=1246"
+            target="_blank"
+            rel="noopener noreferrer"
+            title={c.watch}
+          >
+            <Image
+              src={vegapunk}
+              alt={c.vegapunkAlt}
+              widths={[520, 800, 1100]}
+              sizes="(max-width: 767px) 92vw, 640px"
+              loading="eager"
+            />
+          </a>
+          <figcaption>
+            {t('believe.panelCredit')}: <em>One Piece</em> ch. 1068 &copy; Eiichiro Oda / Shueisha.
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ---------------------------------------------------------------- -->
+      <section class="chapter">
+        <h2>{c.footballHeading}</h2>
+
+        <p class="greatest">{c.greatest}</p>
+
+        <figure class="panel">
+          <a
+            href="https://www.youtube.com/watch?v=G4wTERfoPfA&t=1049s"
+            target="_blank"
+            rel="noopener noreferrer"
+            title={c.watch}
+          >
+            <Image
+              src={footballers}
+              alt={c.footballAlt}
+              widths={[520, 800, 1200]}
+              sizes="(max-width: 767px) 92vw, 640px"
+              loading="lazy"
+            />
+          </a>
+          <figcaption>
+            {t('believe.credit')}: Fanny Schertzer,
+            <a
+              href="https://commons.wikimedia.org/wiki/File:Cristiano_Ronaldo_and_Lionel_Messi_-_Portugal_vs_Argentina,_9th_February_2011.jpg"
+              target="_blank"
+              rel="noopener noreferrer">Wikimedia Commons</a
+            >, <a
+              href="https://creativecommons.org/licenses/by/3.0/"
+              target="_blank"
+              rel="noopener noreferrer">CC BY 3.0</a
+            >.
+          </figcaption>
+        </figure>
+
+        <p class="note">{c.messiIntro}</p>
+
+        <blockquote class="quote" lang="es">
+          {messiQuote.map((paragraph) => <p>{paragraph}</p>)}
+          <cite>{c.messiBy}</cite>
+        </blockquote>
+      </section>
+
+      <div class="back">
+        <Button href={homePath(lang)} variant="outline" icon="arrow-right">
+          {t('believe.back')}
+        </Button>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  .eyebrow {
+    align-items: center;
+    color: var(--color-red-ink);
+    display: flex;
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 600;
+    gap: 8px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: 64px;
+    font-weight: 500;
+    line-height: 1.02;
+    margin-top: 16px;
+  }
+
+  @media (max-width: 767px) {
+    h1 {
+      font-size: 38px;
+    }
+  }
+
+  .lede {
+    color: var(--color-faded);
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 300;
+    margin-top: 14px;
+  }
+
+  .chapter {
+    border-top: 1px solid var(--color-hairline);
+    margin-top: 64px;
+    padding-top: 48px;
+  }
+
+  .chapter h2 {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  /* --- quotes --- */
+
+  .quote {
+    border-left: 4px solid var(--color-red);
+    margin-top: 28px;
+    padding-left: 26px;
+  }
+
+  .quote p {
+    color: var(--color-dark);
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1.3;
+    text-wrap: pretty;
+  }
+
+  .quote p + p {
+    margin-top: 18px;
+  }
+
+  /* The Messi passage is long-form speech, so it wants reading size rather
+     than display size. */
+  .quote[lang='es'] p {
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.65;
+  }
+
+  .quote cite {
+    color: var(--color-muted);
+    display: block;
+    font-size: 15px;
+    font-style: normal;
+    margin-top: 18px;
+  }
+
+  .quote cite::before {
+    content: '— ';
+  }
+
+  @media (max-width: 767px) {
+    .quote {
+      padding-left: 18px;
+    }
+
+    .quote p {
+      font-size: 21px;
+    }
+  }
+
+  .note {
+    color: var(--color-body);
+    font-size: 18px;
+    line-height: 1.6;
+    margin-top: 28px;
+  }
+
+  .greatest {
+    color: var(--color-dark);
+    font-family: var(--font-heading);
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-top: 28px;
+    text-wrap: balance;
+  }
+
+  @media (max-width: 767px) {
+    .greatest {
+      font-size: 22px;
+    }
+  }
+
+  /* --- figures --- */
+
+  .panel {
+    margin-top: 32px;
+  }
+
+  .panel :global(img) {
+    border: 3px solid var(--color-ink);
+    box-shadow: var(--shadow-ink-sm);
+    height: auto;
+    width: 100%;
+  }
+
+  .panel a {
+    display: block;
+    transition: box-shadow 0.3s;
+  }
+
+  .panel a:hover :global(img) {
+    box-shadow: var(--shadow-ink);
+  }
+
+  figcaption {
+    color: var(--color-faded);
+    font-size: 13px;
+    line-height: 1.5;
+    margin-top: 12px;
+  }
+
+  figcaption a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  figcaption a:hover {
+    color: var(--color-red-ink);
+  }
+
+  .back {
+    border-top: 1px solid var(--color-hairline);
+    margin-top: 64px;
+    padding-top: 44px;
+  }
+</style>

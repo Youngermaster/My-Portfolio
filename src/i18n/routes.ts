@@ -9,7 +9,7 @@
  */
 import type { Locale } from './ui';
 
-export const ROUTE_KEYS = ['home', 'projects', 'styleguide'] as const;
+export const ROUTE_KEYS = ['home', 'projects', 'styleguide', 'believe'] as const;
 export type RouteKey = (typeof ROUTE_KEYS)[number];
 
 /** Segment for each route key, per locale. An empty string means the site root. */
@@ -17,6 +17,9 @@ const segments: Record<RouteKey, Record<Locale, string>> = {
   home: { en: '', es: '' },
   projects: { en: 'projects', es: 'proyectos' },
   styleguide: { en: 'styleguide', es: 'guia-de-estilo' },
+  // The easter egg. Not in the nav, not in the sitemap, noindex — the only
+  // ways in are the Konami code and the hint left in the browser console.
+  believe: { en: 'believe', es: 'creo' },
 };
 
 export function routeSegment(key: RouteKey, lang: Locale): string {
@@ -54,6 +57,11 @@ export function projectPath(lang: Locale, slug: string): string {
 /** `/styleguide` or `/es/guia-de-estilo`. */
 export function styleguidePath(lang: Locale): string {
   return localizedPath('styleguide', lang);
+}
+
+/** `/believe` or `/es/creo`. */
+export function believePath(lang: Locale): string {
+  return localizedPath('believe', lang);
 }
 
 /**

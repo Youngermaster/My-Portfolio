@@ -4,3 +4,6 @@ node_modules
 pnpm-lock.yaml
 src/assets
 public
+
+# Prettier strips the <!doctype> when a JSX expression precedes it.
+src/layouts/BaseLayout.astro

@@ -66,7 +66,10 @@ export default defineConfig({
        * which is the signal search engines act on, so the pairing gap in the
        * sitemap costs nothing.
        */
-      filter: (page) => !page.includes('/404'),
+      // `/believe` and `/es/creo` are the easter egg: they carry `noindex` and
+      // stay out of the sitemap, or they stop being an easter egg.
+      filter: (page) =>
+        !page.includes('/404') && !page.includes('/believe') && !page.includes('/creo'),
     }),
   ],
 

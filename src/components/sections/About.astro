@@ -7,14 +7,19 @@
  * languages & tools" — figures that were already wrong when I found them.
  */
 import { Image } from 'astro:assets';
-import { AUTHOR, yearsOfExperience } from '../../consts';
+import { yearsOfExperience } from '../../consts';
 import { useTranslations, type Locale } from '../../i18n/utils';
 import { countRoles, getTechnologies, getAwards } from '../../lib/content';
 import Container from '../ui/Container.astro';
 import Section from '../ui/Section.astro';
 import SectionTitle from '../ui/SectionTitle.astro';
 
-import photo from '../../assets/about/jmyounghoyos.jpg';
+/*
+ * The EXIF rotation is baked into this file rather than left as metadata:
+ * Astro's image pipeline does not apply orientation, so a camera-rotated
+ * original would ship sideways.
+ */
+import photo from '../../assets/about/juan-manuel-young-hoyos-so100-robot-arms.jpg';
 
 interface Props {
   lang: Locale;
@@ -68,8 +73,8 @@ const stats = [
       <div class="media">
         <Image
           src={photo}
-          alt={`${t('about.photoAlt')} — ${AUTHOR.location}`}
-          widths={[420, 640, 900]}
+          alt={t('about.photoAlt')}
+          widths={[420, 640, 900, 1200]}
           sizes="(max-width: 991px) 90vw, 44vw"
           loading="lazy"
         />
