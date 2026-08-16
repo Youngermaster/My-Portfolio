@@ -12,7 +12,11 @@ tint: blue
 order: 25
 status: archived
 links:
-  - { label: Código, url: "https://github.com/Youngermaster/Celestial-Object-Interaction", kind: repo }
+  - {
+      label: Código,
+      url: 'https://github.com/Youngermaster/Celestial-Object-Interaction',
+      kind: repo,
+    }
 ---
 
 Le das un número natural N y simula esa cantidad de cuerpos atrayéndose entre sí. La solución ingenua es O(n²) por paso, y todo el ejercicio consiste en ver dónde eso deja de ser aceptable.

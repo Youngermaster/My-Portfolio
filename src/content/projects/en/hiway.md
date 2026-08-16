@@ -12,7 +12,11 @@ tint: sky
 order: 20
 status: archived
 links:
-  - { label: Google Play, url: "https://play.google.com/store/apps/details?id=com.camilogalvis.hiway", kind: playstore }
+  - {
+      label: Google Play,
+      url: 'https://play.google.com/store/apps/details?id=com.camilogalvis.hiway',
+      kind: playstore,
+    }
 ---
 
 Built with partners. The interesting part was not the map — it was accepting that vehicle position data arrives late, irregularly, and sometimes not at all, and designing the display so a stale reading degrades into a useful estimate rather than a confident lie.

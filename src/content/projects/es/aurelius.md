@@ -11,7 +11,7 @@ tech: [React Native, Expo, TypeScript]
 tint: cream
 order: 5
 links:
-  - { label: Grisú, url: "https://grisu.co/apps", kind: site }
+  - { label: Grisú, url: 'https://grisu.co/apps', kind: site }
 ---
 
 Una app silenciosa para leer pasajes estoicos. Sin rachas, sin insignias, sin

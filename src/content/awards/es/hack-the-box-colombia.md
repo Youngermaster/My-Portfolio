@@ -2,12 +2,12 @@
 key: hack-the-box-colombia
 title: Tercer puesto en Colombia, Hack The Box
 issuer: Hack The Box
-date: "2022-06"
+date: '2022-06'
 summary: Alcancé el tercer lugar del ranking colombiano de Hack The Box mientras trabajaba en seguridad ofensiva.
 tint: red
 order: 2
 links:
-  - { label: Perfil, url: "https://app.hackthebox.com/profile/643960", kind: profile }
+  - { label: Perfil, url: 'https://app.hackthebox.com/profile/643960', kind: profile }
 ---
 
 Hack The Box es una plataforma de máquinas deliberadamente vulnerables que se

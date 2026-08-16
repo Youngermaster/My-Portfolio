@@ -11,7 +11,7 @@ tech: [Rust, no_std, RPLIDAR, Embedded]
 tint: blue
 order: 2
 links:
-  - { label: Source, url: "https://github.com/Project-Olivaw/olivaw-lidar", kind: repo }
+  - { label: Source, url: 'https://github.com/Project-Olivaw/olivaw-lidar', kind: repo }
 ---
 
 A driver for SLAMTEC RPLIDAR laser range scanners written entirely in Rust.

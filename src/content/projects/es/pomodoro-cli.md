@@ -12,7 +12,7 @@ tint: panel
 order: 28
 status: live
 links:
-  - { label: Código, url: "https://github.com/Youngermaster/Pomodoro-CLI", kind: repo }
+  - { label: Código, url: 'https://github.com/Youngermaster/Pomodoro-CLI', kind: repo }
 ---
 
 Toda app de pomodoro quiere ser una ventana. Esta es un comando. Arranca, cuenta y te dice que pares — y no necesita que salgas de la terminal para hacerlo.

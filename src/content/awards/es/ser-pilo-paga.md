@@ -2,7 +2,7 @@
 key: ser-pilo-paga
 title: Beca Ser Pilo Paga 4
 issuer: Gobierno de Colombia
-date: "2017-12"
+date: '2017-12'
 summary: Una beca nacional completa otorgada por los resultados de la prueba estandarizada de 2017, que cubrió una carrera de ingeniería en EAFIT.
 tint: cream
 order: 4

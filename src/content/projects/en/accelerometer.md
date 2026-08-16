@@ -12,8 +12,12 @@ tint: cream
 order: 21
 status: archived
 links:
-  - { label: Google Play, url: "https://play.google.com/store/apps/details?id=com.grisu.accelerometer", kind: playstore }
-  - { label: Source, url: "https://github.com/Youngermaster/Accelerometer", kind: repo }
+  - {
+      label: Google Play,
+      url: 'https://play.google.com/store/apps/details?id=com.grisu.accelerometer',
+      kind: playstore,
+    }
+  - { label: Source, url: 'https://github.com/Youngermaster/Accelerometer', kind: repo }
 ---
 
 A small tool built because the existing sensor-logging apps all decided for you what to sample and where the data went. This one takes a duration, an interval in milliseconds, and a destination — email, WhatsApp, anywhere — and gets out of the way.

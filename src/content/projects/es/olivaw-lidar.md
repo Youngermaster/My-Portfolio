@@ -11,7 +11,7 @@ tech: [Rust, no_std, RPLIDAR, Embebidos]
 tint: blue
 order: 2
 links:
-  - { label: Código, url: "https://github.com/Project-Olivaw/olivaw-lidar", kind: repo }
+  - { label: Código, url: 'https://github.com/Project-Olivaw/olivaw-lidar', kind: repo }
 ---
 
 Un driver para los escáneres láser RPLIDAR de SLAMTEC escrito enteramente en

@@ -12,8 +12,12 @@ tint: panel
 order: 22
 status: archived
 links:
-  - { label: Google Play, url: "https://play.google.com/store/apps/details?id=com.grisu.anthropometric_evaluator", kind: playstore }
-  - { label: Source, url: "https://github.com/Youngermaster/Anthropometric-Evaluator", kind: repo }
+  - {
+      label: Google Play,
+      url: 'https://play.google.com/store/apps/details?id=com.grisu.anthropometric_evaluator',
+      kind: playstore,
+    }
+  - { label: Source, url: 'https://github.com/Youngermaster/Anthropometric-Evaluator', kind: repo }
 ---
 
 A calculator app that takes anthropometric measurements and evaluates body composition against standard formulas. Straightforward maths; the work was in making the input sequence tolerable on a phone.

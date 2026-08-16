@@ -11,7 +11,7 @@ tech: [React Native, Expo, Audio]
 tint: yellow
 order: 6
 links:
-  - { label: Grisú, url: "https://grisu.co/apps", kind: site }
+  - { label: Grisú, url: 'https://grisu.co/apps', kind: site }
 ---
 
 El Yak Bak era un juguete de plástico que grababa unos segundos de audio y te

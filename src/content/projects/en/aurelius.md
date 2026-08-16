@@ -11,7 +11,7 @@ tech: [React Native, Expo, TypeScript]
 tint: cream
 order: 5
 links:
-  - { label: Grisú, url: "https://grisu.co/apps", kind: site }
+  - { label: Grisú, url: 'https://grisu.co/apps', kind: site }
 ---
 
 A quiet app for reading Stoic passages. No streaks, no badges, no notification

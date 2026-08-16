@@ -2,12 +2,12 @@
 key: expo-ingenierias
 title: Tercer puesto en Expo-Ingenierías
 issuer: Universidad EAFIT
-date: "2019-06"
+date: '2019-06'
 summary: Tercer lugar con SIMA, un sistema automatizado de riego y monitoreo para plantas de casa, construido por un equipo de cinco sobre Arduino y Ubidots.
 tint: blue
 order: 3
 links:
-  - { label: Video, url: "https://youtu.be/E6DVaf4FUbo", kind: video }
+  - { label: Video, url: 'https://youtu.be/E6DVaf4FUbo', kind: video }
 ---
 
 **SIMA** — Sistema de Irrigación y Monitoreo Automatizado. Un equipo de cinco

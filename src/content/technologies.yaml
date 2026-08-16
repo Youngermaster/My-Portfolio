@@ -10,282 +10,282 @@
 
 en:
   - key: rust
-    name: "Rust"
-    description: "My default for systems work — robotics drivers, SLAM, and anything that has to run on a Raspberry Pi without a C++ toolchain in the way."
+    name: 'Rust'
+    description: 'My default for systems work — robotics drivers, SLAM, and anything that has to run on a Raspberry Pi without a C++ toolchain in the way.'
     panel: ../assets/panels/technologies/rust.png
     category: language
     order: 1
 
   - key: python
-    name: "Python"
-    description: "Backend services, AI work, automation and the web scraping I have leaned on since my security days."
+    name: 'Python'
+    description: 'Backend services, AI work, automation and the web scraping I have leaned on since my security days.'
     panel: ../assets/panels/technologies/python.png
     category: language
     order: 2
 
   - key: react-native
-    name: "React Native"
-    description: "Where most of my mobile work lives — e-commerce apps at Publicis, and the utility apps I ship through Grisú."
+    name: 'React Native'
+    description: 'Where most of my mobile work lives — e-commerce apps at Publicis, and the utility apps I ship through Grisú.'
     panel: ../assets/panels/technologies/react-native.png
     category: framework
     order: 3
 
   - key: react
-    name: "React"
-    description: "The web half of the same story: production front ends, design-system components, and the odd internal admin panel."
+    name: 'React'
+    description: 'The web half of the same story: production front ends, design-system components, and the odd internal admin panel.'
     panel: ../assets/panels/technologies/react.png
     category: framework
     order: 4
 
   - key: fastapi
-    name: "FastAPI"
-    description: "My go-to when a Python service needs to be fast to write, typed, and documented without extra ceremony."
+    name: 'FastAPI'
+    description: 'My go-to when a Python service needs to be fast to write, typed, and documented without extra ceremony.'
     panel: ../assets/panels/technologies/fastapi.png
     category: framework
     order: 5
 
   - key: docker
-    name: "Docker"
-    description: "How everything I build gets reproducible — from a one-off scraper to a monorepo of microservices."
+    name: 'Docker'
+    description: 'How everything I build gets reproducible — from a one-off scraper to a monorepo of microservices.'
     panel: ../assets/panels/technologies/docker.png
     category: infra
     order: 6
 
   - key: aws
-    name: "AWS"
-    description: "Where the production workloads run, alongside CI/CD pipelines and the observability stack that watches them."
+    name: 'AWS'
+    description: 'Where the production workloads run, alongside CI/CD pipelines and the observability stack that watches them.'
     panel: ../assets/panels/technologies/aws.png
     category: infra
     order: 7
 
   - key: linux
-    name: "Linux"
-    description: "My daily driver since university, and the environment nearly everything I write ends up running on."
+    name: 'Linux'
+    description: 'My daily driver since university, and the environment nearly everything I write ends up running on.'
     panel: ../assets/panels/technologies/linux.png
     category: infra
     order: 8
 
   - key: mongodb
-    name: "MongoDB"
-    description: "Document storage for the health-interoperability platform, where the shape of a clinical record is anything but fixed."
+    name: 'MongoDB'
+    description: 'Document storage for the health-interoperability platform, where the shape of a clinical record is anything but fixed.'
     panel: ../assets/panels/technologies/mongodb.png
     category: data
     order: 9
 
   - key: postgresql
-    name: "PostgreSQL"
-    description: "My default relational database — when the data has a shape worth enforcing, this is where it goes."
+    name: 'PostgreSQL'
+    description: 'My default relational database — when the data has a shape worth enforcing, this is where it goes.'
     panel: ../assets/panels/technologies/postgresql.png
     category: data
     order: 10
 
   - key: apachekafka
-    name: "Apache Kafka"
-    description: "Event streaming for pipelines that cannot afford to lose a message, like the EcoDrive telemetry work."
+    name: 'Apache Kafka'
+    description: 'Event streaming for pipelines that cannot afford to lose a message, like the EcoDrive telemetry work.'
     panel: ../assets/panels/technologies/apachekafka.png
     category: data
     order: 11
 
   - key: graphql
-    name: "GraphQL"
-    description: "Used when a client needs to ask precise questions of a graph of data instead of stitching together five REST calls."
+    name: 'GraphQL'
+    description: 'Used when a client needs to ask precise questions of a graph of data instead of stitching together five REST calls.'
     panel: ../assets/panels/technologies/graphql.png
     category: data
     order: 12
 
   - key: mqtt
-    name: "MQTT"
-    description: "The messaging backbone of my IoT work — lightweight enough for a microcontroller, reliable enough to design a system around."
+    name: 'MQTT'
+    description: 'The messaging backbone of my IoT work — lightweight enough for a microcontroller, reliable enough to design a system around.'
     panel: ../assets/panels/technologies/mqtt.png
     category: hardware
     order: 13
 
   - key: raspberrypi
-    name: "Raspberry Pi"
-    description: "The usual target for the robotics work: cross-compile the Rust, ship it to the Pi, watch the lidar spin."
+    name: 'Raspberry Pi'
+    description: 'The usual target for the robotics work: cross-compile the Rust, ship it to the Pi, watch the lidar spin.'
     panel: ../assets/panels/technologies/raspberrypi.png
     category: hardware
     order: 14
 
   - key: arduino
-    name: "Arduino"
-    description: "Where the hardware side started — the automated irrigation system that took third place at Expo-Ingenierías ran on one."
+    name: 'Arduino'
+    description: 'Where the hardware side started — the automated irrigation system that took third place at Expo-Ingenierías ran on one.'
     panel: ../assets/panels/technologies/arduino.png
     category: hardware
     order: 15
 
   - key: jenkins
-    name: "Jenkins"
-    description: "CI/CD in the places that already run it; GitHub Actions and GitLab CI cover the rest."
+    name: 'Jenkins'
+    description: 'CI/CD in the places that already run it; GitHub Actions and GitLab CI cover the rest.'
     panel: ../assets/panels/technologies/jenkins.png
     category: tooling
     order: 16
 
   - key: godot
-    name: "Godot"
-    description: "The engine behind the hyper-casual mobile games I build at Grisú — open source, small, and quick to iterate in."
+    name: 'Godot'
+    description: 'The engine behind the hyper-casual mobile games I build at Grisú — open source, small, and quick to iterate in.'
     panel: ../assets/panels/technologies/godot.png
     category: tooling
     order: 17
 
   - key: neovim
-    name: "Neovim"
-    description: "My editor. Configured once, carried everywhere, and faster than reaching for the mouse."
+    name: 'Neovim'
+    description: 'My editor. Configured once, carried everywhere, and faster than reaching for the mouse.'
     panel: ../assets/panels/technologies/neovim.png
     category: tooling
     order: 18
 
   - key: obsidian
-    name: "Obsidian"
-    description: "Where architecture notes, research and half-formed project ideas live before they turn into code."
+    name: 'Obsidian'
+    description: 'Where architecture notes, research and half-formed project ideas live before they turn into code.'
     panel: ../assets/panels/technologies/obsidian.png
     category: tooling
     order: 19
 
   - key: figma
-    name: "Figma"
-    description: "For UI work — designing the interface before building it, as I did for GameConnect."
+    name: 'Figma'
+    description: 'For UI work — designing the interface before building it, as I did for GameConnect.'
     panel: ../assets/panels/technologies/figma.png
     category: design
     order: 20
 
 es:
   - key: rust
-    name: "Rust"
-    description: "Mi opción por defecto para sistemas — drivers de robótica, SLAM y todo lo que tenga que correr en una Raspberry Pi sin arrastrar un toolchain de C++."
+    name: 'Rust'
+    description: 'Mi opción por defecto para sistemas — drivers de robótica, SLAM y todo lo que tenga que correr en una Raspberry Pi sin arrastrar un toolchain de C++.'
     panel: ../assets/panels/technologies/rust.png
     category: language
     order: 1
 
   - key: python
-    name: "Python"
-    description: "Servicios de backend, trabajo de IA, automatización y el web scraping en el que me apoyo desde mis años en seguridad."
+    name: 'Python'
+    description: 'Servicios de backend, trabajo de IA, automatización y el web scraping en el que me apoyo desde mis años en seguridad.'
     panel: ../assets/panels/technologies/python.png
     category: language
     order: 2
 
   - key: react-native
-    name: "React Native"
-    description: "Donde vive la mayor parte de mi trabajo móvil — apps de e-commerce en Publicis y las aplicaciones que publico con Grisú."
+    name: 'React Native'
+    description: 'Donde vive la mayor parte de mi trabajo móvil — apps de e-commerce en Publicis y las aplicaciones que publico con Grisú.'
     panel: ../assets/panels/technologies/react-native.png
     category: framework
     order: 3
 
   - key: react
-    name: "React"
-    description: "La mitad web de la misma historia: front ends en producción, componentes de design system y algún panel administrativo interno."
+    name: 'React'
+    description: 'La mitad web de la misma historia: front ends en producción, componentes de design system y algún panel administrativo interno.'
     panel: ../assets/panels/technologies/react.png
     category: framework
     order: 4
 
   - key: fastapi
-    name: "FastAPI"
-    description: "Mi elección cuando un servicio en Python debe escribirse rápido, con tipos y documentado sin ceremonia adicional."
+    name: 'FastAPI'
+    description: 'Mi elección cuando un servicio en Python debe escribirse rápido, con tipos y documentado sin ceremonia adicional.'
     panel: ../assets/panels/technologies/fastapi.png
     category: framework
     order: 5
 
   - key: docker
-    name: "Docker"
-    description: "Cómo todo lo que construyo se vuelve reproducible — desde un scraper puntual hasta un monorepo de microservicios."
+    name: 'Docker'
+    description: 'Cómo todo lo que construyo se vuelve reproducible — desde un scraper puntual hasta un monorepo de microservicios.'
     panel: ../assets/panels/technologies/docker.png
     category: infra
     order: 6
 
   - key: aws
-    name: "AWS"
-    description: "Donde corren las cargas de producción, junto con los pipelines de CI/CD y la observabilidad que los vigila."
+    name: 'AWS'
+    description: 'Donde corren las cargas de producción, junto con los pipelines de CI/CD y la observabilidad que los vigila.'
     panel: ../assets/panels/technologies/aws.png
     category: infra
     order: 7
 
   - key: linux
-    name: "Linux"
-    description: "Mi sistema de trabajo desde la universidad, y el entorno donde termina ejecutándose casi todo lo que escribo."
+    name: 'Linux'
+    description: 'Mi sistema de trabajo desde la universidad, y el entorno donde termina ejecutándose casi todo lo que escribo.'
     panel: ../assets/panels/technologies/linux.png
     category: infra
     order: 8
 
   - key: mongodb
-    name: "MongoDB"
-    description: "Almacenamiento documental para la plataforma de interoperabilidad en salud, donde la forma de un registro clínico es todo menos fija."
+    name: 'MongoDB'
+    description: 'Almacenamiento documental para la plataforma de interoperabilidad en salud, donde la forma de un registro clínico es todo menos fija.'
     panel: ../assets/panels/technologies/mongodb.png
     category: data
     order: 9
 
   - key: postgresql
-    name: "PostgreSQL"
-    description: "Mi base de datos relacional por defecto — cuando los datos tienen una forma que vale la pena hacer cumplir, van aquí."
+    name: 'PostgreSQL'
+    description: 'Mi base de datos relacional por defecto — cuando los datos tienen una forma que vale la pena hacer cumplir, van aquí.'
     panel: ../assets/panels/technologies/postgresql.png
     category: data
     order: 10
 
   - key: apachekafka
-    name: "Apache Kafka"
-    description: "Streaming de eventos para pipelines que no pueden permitirse perder un mensaje, como la telemetría de EcoDrive."
+    name: 'Apache Kafka'
+    description: 'Streaming de eventos para pipelines que no pueden permitirse perder un mensaje, como la telemetría de EcoDrive.'
     panel: ../assets/panels/technologies/apachekafka.png
     category: data
     order: 11
 
   - key: graphql
-    name: "GraphQL"
-    description: "Lo uso cuando un cliente necesita hacer preguntas precisas sobre un grafo de datos en vez de encadenar cinco llamadas REST."
+    name: 'GraphQL'
+    description: 'Lo uso cuando un cliente necesita hacer preguntas precisas sobre un grafo de datos en vez de encadenar cinco llamadas REST.'
     panel: ../assets/panels/technologies/graphql.png
     category: data
     order: 12
 
   - key: mqtt
-    name: "MQTT"
-    description: "La columna vertebral de mensajería en mi trabajo de IoT — liviano para un microcontrolador y confiable para diseñar un sistema alrededor."
+    name: 'MQTT'
+    description: 'La columna vertebral de mensajería en mi trabajo de IoT — liviano para un microcontrolador y confiable para diseñar un sistema alrededor.'
     panel: ../assets/panels/technologies/mqtt.png
     category: hardware
     order: 13
 
   - key: raspberrypi
-    name: "Raspberry Pi"
-    description: "El objetivo habitual del trabajo de robótica: compilar el Rust de forma cruzada, enviarlo a la Pi y ver girar el lidar."
+    name: 'Raspberry Pi'
+    description: 'El objetivo habitual del trabajo de robótica: compilar el Rust de forma cruzada, enviarlo a la Pi y ver girar el lidar.'
     panel: ../assets/panels/technologies/raspberrypi.png
     category: hardware
     order: 14
 
   - key: arduino
-    name: "Arduino"
-    description: "Donde empezó el lado hardware — el sistema de riego automatizado que ganó el tercer puesto en Expo-Ingenierías funcionaba con uno."
+    name: 'Arduino'
+    description: 'Donde empezó el lado hardware — el sistema de riego automatizado que ganó el tercer puesto en Expo-Ingenierías funcionaba con uno.'
     panel: ../assets/panels/technologies/arduino.png
     category: hardware
     order: 15
 
   - key: jenkins
-    name: "Jenkins"
-    description: "CI/CD en los lugares que ya lo usan; GitHub Actions y GitLab CI cubren el resto."
+    name: 'Jenkins'
+    description: 'CI/CD en los lugares que ya lo usan; GitHub Actions y GitLab CI cubren el resto.'
     panel: ../assets/panels/technologies/jenkins.png
     category: tooling
     order: 16
 
   - key: godot
-    name: "Godot"
-    description: "El motor detrás de los juegos móviles hyper-casual que construyo en Grisú — libre, pequeño y rápido para iterar."
+    name: 'Godot'
+    description: 'El motor detrás de los juegos móviles hyper-casual que construyo en Grisú — libre, pequeño y rápido para iterar.'
     panel: ../assets/panels/technologies/godot.png
     category: tooling
     order: 17
 
   - key: neovim
-    name: "Neovim"
-    description: "Mi editor. Configurado una vez, llevado a todas partes, y más rápido que estirar la mano hacia el mouse."
+    name: 'Neovim'
+    description: 'Mi editor. Configurado una vez, llevado a todas partes, y más rápido que estirar la mano hacia el mouse.'
     panel: ../assets/panels/technologies/neovim.png
     category: tooling
     order: 18
 
   - key: obsidian
-    name: "Obsidian"
-    description: "Donde viven las notas de arquitectura, la investigación y las ideas a medio formar antes de convertirse en código."
+    name: 'Obsidian'
+    description: 'Donde viven las notas de arquitectura, la investigación y las ideas a medio formar antes de convertirse en código.'
     panel: ../assets/panels/technologies/obsidian.png
     category: tooling
     order: 19
 
   - key: figma
-    name: "Figma"
-    description: "Para el trabajo de UI — diseñar la interfaz antes de construirla, como hice para GameConnect."
+    name: 'Figma'
+    description: 'Para el trabajo de UI — diseñar la interfaz antes de construirla, como hice para GameConnect.'
     panel: ../assets/panels/technologies/figma.png
     category: design
     order: 20

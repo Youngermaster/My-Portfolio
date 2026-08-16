@@ -11,7 +11,7 @@ tech: [React Native, Expo, TypeScript]
 tint: sky
 order: 4
 links:
-  - { label: Grisú, url: "https://grisu.co/apps", kind: site }
+  - { label: Grisú, url: 'https://grisu.co/apps', kind: site }
 ---
 
 Spin a wheel, get an answer, move on. Spindle exists because the cost of

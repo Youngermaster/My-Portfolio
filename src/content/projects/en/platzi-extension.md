@@ -12,8 +12,16 @@ tint: sky
 order: 29
 status: archived
 links:
-  - { label: Chrome Web Store, url: "https://chrome.google.com/webstore/detail/platzi-community-wrapper/dakgbbfpefoofghfbkopnbnpadeblbep", kind: site }
-  - { label: Source, url: "https://github.com/Youngermaster/Platzi-community-wrapper-eraser-extension", kind: repo }
+  - {
+      label: Chrome Web Store,
+      url: 'https://chrome.google.com/webstore/detail/platzi-community-wrapper/dakgbbfpefoofghfbkopnbnpadeblbep',
+      kind: site,
+    }
+  - {
+      label: Source,
+      url: 'https://github.com/Youngermaster/Platzi-community-wrapper-eraser-extension',
+      kind: repo,
+    }
 ---
 
 Published to the Chrome Web Store. A twenty-line content script solving a real annoyance is a better use of an afternoon than most side projects, and the review process is a useful thing to have been through once.

@@ -2,7 +2,7 @@
 key: ser-pilo-paga
 title: Beca Ser Pilo Paga 4
 issuer: Gobierno de Colombia
-date: "2017-12"
+date: '2017-12'
 summary: A full national scholarship awarded on the 2017 standardised test results, covering an engineering degree at EAFIT.
 tint: cream
 order: 4

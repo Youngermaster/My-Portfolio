@@ -2,7 +2,7 @@
 key: civicapay-2022
 title: CivicaPay Hackathon winner
 issuer: Metro de Medellín, Ruta N, Davivienda
-date: "2022-03"
+date: '2022-03'
 summary: First place among more than 50 teams from 16 universities, for an ecosystem of incentives built on top of the Medellín Metro's existing payment app.
 panel: ../../../assets/awards/civica/banner.jpeg
 tint: yellow

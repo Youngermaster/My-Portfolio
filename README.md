@@ -3,7 +3,7 @@
 Personal portfolio for Juan Manuel Young Hoyos. Astro 7, static output, bilingual
 (English / Spanish), and — by design — no client-side framework.
 
-The art direction is *ligne claire*: flat colour, black ink, hard corners, and a
+The art direction is _ligne claire_: flat colour, black ink, hard corners, and a
 set of hand-drawn Tintin-style comic panels. There is a
 [living styleguide](https://jmyounghoyos.com/styleguide) that renders every
 device in the system on one page.
@@ -22,18 +22,18 @@ pnpm preview    # serve dist/ locally
 Requires **Node 22+** and **pnpm**. There is one lockfile and it is
 `pnpm-lock.yaml`; do not add another.
 
-| Script | What it does |
-| --- | --- |
-| `pnpm dev` | Dev server |
-| `pnpm build` | `astro check` → `astro build` → prune unreferenced assets |
-| `pnpm build:fast` | Same without the typecheck |
-| `pnpm check` | TypeScript **and** content-collection schema validation |
-| `pnpm preview` | Serve the built site |
-| `pnpm format` | Prettier |
-| `pnpm og` | Regenerate the social share cards in `public/og/` |
+| Script                 | What it does                                                      |
+| ---------------------- | ----------------------------------------------------------------- |
+| `pnpm dev`             | Dev server                                                        |
+| `pnpm build`           | `astro check` → `astro build` → prune unreferenced assets         |
+| `pnpm build:fast`      | Same without the typecheck                                        |
+| `pnpm check`           | TypeScript **and** content-collection schema validation           |
+| `pnpm preview`         | Serve the built site                                              |
+| `pnpm format`          | Prettier                                                          |
+| `pnpm og`              | Regenerate the social share cards in `public/og/`                 |
 | `pnpm optimize:panels` | Re-encode the comic panels in `src/assets/` in place (idempotent) |
-| `pnpm images:check` | Fail if any image carries EXIF/IPTC/XMP. Runs in CI. |
-| `pnpm images:scrub` | Strip that metadata in place (`--sign` to add your own instead) |
+| `pnpm images:check`    | Fail if any image carries EXIF/IPTC/XMP. Runs in CI.              |
+| `pnpm images:scrub`    | Strip that metadata in place (`--sign` to add your own instead)   |
 
 ## Deploying
 
@@ -83,13 +83,13 @@ Five collections, validated by Zod in `src/content.config.ts`.
 locales.** That single invariant is what makes the language switcher land on the
 equivalent page instead of the homepage.
 
-| Collection | Where | Format |
-| --- | --- | --- |
-| `projects` | `src/content/projects/{en,es}/*.md` | Markdown — these get detail pages |
-| `awards` | `src/content/awards/{en,es}/*.md` | Markdown |
-| `services` | `src/content/services/{en,es}/*.md` | Markdown |
-| `experience` | `src/content/experience.yaml` | YAML, both locales in one file |
-| `technologies` | `src/content/technologies.yaml` | YAML, both locales in one file |
+| Collection     | Where                               | Format                            |
+| -------------- | ----------------------------------- | --------------------------------- |
+| `projects`     | `src/content/projects/{en,es}/*.md` | Markdown — these get detail pages |
+| `awards`       | `src/content/awards/{en,es}/*.md`   | Markdown                          |
+| `services`     | `src/content/services/{en,es}/*.md` | Markdown                          |
+| `experience`   | `src/content/experience.yaml`       | YAML, both locales in one file    |
+| `technologies` | `src/content/technologies.yaml`     | YAML, both locales in one file    |
 
 The frontmatter field is `key`, **not** `slug` — Astro's `glob()` loader treats
 `slug` as an id override, which would collapse `en/mobile.md` and `es/mobile.md`
@@ -100,7 +100,7 @@ reads it as a nested mapping.
 
 ### Adding things
 
-- **A project** — add `src/content/projects/en/<key>.md` *and* the `es`
+- **A project** — add `src/content/projects/en/<key>.md` _and_ the `es`
   counterpart with the same `key`. Detail pages appear automatically at
   `/projects/<key>` and `/es/proyectos/<key>`.
 - **A panel** — drop the artwork in `src/assets/panels/`, point `panel:` at it,

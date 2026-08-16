@@ -11,8 +11,8 @@ tech: [Rust, SLAM, factrs, Raspberry Pi]
 tint: yellow
 order: 1
 links:
-  - { label: Código, url: "https://github.com/Project-Olivaw/olivaw-slam", kind: repo }
-  - { label: Project Olivaw, url: "https://github.com/Project-Olivaw", kind: site }
+  - { label: Código, url: 'https://github.com/Project-Olivaw/olivaw-slam', kind: repo }
+  - { label: Project Olivaw, url: 'https://github.com/Project-Olivaw', kind: site }
 ---
 
 En términos de arquitectura hace lo mismo que `slam_toolbox` dentro de ROS2 —

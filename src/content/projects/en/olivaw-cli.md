@@ -11,7 +11,7 @@ tech: [Rust, CLI, embedded-hal, ESP32]
 tint: red
 order: 3
 links:
-  - { label: Source, url: "https://github.com/Project-Olivaw/olivaw-cli", kind: repo }
+  - { label: Source, url: 'https://github.com/Project-Olivaw/olivaw-cli', kind: repo }
 ---
 
 ```bash

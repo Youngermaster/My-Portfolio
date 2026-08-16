@@ -12,7 +12,7 @@ tint: cream
 order: 27
 status: archived
 links:
-  - { label: Código, url: "https://github.com/Youngermaster/Unity-FPS", kind: repo }
+  - { label: Código, url: 'https://github.com/Youngermaster/Unity-FPS', kind: repo }
 ---
 
 Sin objetivos, sin puntaje, sin final. Construido para aprender el motor, y dejado como un lugar para explorar en vez de forzarlo a ser un juego que nunca iba a ser.

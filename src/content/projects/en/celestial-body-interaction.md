@@ -12,7 +12,11 @@ tint: blue
 order: 25
 status: archived
 links:
-  - { label: Source, url: "https://github.com/Youngermaster/Celestial-Object-Interaction", kind: repo }
+  - {
+      label: Source,
+      url: 'https://github.com/Youngermaster/Celestial-Object-Interaction',
+      kind: repo,
+    }
 ---
 
 Give it a natural number N and it simulates that many bodies pulling on each other. The naive solution is O(n²) per step and the whole exercise is watching where that stops being acceptable.

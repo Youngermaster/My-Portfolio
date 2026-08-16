@@ -11,7 +11,7 @@ tech: [React Native, Kafka, FastAPI, Python]
 tint: panel
 order: 7
 links:
-  - { label: Grisú, url: "https://grisu.co", kind: site }
+  - { label: Grisú, url: 'https://grisu.co', kind: site }
 ---
 
 EcoDrive recoge telemetría de conducción y la convierte en puntuación de
